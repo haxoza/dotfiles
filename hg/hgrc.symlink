@@ -6,7 +6,6 @@ merge = charm
 [extensions]
 shelve =
 rebase =
-prompt = /Users/haxoza/dev/projects/hg-prompt/prompt.py
 hgext.graphlog =
 hgext.purge =
 hgext.color =
