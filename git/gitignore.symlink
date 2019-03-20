@@ -1,0 +1,11 @@
+# OS generated files
+.Spotlight-V100
+.Trashes
+.DS_Store
+
+# Other dev-related files
+*.bak
+*.orig
+*~
+*.swp
+
