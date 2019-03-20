@@ -1,0 +1,27 @@
+[ui]
+%include ~/.hgrc.local
+editor = vim
+merge = charm
+
+[extensions]
+shelve =
+rebase =
+prompt = /Users/haxoza/dev/projects/hg-prompt/prompt.py
+hgext.graphlog =
+hgext.purge =
+hgext.color =
+hgext.churn =
+hgext.mq =
+hgext.bookmarks =
+
+[merge-tools]
+charm.args = merge $local $other $base $output
+
+# [hooks]
+# preupdate = hg log -pr .:$HG_PARENT1
+
+[alias]
+shortlog = !hg log --template "{author|person}\n" | sort | uniq -c | sort -nr
+
+[pager]
+ignore = version, help, update, status, summary
