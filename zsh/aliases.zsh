@@ -4,3 +4,4 @@ alias dotfiles="cd $DOTFILES"
 alias projects="cd ~/dev/projects"
 alias docker-composer="docker-compose"
 
+alias tableflip="echo '(╯°□°）╯︵ ┻━┻' | pbcopy"
