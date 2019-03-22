@@ -24,6 +24,8 @@
 	cmd = charm merge "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
 [diff "bin"]
     textconv = hexdump -v -C
+[diff "sopsdiffer"]
+	textconv = sops -d
 [commit]
 	gpgsign = true
 [include]
