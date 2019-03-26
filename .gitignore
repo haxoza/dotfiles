@@ -1,2 +1,3 @@
 git/gitconfig.local.symlink
 hg/hgrc.local.symlink
+pypi/pypirc.symlink
