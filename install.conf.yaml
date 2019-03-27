@@ -1,0 +1,14 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.gitconfig: git/gitconfig.symlink
+    ~/.gitconfig.local: git/gitconfig.local.symlink
+    ~/.gitignore: git/gitignore.symlink
+    ~/.hgrc: hg/hgrc.symlink
+    ~/.hgrc.local: hg/hgrc.local.symlink
+    ~/.vimrc: vim/vimrc.symlink
+
