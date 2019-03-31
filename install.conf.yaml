@@ -10,5 +10,10 @@
     ~/.gitignore: git/gitignore.symlink
     ~/.hgrc: hg/hgrc.symlink
     ~/.hgrc.local: hg/hgrc.local.symlink
+    ~/.pypirc: pypi/pypirc.symlink
+    ~/.ssh/config:
+        create: true
+        path: ssh/config.symlink
     ~/.vimrc: vim/vimrc.symlink
+    ~/.zshrc: zsh/zshrc.symlink
 
