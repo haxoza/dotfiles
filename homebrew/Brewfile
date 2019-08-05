@@ -3,6 +3,7 @@ tap "homebrew/cask"
 tap "homebrew/core"
 brew "bash"
 brew "bat"
+brew "cocoapods"
 brew "git"
 brew "gnu-getopt"
 brew "goaccess"
@@ -28,6 +29,7 @@ cask "android-file-transfer"
 cask "betterzip"
 cask "cheatsheet"
 cask "docker"
+cask "fastlane"
 cask "firefox"
 cask "fluor"
 cask "gimp"
@@ -58,5 +60,5 @@ cask "visual-studio-code"
 cask "vlc"
 cask "webpquicklook"
 cask "zoomus"
-mas "com.apple.dt.Xcode", id: 497799835
-mas "com.fiplab.clipboard", id: 595191960
+mas "CopyClip", id: 595191960
+mas "Xcode", id: 497799835
