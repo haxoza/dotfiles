@@ -5,6 +5,7 @@
 - clean: ['~']
 
 - link:
+    ~/.condarc: conda/condarc.symlink
     ~/.gitconfig: git/gitconfig.symlink
     ~/.gitconfig.local: git/gitconfig.local.symlink
     ~/.gitignore: git/gitignore.symlink
