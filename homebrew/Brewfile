@@ -39,6 +39,7 @@ cask "gpg-suite-no-mail"
 cask "harvest"
 cask "iterm2"
 cask "java"
+cask "keybase"
 cask "miniconda"
 cask "postman"
 cask "pycharm"
@@ -62,4 +63,5 @@ cask "vlc"
 cask "webpquicklook"
 cask "zoomus"
 mas "CopyClip", id: 595191960
+mas "Keynote", id: 409183694
 mas "Xcode", id: 497799835
