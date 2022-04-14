@@ -1,3 +1,6 @@
+IdentityFile ~/.ssh/id_rsa
+IdentityFile ~/.ssh/id_rsa_old
+
 Host *
     UseKeychain yes
     AddKeysToAgent yes

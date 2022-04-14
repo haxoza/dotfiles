@@ -1,12 +1,12 @@
 [submodule "zsh/themes/powerlevel9k"]
 	path = zsh/themes/powerlevel9k
-	url = ssh://github.com/bhilburn/powerlevel9k.git
+	url = ssh://git@github.com/bhilburn/powerlevel9k.git
 [submodule "zsh/plugins/zsh-autosuggestions"]
 	path = zsh/plugins/zsh-autosuggestions
-	url = ssh://github.com/zsh-users/zsh-autosuggestions.git
+	url = ssh://git@github.com/zsh-users/zsh-autosuggestions.git
 [submodule "dotbot"]
 	path = dotbot
-	url = ssh://github.com/anishathalye/dotbot.git
+	url = ssh://git@github.com/anishathalye/dotbot.git
 [submodule "zsh/plugins/zsh-syntax-highlighting"]
 	path = zsh/plugins/zsh-syntax-highlighting
-	url = ssh://github.com/zsh-users/zsh-syntax-highlighting.git
+	url = ssh://git@github.com/zsh-users/zsh-syntax-highlighting.git
