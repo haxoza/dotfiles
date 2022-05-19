@@ -3,21 +3,18 @@ tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/services"
-brew "python@3.8"  # required by google-cloud-sdk
 brew "python@3.9"
 brew "awscli"
 brew "bash"
 brew "bat"
 brew "python@3.10"
 brew "black"
+brew "ruby"
 brew "cocoapods"
 brew "cookiecutter"
-brew "ruby"
-brew "fastlane", link: false
 brew "ghostscript"
 brew "git"
 brew "git-lfs"
-brew "git-remote-hg"
 brew "gnu-getopt"
 brew "helm"
 brew "jq"
@@ -34,13 +31,16 @@ brew "openjdk"
 brew "pipenv"
 brew "poetry"
 brew "pre-commit"
+brew "pyenv-virtualenv"
+brew "pyenv-virtualenvwrapper"
+brew "tcl-tk"
+brew "python@3.8"  # required by google-cloud-sdk
 brew "ripgrep"
 brew "ruby@2.5"
 brew "ruby@2.7"
 brew "sops"
 brew "sphinx-doc"
 brew "svgo"
-brew "tcl-tk"
 brew "terraform"
 brew "tmux"
 brew "tor"
@@ -85,6 +85,9 @@ cask "webpquicklook"
 cask "zoom"
 mas "Battery Monitor", id: 836505650
 mas "Harvest", id: 506189836
+mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
 mas "NordLayer", id: 1488888843
 mas "Xcode", id: 497799835
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
