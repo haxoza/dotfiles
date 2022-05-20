@@ -32,7 +32,6 @@ brew "pipenv"
 brew "poetry"
 brew "pre-commit"
 brew "pyenv-virtualenv"
-brew "pyenv-virtualenvwrapper"
 brew "tcl-tk"
 brew "python@3.8"  # required by google-cloud-sdk
 brew "ripgrep"

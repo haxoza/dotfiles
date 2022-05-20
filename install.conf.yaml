@@ -17,4 +17,5 @@
         path: ssh/config.symlink
     ~/.vimrc: vim/vimrc.symlink
     ~/.zshrc: zsh/zshrc.symlink
+    ~/.zprofile: zsh/zprofile.symlink
 
