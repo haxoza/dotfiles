@@ -1,7 +1,15 @@
 IdentityFile ~/.ssh/id_rsa
 IdentityFile ~/.ssh/id_rsa_old
+IdentityFile ~/.ssh/id_ed25519_253
 
 Host *
     UseKeychain yes
     AddKeysToAgent yes
+
+Host github-253
+    Hostname github.com
+    IdentityFile ~/.ssh/id_ed25519_253
+
+Host odin.haxoza.com
+ProxyCommand cloudflared access ssh --hostname %h
 
