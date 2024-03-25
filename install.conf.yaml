@@ -9,6 +9,8 @@
     ~/.gitconfig: git/gitconfig.symlink
     ~/.gitconfig.local: git/gitconfig.local.symlink
     ~/.gitignore: git/gitignore.symlink
+    ~/.gnupg/gpg.conf: gpg/gpg.conf.symlink
+    ~/.gnupg/gpg-agent.conf: gpg/gpg-agent.conf.symlink
     ~/.hgrc: hg/hgrc.symlink
     ~/.hgrc.local: hg/hgrc.local.symlink
     ~/.pypirc: pypi/pypirc.symlink
