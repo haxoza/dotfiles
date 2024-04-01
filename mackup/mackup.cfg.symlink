@@ -1,0 +1,7 @@
+[storage]
+engine = file_system
+path = dev/projects/dotfiles/mackup
+directory = backup
+
+[applications_to_sync]
+macosx

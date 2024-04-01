@@ -13,6 +13,7 @@
     ~/.gnupg/gpg-agent.conf: gpg/gpg-agent.conf.symlink
     ~/.hgrc: hg/hgrc.symlink
     ~/.hgrc.local: hg/hgrc.local.symlink
+    ~/.mackup.cfg: mackup/mackup.cfg.symlink
     ~/.pypirc: pypi/pypirc.symlink
     ~/.ssh/config:
         create: true
