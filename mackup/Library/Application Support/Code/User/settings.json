@@ -1,0 +1,15 @@
+{
+    "editor.fontFamily": "'MesloLGSDZ Nerd Font Propo', Menlo, Monaco, 'Courier New', monospace",
+    "python.formatting.provider": "black",
+    "python.formatting.blackPath": "/opt/homebrew/bin/black",
+    "python.analysis.autoImportCompletions": true,
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "editor.inlineSuggest.enabled": true,
+    "github.copilot.enable": {
+        "*": "true",
+        "markdown": true,
+        "scminput": false
+    }
+}
