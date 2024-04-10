@@ -74,8 +74,11 @@ cask "gpg-suite-no-mail"
 cask "iterm2"
 cask "logi-options-plus"
 cask "logitech-camera-settings"
-cask "macs-fan-control"
 cask "nordlayer"
+cask "microsoft-auto-update"
+cask "microsoft-excel"
+cask "microsoft-powerpoint"
+cask "microsoft-word"
 cask "nrlquaker-winbox"
 cask "pycharm"
 cask "qlcolorcode"
@@ -89,6 +92,7 @@ cask "signal"
 cask "sketch"
 cask "slack"
 cask "spotify"
+cask "stats"
 cask "steam"
 cask "sunsama"
 cask "suspicious-package"
@@ -99,6 +103,7 @@ cask "vlc"
 cask "webpquicklook"
 cask "zoom"
 mas "Battery Monitor", id: 836505650
+mas "GarageBand", id: 682658836
 mas "Harvest", id: 506189836
 mas "iMazing Profile Editor", id: 1487860882
 mas "iMovie", id: 408981434
