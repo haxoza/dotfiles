@@ -105,7 +105,6 @@ cask "visual-studio-code"
 cask "vlc"
 cask "webpquicklook"
 cask "zoom"
-mas "Battery Monitor", id: 836505650
 mas "GarageBand", id: 682658836
 mas "Harvest", id: 506189836
 mas "iMazing Profile Editor", id: 1487860882
