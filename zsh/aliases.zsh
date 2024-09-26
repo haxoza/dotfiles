@@ -6,4 +6,3 @@ alias docker-composer="docker-compose"
 
 alias tableflip="echo '(╯°□°）╯︵ ┻━┻' | pbcopy"
 
-unalias ipython  # this alias is from omz python plugin but it doesn't work with pyenv shims so it has to be disabled
