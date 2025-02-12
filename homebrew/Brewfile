@@ -61,7 +61,6 @@ brew "heroku/brew/heroku"
 brew "snyk/tap/snyk"
 cask "1password"
 cask "1password-cli"
-cask "amazon-workspaces"
 cask "android-file-transfer"
 cask "android-platform-tools"
 cask "arduino-ide"
@@ -114,10 +113,11 @@ mas "Harvest", id: 506189836
 mas "iMazing Profile Editor", id: 1487860882
 mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
-mas "Microsoft Remote Desktop", id: 1295203466
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
+mas "Windows App", id: 1295203466
 mas "Xcode", id: 497799835
+vscode "antfu.goto-alias"
 vscode "charliermarsh.ruff"
 vscode "dracula-theme.theme-dracula"
 vscode "eamodio.gitlens"
@@ -140,6 +140,8 @@ vscode "ms-toolsai.vscode-jupyter-slideshow"
 vscode "ms-vscode-remote.remote-containers"
 vscode "ms-vscode.makefile-tools"
 vscode "nuxt.mdc"
+vscode "nuxtr.nuxt-vscode-extentions"
+vscode "nuxtr.nuxtr-vscode"
 vscode "redhat.vscode-yaml"
 vscode "tamasfe.even-better-toml"
 vscode "vue.volar"
