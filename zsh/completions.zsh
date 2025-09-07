@@ -5,6 +5,12 @@ if type brew &>/dev/null; then
     compinit
 fi
 
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/haxoza/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+
 # You may also need to force rebuild `zcompdump`:
 #
 #    rm -f ~/.zcompdump; compinit
