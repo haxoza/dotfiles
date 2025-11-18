@@ -18,6 +18,7 @@
         create: true
         path: ssh/config.symlink
     ~/.vimrc: vim/vimrc.symlink
+    ~/.zshenv: zsh/zshenv.symlink
     ~/.zshrc: zsh/zshrc.symlink
     ~/.zprofile: zsh/zprofile.symlink
 
