@@ -151,6 +151,20 @@ git submodule sync --recursive
 - **GPG keys**: Use `gpg/import.sh` and `gpg/export.sh` for key management
 - **SSH keys**: Never commit SSH private keys; only commit `ssh/config.symlink` for configuration
 
+## Git Commit Conventions
+
+This repository follows [Conventional Commits](https://www.conventionalcommits.org/):
+
+**Format**: `type(scope): description`
+
+**Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
+
+**Examples**:
+- `feat(homebrew): add Makefile for common tasks`
+- `chore(zsh): update oh-my-zsh plugins`
+- `docs(agents): add code style guidelines`
+- `fix(git): correct ssh config path`
+
 ## Installation Flow
 
 1. Clone the repository
