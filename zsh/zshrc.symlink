@@ -12,6 +12,8 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light pyenv/pyenv
 zinit light pyenv/pyenv-virtualenv
 zinit light direnv/direnv
+zinit snippet OMZ::plugins/sudo
+zinit light umop3plsdn/colored-man-pages
 
 autoload -Uz compinit
 compinit
