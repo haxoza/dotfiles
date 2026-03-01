@@ -2,9 +2,7 @@
 
 export DOTFILES="$HOME/dev/projects/dotfiles"
 
-zinit cdreplay -q
-
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+eval "$(starship init zsh)"
 
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
@@ -15,11 +13,10 @@ zinit light direnv/direnv
 zinit snippet OMZ::plugins/sudo
 zinit light umop3plsdn/colored-man-pages
 
-autoload -Uz compinit
 compinit
 
 for zsh_file in $DOTFILES/zsh/*.zsh; do
   source "$zsh_file"
 done
 
-[ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
+
