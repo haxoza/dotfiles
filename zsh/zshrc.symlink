@@ -5,12 +5,18 @@ export DOTFILES="$HOME/dev/projects/dotfiles"
 export ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit"
 source /opt/homebrew/opt/zinit/zinit.zsh
 
-eval "$(starship init zsh)"
+_starship_cache="${XDG_CACHE_HOME:-$HOME/.cache}/starship_init.zsh"
+if [[ ! -f "$_starship_cache" || "$(command -v starship)" -nt "$_starship_cache" ]]; then
+  starship init zsh > "$_starship_cache"
+fi
+source "$_starship_cache"
+unset _starship_cache
 
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light umop3plsdn/colored-man-pages
+zinit wait lucid for \
+  zsh-users/zsh-completions \
+  atload"_zsh_autosuggest_start" zsh-users/zsh-autosuggestions \
+  atinit"zicompinit; zicdreplay" zsh-users/zsh-syntax-highlighting \
+  umop3plsdn/colored-man-pages
 
 for zsh_file in $DOTFILES/zsh/*.zsh; do
   source "$zsh_file"
