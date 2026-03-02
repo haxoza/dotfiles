@@ -2,21 +2,16 @@
 
 export DOTFILES="$HOME/dev/projects/dotfiles"
 
+export ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit"
+source /opt/homebrew/opt/zinit/zinit.zsh
+
 eval "$(starship init zsh)"
 
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-syntax-highlighting
-zinit light pyenv/pyenv
-zinit light pyenv/pyenv-virtualenv
-zinit light direnv/direnv
-zinit snippet OMZ::plugins/sudo
 zinit light umop3plsdn/colored-man-pages
-
-compinit
 
 for zsh_file in $DOTFILES/zsh/*.zsh; do
   source "$zsh_file"
 done
-
-
