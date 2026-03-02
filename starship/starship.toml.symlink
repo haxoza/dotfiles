@@ -1,0 +1,63 @@
+format = """
+\
+$username\
+$hostname\
+$singularity\
+$directory\
+$vcsh\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$docker_context\
+$package\
+$bun$c$cmake$cobol$daml$dart$deno$dotnet\
+$elixir$elm$erlang$fortran$gleam$golang$gradle\
+$haskell$haxe$helm$java$julia$kotlin$lua$mojo\
+$nim$nodejs$ocaml$odin$opa$perl$php$pulumi\
+$purescript$python$quarto$raku$rlang$red$ruby\
+$rust$scala$solidity$swift$terraform$typst\
+$vlang$vagrant$xmake$zig\
+$buf$guix_shell$nix_shell$conda$pixi$meson$spack\
+$crystal\
+$fill\
+$cmd_duration\
+$aws$gcloud$openstack\
+$container\
+$jobs\
+$battery\
+$time\
+$line_break\
+$character"""
+
+[fill]
+symbol = " "
+
+[directory]
+style = "bold blue"
+read_only = " 󰌾"
+read_only_style = "red"
+
+[username]
+show_always = false
+
+[git_commit]
+only_detached = false
+
+[git_status]
+modified = "!${count}"
+untracked = "?${count}"
+
+[cmd_duration]
+style = "magenta"
+min_time = 2_000
+
+[jobs]
+style = "bold green"
+
+[gcloud]
+detect_env_vars = ["CLOUDSDK_CORE_PROJECT", "CLOUDSDK_ACTIVE_CONFIG_NAME"]
+
+[time]
+disabled = false
+style = "cyan"

@@ -21,4 +21,7 @@
     ~/.zshenv: zsh/zshenv.symlink
     ~/.zshrc: zsh/zshrc.symlink
     ~/.zprofile: zsh/zprofile.symlink
+    ~/.config/starship.toml:
+        create: true
+        path: starship/starship.toml.symlink
 
