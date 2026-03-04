@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+# Re-apply brew shellenv after macOS path_helper (/etc/zprofile) reorders PATH
+eval "$(/opt/homebrew/bin/brew shellenv)"
