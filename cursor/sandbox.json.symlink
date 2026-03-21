@@ -1,0 +1,5 @@
+{
+  "additionalReadwritePaths": [
+    "~/.local/state/fnm_multishells"
+  ]
+}
