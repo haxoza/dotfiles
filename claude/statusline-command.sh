@@ -31,6 +31,7 @@ fi
 
 # Model
 model=$(echo "$input" | jq -r '.model.display_name // empty')
+model=$(echo "$model" | sed 's/ (\(.*\) context)/(\1)/')
 model_part=""
 [ -n "$model" ] && model_part=" | ${model}"
 

@@ -1,22 +1,44 @@
 {
+  "attribution": {
+    "commit": ""
+  },
   "permissions": {
-    "defaultMode": "acceptEdits",
     "allow": [
       "WebSearch",
       "WebFetch"
-    ]
-  },
-  "sandbox": {
-    "enabled": true,
-    "excludedCommands": ["git", "gh"],
-    "filesystem": {
-      "denyRead": ["~/"],
-      "allowRead": ["."]
-    }
+    ],
+    "defaultMode": "acceptEdits"
   },
   "enableAllProjectMcpServers": true,
-  "attribution": {
-    "commit": ""
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "caffeinate -ims </dev/null >/dev/null 2>&1 & disown",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pkill -f 'caffeinate -ims'",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
     "code-review@claude-plugins-official": true,
@@ -29,10 +51,6 @@
     "ai-team-toolkit@sunscrapers": true,
     "sdlc-toolkit@sunscrapers": true
   },
-  "statusLine": {
-    "type": "command",
-    "command": "bash ~/.claude/statusline-command.sh"
-  },
   "extraKnownMarketplaces": {
     "sunscrapers": {
       "source": {
@@ -40,5 +58,21 @@
         "url": "git@github.com:sunscrapers/agent-toolkit.git"
       }
     }
-  }
+  },
+  "sandbox": {
+    "enabled": true,
+    "filesystem": {
+      "denyRead": [
+        "~/"
+      ],
+      "allowRead": [
+        "."
+      ]
+    },
+    "excludedCommands": [
+      "git",
+      "gh"
+    ]
+  },
+  "enableRemoteControl": true
 }
