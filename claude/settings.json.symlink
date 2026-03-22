@@ -1,4 +1,20 @@
 {
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "WebSearch",
+      "WebFetch"
+    ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "excludedCommands": ["git", "gh"],
+    "filesystem": {
+      "denyRead": ["~/"],
+      "allowRead": ["."]
+    }
+  },
+  "enableAllProjectMcpServers": true,
   "attribution": {
     "commit": ""
   },
