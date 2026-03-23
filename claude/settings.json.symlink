@@ -7,6 +7,44 @@
       "WebSearch",
       "WebFetch"
     ],
+    "deny": [
+      "Read(~/.ssh/**)",
+      "Edit(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Edit(~/.aws/**)",
+      "Read(~/.gnupg/**)",
+      "Edit(~/.gnupg/**)",
+      "Read(~/.config/gcloud/**)",
+      "Edit(~/.config/gcloud/**)",
+      "Read(~/.config/op/**)",
+      "Edit(~/.config/op/**)",
+      "Read(~/.config/gh/**)",
+      "Edit(~/.config/gh/**)",
+      "Read(~/.kube/**)",
+      "Edit(~/.kube/**)",
+      "Read(~/.terraform.d/**)",
+      "Edit(~/.terraform.d/**)",
+      "Read(~/.docker/config.json)",
+      "Edit(~/.docker/config.json)",
+      "Read(~/.pypirc)",
+      "Edit(~/.pypirc)",
+      "Read(~/.npmrc)",
+      "Edit(~/.npmrc)",
+      "Read(~/.git-credentials)",
+      "Edit(~/.git-credentials)",
+      "Edit(~/.bashrc)",
+      "Edit(~/.zshrc)",
+      "Bash(rm -rf *)",
+      "Bash(rm -fr *)",
+      "Bash(sudo *)",
+      "Bash(mkfs *)",
+      "Bash(dd *)",
+      "Bash(wget *|bash*)",
+      "Bash(wget *| bash*)",
+      "Bash(git push --force*)",
+      "Bash(git push *--force*)",
+      "Bash(git reset --hard*)"
+    ],
     "defaultMode": "acceptEdits"
   },
   "enableAllProjectMcpServers": true,
@@ -61,18 +99,28 @@
   },
   "sandbox": {
     "enabled": true,
-    "filesystem": {
-      "denyRead": [
-        "~/"
-      ],
-      "allowRead": [
-        "."
-      ]
-    },
     "excludedCommands": [
       "git",
       "gh"
-    ]
+    ],
+    "filesystem": {
+      "allowWrite": [
+        "~/.local/state/fnm_multishells"
+      ],
+      "denyRead": [
+        "~/.ssh",
+        "~/.aws",
+        "~/.gnupg",
+        "~/.config/gcloud",
+        "~/.config/op",
+        "~/.config/gh",
+        "~/.kube",
+        "~/.terraform.d",
+        "~/.git-credentials",
+        "~/.npmrc",
+        "~/.pypirc"
+      ]
+    }
   },
   "enableRemoteControl": true
 }

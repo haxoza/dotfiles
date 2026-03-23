@@ -9,6 +9,7 @@ This repo installs shell and tool configuration by symlinking tracked files into
 - `install` bootstraps the Dotbot submodule and applies `install.conf.yaml`
 - `zsh/` contains the main shell setup, sourced helper files, and prompt/tooling config
 - `git/`, `vim/`, `ssh/`, `gpg/`, `conda/`, `hg/`, `pypi/`, `cursor/`, `starship/` hold symlinked app configs
+- `claude/` holds Claude Code settings — permissions deny rules and sandbox config based on [trailofbits/claude-code-config](https://github.com/trailofbits/claude-code-config) and own research
 - `homebrew/` contains Homebrew bootstrap and `Brewfile` helpers
 - `mackup/` stores macOS application preferences managed with Mackup
 
