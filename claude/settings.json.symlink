@@ -4,6 +4,8 @@
   },
   "permissions": {
     "allow": [
+      "Bash(git *)",
+      "Bash(gpg *)",
       "WebSearch",
       "WebFetch"
     ],
@@ -99,13 +101,16 @@
   },
   "sandbox": {
     "enabled": true,
+    "autoAllowBashIfSandboxed": true,
     "excludedCommands": [
-      "git",
-      "gh"
+      "git:*",
+      "gpg:*"
     ],
     "filesystem": {
       "allowWrite": [
-        "~/.local/state/fnm_multishells"
+        "~/.local/state/fnm_multishells",
+        "~/.npm/_cacache",
+        "~/Library/Caches/uv"
       ],
       "denyRead": [
         "~/.ssh",
