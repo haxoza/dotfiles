@@ -104,7 +104,8 @@
     "autoAllowBashIfSandboxed": true,
     "excludedCommands": [
       "git:*",
-      "gpg:*"
+      "gpg:*",
+      "gh:*"
     ],
     "filesystem": {
       "allowWrite": [
