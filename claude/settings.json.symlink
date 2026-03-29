@@ -155,7 +155,21 @@
       "git:*",
       "gpg:*",
       "gh:*"
-    ]
+    ],
+    "network": {
+      "allowedDomains": [
+        "pypi.org",
+        "files.pythonhosted.org",
+        "registry.npmjs.org",
+        "static.crates.io",
+        "index.crates.io",
+        "proxy.golang.org",
+        "sum.golang.org",
+        "storage.googleapis.com",
+        "repo.hex.pm",
+        "builds.hex.pm"
+      ]
+    }
   },
   "skipAutoPermissionPrompt": true
 }
