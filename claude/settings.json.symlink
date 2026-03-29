@@ -4,8 +4,37 @@
   },
   "permissions": {
     "allow": [
-      "Bash(git *)",
-      "Bash(gpg *)",
+      "Bash(git status*)",
+      "Bash(git log*)",
+      "Bash(git diff*)",
+      "Bash(git show*)",
+      "Bash(git blame*)",
+      "Bash(git add*)",
+      "Bash(git commit*)",
+      "Bash(git stash*)",
+      "Bash(git branch*)",
+      "Bash(git checkout*)",
+      "Bash(git switch*)",
+      "Bash(git fetch*)",
+      "Bash(git pull*)",
+      "Bash(git merge*)",
+      "Bash(git rebase*)",
+      "Bash(git tag*)",
+      "Bash(git rev-parse*)",
+      "Bash(git ls-files*)",
+      "Bash(git remote*)",
+      "Bash(gh search:*)",
+      "Bash(gh issue:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh pr checks:*)",
+      "Bash(gh pr status:*)",
+      "Bash(gh repo view:*)",
+      "Bash(gh run list:*)",
+      "Bash(gh run view:*)",
+      "Bash(gh api:*)",
+      "Bash(docker compose:*)",
       "WebSearch",
       "WebFetch"
     ],
@@ -47,9 +76,9 @@
       "Bash(git push *--force*)",
       "Bash(git reset --hard*)"
     ],
-    "defaultMode": "acceptEdits"
+    "defaultMode": "auto"
   },
-  "enableAllProjectMcpServers": true,
+  "enableAllProjectMcpServers": false,
   "hooks": {
     "SessionStart": [
       {
@@ -86,10 +115,10 @@
     "feature-dev@claude-plugins-official": true,
     "superpowers@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
-    "ralph-loop@claude-plugins-official": true,
     "ai-repo-audit@sunscrapers": true,
     "ai-team-toolkit@sunscrapers": true,
-    "sdlc-toolkit@sunscrapers": true
+    "sdlc-toolkit@sunscrapers": true,
+    "ralph-loop@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "sunscrapers": {
@@ -102,11 +131,6 @@
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
-    "excludedCommands": [
-      "git:*",
-      "gpg:*",
-      "gh:*"
-    ],
     "filesystem": {
       "allowWrite": [
         "~/.local/state/fnm_multishells",
@@ -126,7 +150,12 @@
         "~/.npmrc",
         "~/.pypirc"
       ]
-    }
+    },
+    "excludedCommands": [
+      "git:*",
+      "gpg:*",
+      "gh:*"
+    ]
   },
-  "enableRemoteControl": true
+  "skipAutoPermissionPrompt": true
 }
