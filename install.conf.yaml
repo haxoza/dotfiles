@@ -38,6 +38,9 @@
     ~/.config/opencode/opencode.jsonc:
         create: true
         path: opencode/opencode.jsonc.symlink
+    ~/.config/opencode/plugins/sensitive-path-guard.js:
+        create: true
+        path: opencode/plugins/sensitive-path-guard.symlink.js
     ~/.gitconfig: git/gitconfig.symlink
     ~/.gitconfig.local: git/gitconfig.local.symlink
     ~/.gitignore: git/gitignore.symlink

@@ -2,5 +2,66 @@
   "$schema": "https://opencode.ai/config.json",
   "plugin": [
     "superpowers@git+https://github.com/obra/superpowers.git"
-  ]
+  ],
+  "permission": {
+    // Block all tool access to sensitive directories
+    "external_directory": {
+      "~/.ssh/**": "deny",
+      "~/.aws/**": "deny",
+      "~/.gnupg/**": "deny",
+      "~/Library/Keychains/**": "deny",
+      "~/.config/gcloud/**": "deny",
+      "~/.config/op/**": "deny",
+      "~/.config/gh/**": "deny",
+      "~/.kube/**": "deny",
+      "~/.terraform.d/**": "deny"
+    },
+    // Deny reading sensitive single files
+    "read": {
+      "~/.docker/config.json": "deny",
+      "~/.pypirc": "deny",
+      "~/.npmrc": "deny",
+      "~/.git-credentials": "deny"
+    },
+    // Deny editing sensitive single files + shell configs
+    "edit": {
+      "~/.docker/config.json": "deny",
+      "~/.pypirc": "deny",
+      "~/.npmrc": "deny",
+      "~/.git-credentials": "deny",
+      "~/.bashrc": "deny",
+      "~/.zshrc": "deny"
+    },
+
+    // Bash: ask for commands targeting home directory, deny dangerous commands
+    "bash": {
+      "*~/*": "ask",
+      "*$HOME/*": "ask",
+      "*~/.ssh*": "deny",
+      "*~/.aws*": "deny",
+      "*~/.gnupg*": "deny",
+      "*~/Library/Keychains*": "deny",
+      "*~/.config/gcloud*": "deny",
+      "*~/.config/op*": "deny",
+      "*~/.config/gh*": "deny",
+      "*~/.kube*": "deny",
+      "*~/.terraform.d*": "deny",
+      "*~/.docker/config.json*": "deny",
+      "*~/.pypirc*": "deny",
+      "*~/.npmrc*": "deny",
+      "*~/.git-credentials*": "deny",
+      "git push --force*": "deny",
+      "git push *--force*": "deny",
+      "git reset --hard*": "deny",
+      "rm -rf *": "deny",
+      "rm -fr *": "deny",
+      "sudo *": "deny",
+      "mkfs *": "deny",
+      "dd *": "deny",
+      "wget *|bash*": "deny",
+      "wget *| bash*": "deny",
+      "curl *|bash*": "deny",
+      "curl *| bash*": "deny"
+    }
+  }
 }
