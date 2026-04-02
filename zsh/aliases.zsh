@@ -17,3 +17,18 @@ station-off() {
   echo "Normal sleep behavior restored."
 }
 
+# Update dev tools: Homebrew packages and Zinit plugins
+dev-update() {
+  echo "==> Updating Homebrew..."
+  brew update && brew upgrade
+
+  echo "==> Updating Zinit and plugins..."
+  zinit self-update
+  zinit update --all
+
+  echo "==> Clearing Zinit completions cache..."
+  zi cclear
+
+  echo "==> Done!"
+}
+
