@@ -63,6 +63,10 @@
       "Edit(~/.npmrc)",
       "Read(~/.git-credentials)",
       "Edit(~/.git-credentials)",
+      "Read(~/Library/Keychains/**)",
+      "Edit(~/Library/Keychains/**)",
+      "Read(~/.azure/**)",
+      "Edit(~/.azure/**)",
       "Edit(~/.bashrc)",
       "Edit(~/.zshrc)",
       "Bash(rm -rf *)",
@@ -141,14 +145,17 @@
         "~/.ssh",
         "~/.aws",
         "~/.gnupg",
+        "~/.azure",
         "~/.config/gcloud",
         "~/.config/op",
         "~/.config/gh",
         "~/.kube",
         "~/.terraform.d",
+        "~/.docker/config.json",
         "~/.git-credentials",
         "~/.npmrc",
-        "~/.pypirc"
+        "~/.pypirc",
+        "~/Library/Keychains"
       ]
     },
     "excludedCommands": [
