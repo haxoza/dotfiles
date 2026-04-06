@@ -90,7 +90,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "caffeinate -ims </dev/null >/dev/null 2>&1 & disown",
+            "command": "bash ~/.claude/caffeinate-manage.sh start",
             "timeout": 5
           }
         ]
@@ -102,7 +102,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "pkill -f 'caffeinate -ims'",
+            "command": "bash ~/.claude/caffeinate-manage.sh stop",
             "timeout": 5
           }
         ]
