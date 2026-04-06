@@ -18,6 +18,9 @@
     ~/.claude/statusline-command.sh:
         create: true
         path: claude/statusline-command.sh
+    ~/.claude/caffeinate-manage.sh:
+        create: true
+        path: claude/caffeinate-manage.sh
     ~/.gitconfig: git/gitconfig.symlink
     ~/.gitconfig.local: git/gitconfig.local.symlink
     ~/.gitignore: git/gitignore.symlink
