@@ -6,10 +6,9 @@ input=$(cat)
 # Directory
 cwd=$(echo "$input" | jq -r '.workspace.current_dir // .cwd // empty')
 if [ -n "$cwd" ]; then
-  # Shorten home directory to ~
-  short_dir="${cwd/#$HOME/~}"
+  short_dir=$(basename "$cwd")
 else
-  short_dir="$(pwd)"
+  short_dir=$(basename "$(pwd)")
 fi
 
 # Git info (branch + status indicators)
