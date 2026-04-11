@@ -8,13 +8,13 @@
     ~/.condarc: conda/condarc.symlink
     ~/.config/starship.toml:
         create: true
-        path: starship/starship.toml.symlink
+        path: starship/starship.symlink.toml
     ~/.cursor/sandbox.json:
         create: true
-        path: cursor/sandbox.json.symlink
+        path: cursor/sandbox.symlink.json
     ~/.claude/settings.json:
         create: true
-        path: claude/settings.json.symlink
+        path: claude/settings.symlink.json
     ~/.claude/statusline-command.sh:
         create: true
         path: claude/statusline-command.sh
@@ -24,8 +24,8 @@
     ~/.gitconfig: git/gitconfig.symlink
     ~/.gitconfig.local: git/gitconfig.local.symlink
     ~/.gitignore: git/gitignore.symlink
-    ~/.gnupg/gpg.conf: gpg/gpg.conf.symlink
-    ~/.gnupg/gpg-agent.conf: gpg/gpg-agent.conf.symlink
+    ~/.gnupg/gpg.conf: gpg/gpg.symlink.conf
+    ~/.gnupg/gpg-agent.conf: gpg/gpg-agent.symlink.conf
     ~/.hgrc: hg/hgrc.symlink
     ~/.hgrc.local: hg/hgrc.local.symlink
     ~/.pypirc: pypi/pypirc.symlink
