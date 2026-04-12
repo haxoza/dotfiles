@@ -7,6 +7,7 @@
 
 - Do not modify `dotbot/`; it is a vendored git submodule
 - Do not commit secrets, private keys, tokens, or machine-specific credentials
+- Edit `claude/settings.symlink.json`, not `~/.claude/settings.json`
 
 ## Repo Conventions
 
