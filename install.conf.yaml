@@ -4,6 +4,9 @@
 
 - clean: ['~']
 
+- shell:
+    - [./codex/generate-config.sh, Generate Codex config]
+
 - link:
     ~/.condarc: conda/condarc.symlink
     ~/.config/starship.toml:
@@ -21,6 +24,9 @@
     ~/.claude/caffeinate-manage.sh:
         create: true
         path: claude/caffeinate-manage.sh
+    ~/.codex/config.toml:
+        create: true
+        path: codex/config.toml
     ~/.gitconfig: git/gitconfig.symlink
     ~/.gitconfig.local: git/gitconfig.local.symlink
     ~/.gitignore: git/gitignore.symlink

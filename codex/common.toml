@@ -1,0 +1,26 @@
+# Secure-by-default Codex baseline.
+#
+# This file is tracked in git. Machine-specific trust entries belong in
+# `trusted.local.toml`, which is intentionally left out of version control.
+
+model_reasoning_effort = "high"
+
+# More autonomous than the default "untrusted", but still safe:
+# - routine work can proceed in the sandbox
+# - actions that need elevated permissions still require approval
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+[sandbox_workspace_write]
+# Codex CLI currently exposes a coarse sandbox network toggle rather than
+# Claude-style per-domain allowlists. Enable it so package managers can resolve
+# and download dependencies without extra approval prompts.
+network_access = true
+
+# Permit a few safe cache/state locations that commonly unblock agentic work on
+# macOS without broadening filesystem access.
+writable_roots = [
+  "~/.local/state/fnm_multishells",
+  "~/.npm/_cacache",
+  "~/Library/Caches/uv",
+]

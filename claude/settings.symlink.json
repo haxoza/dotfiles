@@ -147,6 +147,27 @@
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
+    "network": {
+      "allowedDomains": [
+        "api.github.com",
+        "raw.githubusercontent.com",
+        "objects.githubusercontent.com",
+        "codeload.github.com",
+        "pypi.org",
+        "files.pythonhosted.org",
+        "registry.npmjs.org",
+        "registry.yarnpkg.com",
+        "static.crates.io",
+        "index.crates.io",
+        "proxy.golang.org",
+        "sum.golang.org",
+        "index.golang.org",
+        "storage.googleapis.com",
+        "repo.hex.pm",
+        "builds.hex.pm",
+        "json.schemastore.org"
+      ]
+    },
     "filesystem": {
       "allowWrite": [
         "~/.local/state/fnm_multishells",
@@ -174,28 +195,11 @@
       "git:*",
       "gpg:*",
       "gh:*"
-    ],
-    "network": {
-      "allowedDomains": [
-        "api.github.com",
-        "raw.githubusercontent.com",
-        "objects.githubusercontent.com",
-        "codeload.github.com",
-        "pypi.org",
-        "files.pythonhosted.org",
-        "registry.npmjs.org",
-        "registry.yarnpkg.com",
-        "static.crates.io",
-        "index.crates.io",
-        "proxy.golang.org",
-        "sum.golang.org",
-        "index.golang.org",
-        "storage.googleapis.com",
-        "repo.hex.pm",
-        "builds.hex.pm",
-        "json.schemastore.org"
-      ]
-    }
+    ]
   },
+  "effortLevel": "xhigh",
+  "preferredNotifChannel": "terminal_bell",
+  "remoteControlAtStartup": true,
+  "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true
 }

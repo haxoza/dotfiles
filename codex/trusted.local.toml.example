@@ -1,0 +1,10 @@
+# Copy this file to `trusted.local.toml` and add only machine-local trust
+# entries there. The generator will append them to `config.toml`.
+#
+# Example:
+#
+# [projects."/Users/haxoza/dev/projects/dotfiles"]
+# trust_level = "trusted"
+#
+# [projects."/Users/haxoza/dev/projects/vecten.com"]
+# trust_level = "trusted"
