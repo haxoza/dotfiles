@@ -69,6 +69,17 @@
       "Edit(~/.azure/**)",
       "Edit(~/.bashrc)",
       "Edit(~/.zshrc)",
+      "Read(~/.bash_history)",
+      "Read(~/.bash_sessions/**)",
+      "Read(~/.histfile)",
+      "Read(~/.local/share/fish/fish_history)",
+      "Read(~/.zhistory)",
+      "Read(~/.zsh_history)",
+      "Read(~/.zsh_sessions/**)",
+      "Edit(~/.claude/settings.json)",
+      "Edit(~/.claude/settings.local.json)",
+      "Edit(.claude/settings.json)",
+      "Edit(.claude/settings.local.json)",
       "Bash(rm -rf *)",
       "Bash(rm -fr *)",
       "Bash(sudo *)",
@@ -194,7 +205,14 @@
         "~/.git-credentials",
         "~/.npmrc",
         "~/.pypirc",
-        "~/Library/Keychains"
+        "~/Library/Keychains",
+        "~/.bash_history",
+        "~/.bash_sessions",
+        "~/.histfile",
+        "~/.local/share/fish/fish_history",
+        "~/.zhistory",
+        "~/.zsh_history",
+        "~/.zsh_sessions"
       ]
     },
     "excludedCommands": [
