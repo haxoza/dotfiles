@@ -27,6 +27,9 @@
     ~/.codex/config.toml:
         create: true
         path: codex/config.toml
+    ~/.config/opencode/opencode.json:
+        create: true
+        path: opencode/opencode.symlink.json
     ~/.gitconfig: git/gitconfig.symlink
     ~/.gitconfig.local: git/gitconfig.local.symlink
     ~/.gitignore: git/gitignore.symlink
