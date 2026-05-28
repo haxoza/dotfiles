@@ -24,9 +24,17 @@
     ~/.claude/caffeinate-manage.sh:
         create: true
         path: claude/caffeinate-manage.sh
+    ~/.claude/skills:
+        create: true
+        glob: true
+        path: agents/skills/*
     ~/.codex/config.toml:
         create: true
         path: codex/config.toml
+    ~/.agents/skills:
+        create: true
+        glob: true
+        path: agents/skills/*
     ~/.gitconfig: git/gitconfig.symlink
     ~/.gitconfig.local: git/gitconfig.local.symlink
     ~/.gitignore: git/gitignore.symlink
