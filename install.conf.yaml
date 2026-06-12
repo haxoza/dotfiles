@@ -35,6 +35,9 @@
         create: true
         glob: true
         path: agents/skills/*
+    ~/.config/opencode/opencode.jsonc:
+        create: true
+        path: opencode/opencode.jsonc.symlink
     ~/.gitconfig: git/gitconfig.symlink
     ~/.gitconfig.local: git/gitconfig.local.symlink
     ~/.gitignore: git/gitignore.symlink
