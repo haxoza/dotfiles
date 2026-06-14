@@ -221,7 +221,7 @@
       "gh:*"
     ]
   },
-  "effortLevel": "xhigh",
+  "effortLevel": "high",
   "preferredNotifChannel": "terminal_bell",
   "remoteControlAtStartup": true,
   "agentPushNotifEnabled": true,
