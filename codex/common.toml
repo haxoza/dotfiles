@@ -1,6 +1,6 @@
 # Secure-by-default Codex baseline.
 #
-# This file is tracked in git. Machine-specific trust entries belong in
+# This baseline is tracked in git. Machine-specific trust entries belong in
 # `trusted.local.toml`, which is intentionally left out of version control.
 
 model_reasoning_effort = "high"
@@ -8,7 +8,9 @@ model_reasoning_effort = "high"
 # More autonomous than the default "untrusted", but still safe:
 # - routine work can proceed in the sandbox
 # - actions that need elevated permissions still require approval
+# - eligible low-risk approval prompts are reviewed automatically
 approval_policy = "on-request"
+approvals_reviewer = "auto_review"
 sandbox_mode = "workspace-write"
 
 [sandbox_workspace_write]
