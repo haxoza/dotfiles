@@ -1,137 +1,266 @@
 tap "anomalyco/tap"
 tap "cloudflare/cloudflare"
-tap "docker/tap"
-tap "heroku/brew"
-tap "homebrew/bundle"
-tap "homebrew/services"
-tap "snyk/tap"
+tap "docker/tap", trusted: { casks: ["sbx@nightly"] }
+# Official Amazon AWS command-line interface
 brew "awscli"
+# Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
+# Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Bash Automated Testing System
 brew "bats-core"
+# Python code formatter
 brew "black"
+# Cloudflare Tunnel client (formerly Argo Tunnel)
 brew "cloudflared"
-brew "ruby"
+# Powerful, clean, object-oriented scripting language
+brew "ruby", link: false
+# Dependency manager for Cocoa projects
 brew "cocoapods"
+# Utility that creates projects from templates
 brew "cookiecutter"
+# Load/unload environment variables based on $PWD
 brew "direnv"
+# Text processing system for reStructuredText
 brew "docutils"
+# Functional metaprogramming aware language built on Erlang VM
 brew "elixir"
+# Perl lib for reading and writing EXIF metadata
 brew "exiftool"
+# Fast and simple Node.js version manager
 brew "fnm"
+# GitHub command-line tool
 brew "gh"
+# Interpreter for PostScript and PDF
 brew "ghostscript"
+# Distributed revision control system
 brew "git"
+# Quickly rewrite git repository history
 brew "git-filter-repo"
+# Git extension for versioning large files
 brew "git-lfs"
+# Audit git repos for secrets
+brew "gitleaks"
+# Command-line option parsing utility
 brew "gnu-getopt"
+# Open source programming language to build simple/reliable/efficient software
 brew "go"
+# CLI for backing up and restoring Gmail messages
 brew "gyb"
+# Kubernetes package manager
 brew "helm"
-brew "icu4c@76"
+# Interactive computing in Python
 brew "ipython"
+# Lightweight and flexible command-line JSON processor
 brew "jq"
+# Handy way to save and run project-specific commands
 brew "just"
+# Kubernetes CLI To Manage Your Clusters In Style!
 brew "k9s"
+# Kubernetes command-line interface
 brew "kubernetes-cli"
+# Production Grade K8s Installation, Upgrades, and Management
 brew "kops"
+# Postgres C API library
 brew "libpq"
+# Keep your Mac's application settings in sync
 brew "mackup"
+# Mac App Store command-line interface
 brew "mas"
+# Scalable distributed version control system
 brew "mercurial"
+# Polyglot runtime manager (asdf rust clone)
 brew "mise"
+# Open source relational database management system
 brew "mysql-client"
+# HTTP/2 C Library
 brew "nghttp2"
+# Port scanning utility for large networks
 brew "nmap"
+# Open-source, cross-platform JavaScript runtime environment
 brew "node"
+# Development kit for the Java programming language
 brew "openjdk"
+# Universal skills loader for AI coding agents
 brew "openskills"
+# Locking and sync for Pip requirements files
 brew "pip-tools"
+# Execute binaries from Python packages in isolated environments
 brew "pipx"
+# Package compiler and linker metadata toolkit
 brew "pkgconf"
+# CLI for Playwright: record/generate code, inspect selectors, take screenshots
+brew "playwright-cli"
+# MCP server for Playwright
+brew "playwright-mcp"
+# Fast, disk space efficient package manager
+brew "pnpm"
+# Python package management tool
 brew "poetry"
+# Framework for managing multi-language pre-commit hooks
 brew "pre-commit"
+# Static type checker for Python
 brew "pyright"
+# Interpreted, interactive, object-oriented programming language
 brew "python@3.10"
+# Interpreted, interactive, object-oriented programming language
 brew "python@3.9"
+# Develop and deploy code with zero configuration
 brew "railway"
+# Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Extremely fast Python linter, written in Rust
 brew "ruff"
+# Safe, concurrent, practical language
 brew "rust"
+# Automate your tmux workflow
 brew "smug"
+# Editor of encrypted files
 brew "sops"
+# Cross-shell prompt for astronauts
 brew "starship"
+# Tool Command Language
 brew "tcl-tk"
+# OpenTofu / Terraform / Terragrunt / Terramate / Atmos version manager
 brew "tenv"
+# Terminal multiplexer
 brew "tmux"
+# Anonymizing overlay network for TCP
 brew "tor"
+# Find and verify credentials
+brew "trufflehog"
+# Language Server Protocol implementation for TypeScript wrapping tsserver
 brew "typescript-language-server"
+# Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
+# Tool for creating isolated virtual python environments
 brew "virtualenv"
+# JavaScript package manager
 brew "yarn"
+# Feature-rich command-line audio/video downloader
 brew "yt-dlp"
+# Flexible and fast Zsh plugin manager
 brew "zinit"
+# Shell extension to navigate your filesystem faster
 brew "zoxide"
+# UNIX shell (command interpreter)
 brew "zsh"
+# Additional completion definitions for zsh
 brew "zsh-completions"
-brew "anomalyco/tap/opencode"
-brew "cloudflare/cloudflare/cf-terraforming"
-brew "snyk/tap/snyk"
+# The AI coding agent built for the terminal.
+brew "anomalyco/tap/opencode", trusted: true
+# Utility to export your existing Cloudflare resources as Terraform resources
+brew "cloudflare/cloudflare/cf-terraforming", trusted: true
+# Password manager that keeps all passwords secure behind one password
 cask "1password"
+# Command-line interface for 1Password
 cask "1password-cli"
+# Android SDK component
 cask "android-platform-tools"
+# Electronics prototyping platform
 cask "arduino-ide"
+# Utility to create and modify archives
 cask "betterzip"
+# Utility that prevents the system from going to sleep
 cask "caffeine"
+# Open links in any browser
 cask "choosy"
+# Anthropic's official Claude AI desktop app
 cask "claude"
+# Terminal-based AI coding assistant
 cask "claude-code@latest"
+# OpenAI's coding agent that runs in your terminal
 cask "codex"
+# OpenAI's Codex desktop app for managing coding agents
 cask "codex-app"
+# Write, edit, and chat about your code with AI
 cask "cursor"
+# App to build and share containerised applications and microservices
 cask "docker-desktop"
+# Drive health diagnostic & monitoring tool
 cask "drivedx"
+# Web browser
 cask "firefox"
+# Change the behavior of the fn keys depending on the active application
 cask "fluor"
 cask "font-meslo-lg-nerd-font"
+# Set of tools to manage resources and applications hosted on Google Cloud
 cask "gcloud-cli"
+# Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
+# Free and open-source image editor
 cask "gimp"
+# Web browser
 cask "google-chrome"
+# Client for the Google Drive storage service
 cask "google-drive"
+# Tools to protect your files
 cask "gpg-suite-no-mail"
+# Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
+# Software for Logitech devices
 cask "logi-options+"
+# Provides access to camera controls
 cask "logitech-camera-settings"
+# Provides updates to various Microsoft products
 cask "microsoft-auto-update"
+# Spreadsheet software
 cask "microsoft-excel"
+# Presentation software
 cask "microsoft-powerpoint"
+# Word processor
 cask "microsoft-word"
+# MikroTik Winbox
 cask "nrlquaker-winbox"
+# Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
+# IDE for professional Python development
 cask "pycharm"
+# Quick Look plug-in that renders source code with syntax highlighting
 cask "qlcolorcode"
+# Quick Look generator for Markdown files
 cask "qlmarkdown"
+# Quick Look plugin for plaintext files without an extension
 cask "qlstephen"
+# Quick Look plugin for JSON files
 cask "quicklook-json"
+# Thumbnails, static previews, cover art and metadata for video files
 cask "quicklook-video"
+# Quick Look generator for Adobe Swatch Exchange files
 cask "quicklookase"
+# Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
-cask "docker/tap/sbx"
+# Build, run, and govern agents across the software development lifecycle
+cask "docker/tap/sbx", trusted: true
+# Instant messaging application focusing on security
 cask "signal"
+# Digital design and prototyping platform
 cask "sketch"
+# Team communication and collaboration software
 cask "slack"
+# Music streaming service
 cask "spotify"
+# System monitor for the menu bar
 cask "stats"
+# Daily planner and calendar
 cask "sunsama"
+# Application for inspecting installer packages
 cask "suspicious-package"
+# Mesh VPN based on WireGuard
 cask "tailscale-app"
+# Unpacks archive files
 cask "the-unarchiver"
+# Open-source code editor
 cask "visual-studio-code"
+# Multimedia player
 cask "vlc"
+# Voice to text app
 cask "voiceink"
+# Quick Look plugin for webp files
 cask "webpquicklook"
+# Multiplayer code editor
 cask "zed"
+# Video communication and virtual meeting platform
 cask "zoom"
 mas "GarageBand", id: 682658836
 mas "Harvest", id: 506189836
