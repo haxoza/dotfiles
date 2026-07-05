@@ -141,24 +141,32 @@
     "code-simplifier@claude-plugins-official": true,
     "ai-repo-audit@sunscrapers": true,
     "ai-team-toolkit@sunscrapers": true,
-    "sdlc-toolkit@sunscrapers": true,
     "ralph-loop@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true,
-    "codex@openai-codex": true
+    "codex@openai-codex": true,
+    "sdlc-toolkit@vecten": true
   },
   "extraKnownMarketplaces": {
     "sunscrapers": {
       "source": {
         "source": "git",
         "url": "git@github.com:sunscrapers/agent-toolkit.git"
-      }
+      },
+      "autoUpdate": true
     },
     "openai-codex": {
       "source": {
         "source": "github",
         "repo": "openai/codex-plugin-cc"
       }
+    },
+    "vecten": {
+      "source": {
+        "source": "github",
+        "repo": "vecten/sdlc-toolkit"
+      },
+      "autoUpdate": true
     }
   },
   "sandbox": {
@@ -221,7 +229,9 @@
       "gh:*"
     ]
   },
-  "effortLevel": "high",
+  "effortLevel": "xhigh",
+  "tui": "fullscreen",
+  "skipWorkflowUsageWarning": true,
   "preferredNotifChannel": "terminal_bell",
   "remoteControlAtStartup": true,
   "agentPushNotifEnabled": true,
