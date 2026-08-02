@@ -14,7 +14,7 @@ brew "black"
 # Cloudflare Tunnel client (formerly Argo Tunnel)
 brew "cloudflared"
 # Powerful, clean, object-oriented scripting language
-brew "ruby", link: false
+brew "ruby"
 # Dependency manager for Cocoa projects
 brew "cocoapods"
 # Utility that creates projects from templates
@@ -45,6 +45,8 @@ brew "gitleaks"
 brew "gnu-getopt"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
+# CLI for Drive, Gmail, Calendar, Sheets, Docs, Chat, Admin, and more
+brew "googleworkspace-cli"
 # CLI for backing up and restoring Gmail messages
 brew "gyb"
 # Kubernetes package manager
@@ -202,6 +204,8 @@ cask "iterm2"
 cask "logi-options+"
 # Provides access to camera controls
 cask "logitech-camera-settings"
+# Speech recognition tool
+cask "macwhisper"
 # Provides updates to various Microsoft products
 cask "microsoft-auto-update"
 # Spreadsheet software
@@ -234,8 +238,6 @@ cask "rectangle"
 cask "docker/tap/sbx", trusted: true
 # Instant messaging application focusing on security
 cask "signal"
-# Digital design and prototyping platform
-cask "sketch"
 # Team communication and collaboration software
 cask "slack"
 # Music streaming service
