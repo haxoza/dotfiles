@@ -105,8 +105,6 @@ brew "pre-commit"
 brew "pyright"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.10"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.9"
 # Develop and deploy code with zero configuration
 brew "railway"
 # Search tool like grep and The Silver Searcher
@@ -165,6 +163,8 @@ cask "arduino-ide"
 cask "betterzip"
 # Utility that prevents the system from going to sleep
 cask "caffeine"
+# OpenAI's official ChatGPT desktop app
+cask "chatgpt"
 # Open links in any browser
 cask "choosy"
 # Anthropic's official Claude AI desktop app
@@ -173,8 +173,6 @@ cask "claude"
 cask "claude-code@latest"
 # OpenAI's coding agent that runs in your terminal
 cask "codex"
-# OpenAI's Codex desktop app for managing coding agents
-cask "codex-app"
 # Write, edit, and chat about your code with AI
 cask "cursor"
 # App to build and share containerised applications and microservices
@@ -214,24 +212,14 @@ cask "microsoft-excel"
 cask "microsoft-powerpoint"
 # Word processor
 cask "microsoft-word"
-# MikroTik Winbox
-cask "nrlquaker-winbox"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # IDE for professional Python development
 cask "pycharm"
-# Quick Look plug-in that renders source code with syntax highlighting
-cask "qlcolorcode"
 # Quick Look generator for Markdown files
 cask "qlmarkdown"
-# Quick Look plugin for plaintext files without an extension
-cask "qlstephen"
-# Quick Look plugin for JSON files
-cask "quicklook-json"
 # Thumbnails, static previews, cover art and metadata for video files
 cask "quicklook-video"
-# Quick Look generator for Adobe Swatch Exchange files
-cask "quicklookase"
 # Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
 # Build, run, and govern agents across the software development lifecycle
@@ -248,6 +236,8 @@ cask "stats"
 cask "sunsama"
 # Application for inspecting installer packages
 cask "suspicious-package"
+# Quicklook extension for source files
+cask "syntax-highlight"
 # Mesh VPN based on WireGuard
 cask "tailscale-app"
 # Unpacks archive files
@@ -258,8 +248,8 @@ cask "visual-studio-code"
 cask "vlc"
 # Voice to text app
 cask "voiceink"
-# Quick Look plugin for webp files
-cask "webpquicklook"
+# Administration tool for MikroTik RouterOS
+cask "winbox"
 # Multiplayer code editor
 cask "zed"
 # Video communication and virtual meeting platform
@@ -302,6 +292,7 @@ vscode "nuxt.mdc"
 vscode "nuxtr.nuxt-vscode-extentions"
 vscode "nuxtr.nuxtr-vscode"
 vscode "redhat.vscode-yaml"
+vscode "samuelcolvin.jinjahtml"
 vscode "svelte.svelte-vscode"
 vscode "tamasfe.even-better-toml"
 vscode "vue.volar"
