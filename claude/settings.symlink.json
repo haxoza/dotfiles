@@ -143,7 +143,6 @@
     "code-simplifier@claude-plugins-official": true,
     "ai-repo-audit@sunscrapers": true,
     "ai-team-toolkit@sunscrapers": true,
-    "ralph-loop@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true,
     "codex@openai-codex": true,
