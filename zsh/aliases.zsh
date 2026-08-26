@@ -4,6 +4,11 @@ alias dotfiles="cd $DOTFILES"
 alias projects="cd ~/dev/projects"
 alias docker-composer="docker-compose"
 
+# Superpowers uses the V1 plugin API and cannot load in OpenCode 2 yet.
+opencode2() {
+  OPENCODE_PURE=1 command opencode2 "$@"
+}
+
 alias tableflip="echo '(╯°□°）╯︵ ┻━┻' | pbcopy"
 
 # Claude remote workstation mode (lid-closed, stays awake)
