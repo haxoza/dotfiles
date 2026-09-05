@@ -1,4 +1,8 @@
 #!/usr/bin/env zsh
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Let applications with built-in updaters manage their own upgrades.
+export HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS=1
+
 eval "$(/opt/homebrew/bin/fnm env --shell zsh)"
