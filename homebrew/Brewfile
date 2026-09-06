@@ -1,7 +1,7 @@
 tap "anomalyco/tap"
 tap "cloudflare/cloudflare"
 tap "docker/tap", trusted: { casks: ["sbx@nightly"] }
-tap "nikitabobko/tap"
+tap "nikitabobko/tap", trusted: { casks: ["aerospace"] }
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Bourne-Again SHell, a UNIX command interpreter
