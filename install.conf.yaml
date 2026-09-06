@@ -6,6 +6,9 @@
 
 - shell:
     - [./codex/generate-config.sh, Generate Codex config]
+    - command: ./claude/sync-settings.sh merge
+      description: Merge Claude settings into ~/.claude/settings.json
+      stderr: true
 
 - link:
     ~/.condarc: conda/condarc.symlink
@@ -15,9 +18,6 @@
     ~/.cursor/sandbox.json:
         create: true
         path: cursor/sandbox.symlink.json
-    ~/.claude/settings.json:
-        create: true
-        path: claude/settings.symlink.json
     ~/.claude/statusline-command.sh:
         create: true
         path: claude/statusline-command.sh

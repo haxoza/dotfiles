@@ -7,7 +7,8 @@
 
 - Do not modify `dotbot/`; it is a vendored git submodule
 - Do not commit secrets, private keys, tokens, or machine-specific credentials
-- Edit `claude/settings.symlink.json`, not `~/.claude/settings.json`
+- Edit `claude/settings.json` and run `./install`; never edit `~/.claude/settings.json` directly.
+  It is a merged file, not a symlink. Pull app-side changes back with `claude/sync-settings.sh export`
 
 ## Repo Conventions
 
