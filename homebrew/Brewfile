@@ -1,6 +1,7 @@
 tap "anomalyco/tap"
 tap "cloudflare/cloudflare"
 tap "docker/tap", trusted: { casks: ["sbx@nightly"] }
+tap "nikitabobko/tap"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Bourne-Again SHell, a UNIX command interpreter
@@ -157,6 +158,8 @@ cask "1password"
 cask "1password-cli"
 # Android SDK component
 cask "android-platform-tools"
+# i3-like tiling window manager for macOS
+cask "nikitabobko/tap/aerospace"
 # Electronics prototyping platform
 cask "arduino-ide"
 # Utility to create and modify archives
@@ -220,7 +223,7 @@ cask "pycharm"
 cask "qlmarkdown"
 # Thumbnails, static previews, cover art and metadata for video files
 cask "quicklook-video"
-# Move and resize windows using keyboard shortcuts or snap areas
+# Move and resize windows using keyboard shortcuts or snap areas (disabled during AeroSpace trial)
 cask "rectangle"
 # Build, run, and govern agents across the software development lifecycle
 cask "docker/tap/sbx", trusted: true

@@ -11,6 +11,9 @@
       stderr: true
 
 - link:
+    ~/.aerospace.toml:
+        create: true
+        path: aerospace/aerospace.symlink.toml
     ~/.condarc: conda/condarc.symlink
     ~/.config/starship.toml:
         create: true
