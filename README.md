@@ -86,7 +86,8 @@ make backup
 `~/.claude/settings.json` is a generated file, not a symlink, because Claude Code and Orca rewrite it in place. `./install` runs `claude/sync-settings.sh merge`, which overlays the keys tracked in `claude/settings.json` onto the live file and passes everything else through, including Orca's hook entries.
 
 - Edit `claude/settings.json`, then run `./install` to apply it.
-- Run `claude/sync-settings.sh export` to pull changes made in the app (model, approved permissions) back into the tracked file, then review with `git diff`.
+- Run `claude/sync-settings.sh export` to pull changes made in the app (approved permissions, plugins) back into the tracked file, then review with `git diff`.
+- `model` is deliberately not tracked: Claude Code rewrites it between sessions, so it passes through as an app-owned key.
 - Run `claude/sync-settings.sh status` to see drifted keys, unowned live keys, and hook groups that are neither tracked nor vendor-marked.
 - A top-level key present in `claude/settings.json` is repo-owned and replaced wholesale on merge. To start tracking a key the app added, put it in the tracked file with any value and run export.
 - Inside `hooks`, groups whose command matches a marker in `VENDOR_HOOK_MARKERS` (in `claude/sync-settings.sh`) belong to a third party and pass through; all other groups are repo-owned.
