@@ -72,3 +72,8 @@ h = ['join-with left', 'mode main']
 j = ['join-with down', 'mode main']
 k = ['join-with up', 'mode main']
 l = ['join-with right', 'mode main']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+if.window-title-regex-substring = 'Copy|Move|Delete|Info|Connecting'
+run = 'layout floating'
