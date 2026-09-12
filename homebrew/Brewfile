@@ -76,6 +76,7 @@ brew "mercurial"
 brew "mise"
 # Open source relational database management system
 brew "mysql-client"
+brew "neovim"
 # HTTP/2 C Library
 brew "nghttp2"
 # Port scanning utility for large networks
@@ -217,8 +218,6 @@ cask "microsoft-powerpoint"
 cask "microsoft-word"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
-# IDE for professional Python development
-cask "pycharm"
 # Quick Look generator for Markdown files
 cask "qlmarkdown"
 # Thumbnails, static previews, cover art and metadata for video files
