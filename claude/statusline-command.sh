@@ -55,6 +55,11 @@ limits_part=""
 [ -n "$five_h" ] && limits_part="$(printf " | 5h: %.0f%%" "$five_h")"
 [ -n "$seven_d" ] && limits_part="$(printf "%s 7d: %.0f%%" "$limits_part" "$seven_d")"
 
+# Session name (custom via /rename or --name, otherwise AI-generated)
+session_name=$(echo "$input" | jq -r '.session_name // empty')
+session_part=""
+[ -n "$session_name" ] && session_part=" | ${session_name}"
+
 # Update check (cached, refreshes every 30 min)
 update_part=""
 current_version=$(echo "$input" | jq -r '.version // empty')
@@ -71,4 +76,4 @@ if [ -n "$current_version" ]; then
   fi
 fi
 
-printf "%s%s%s%s%s%s%s" "$short_dir" "$git_part" "$model_part" "$context_part" "$cost_part" "$limits_part" "$update_part"
+printf "%s%s%s%s%s%s%s%s" "$short_dir" "$git_part" "$model_part" "$context_part" "$cost_part" "$limits_part" "$update_part" "$session_part"
