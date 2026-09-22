@@ -26,6 +26,7 @@ status_line = [
   "five-hour-limit",
   "weekly-limit",
   "estimated-thread-cost",
+  "thread-name",
 ]
 
 [sandbox_workspace_write]
