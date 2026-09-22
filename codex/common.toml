@@ -3,6 +3,7 @@
 # This baseline is tracked in git. Machine-specific trust entries belong in
 # `trusted.local.toml`, which is intentionally left out of version control.
 
+model = "gpt-5.6-sol"
 model_reasoning_effort = "high"
 
 # More autonomous than the default "untrusted", but still safe:
@@ -12,6 +13,20 @@ model_reasoning_effort = "high"
 approval_policy = "on-request"
 approvals_reviewer = "auto_review"
 sandbox_mode = "workspace-write"
+
+[tui]
+# Mirror the Claude Code status line with Codex-native, theme-aware fields.
+# Conditional items are omitted when unavailable or inactive.
+status_line = [
+  "project-name",
+  "git-branch",
+  "model-with-reasoning",
+  "fast-mode",
+  "context-used",
+  "five-hour-limit",
+  "weekly-limit",
+  "estimated-thread-cost",
+]
 
 [sandbox_workspace_write]
 # Codex CLI currently exposes a coarse sandbox network toggle rather than
@@ -26,3 +41,39 @@ writable_roots = [
   "~/.npm/_cacache",
   "~/Library/Caches/uv",
 ]
+
+[desktop]
+followUpQueueMode = "queue"
+mac-menu-bar-enabled = false
+conversationDetailMode = "STEPS_PROSE"
+browser-show-full-url = true
+
+[plugins."codex-app-tools@openai-bundled"]
+enabled = true
+
+[plugins."browser@openai-bundled"]
+enabled = true
+
+[plugins."unified-computer-use@openai-bundled"]
+enabled = true
+
+[plugins."visualize@openai-bundled"]
+enabled = true
+
+[plugins."computer-use@openai-bundled"]
+enabled = true
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."pdf@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[plugins."template-creator@openai-primary-runtime"]
+enabled = true

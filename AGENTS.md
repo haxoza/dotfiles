@@ -9,6 +9,8 @@
 - Do not commit secrets, private keys, tokens, or machine-specific credentials
 - Edit `claude/settings.json` and run `./install`; never edit `~/.claude/settings.json` directly.
   It is a merged file, not a symlink. Pull app-side changes back with `claude/sync-settings.sh export`
+- `codex/config.toml` is generated. Before regenerating, reconcile app-written changes into
+  `codex/common.toml` or the gitignored `codex/trusted.local.toml`; keep the generated backup.
 
 ## Repo Conventions
 
