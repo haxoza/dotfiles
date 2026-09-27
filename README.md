@@ -71,6 +71,8 @@ make install-packages
 make dump
 ```
 
+`dev-update` also verifies the Homebrew Codex CLI signature and clears its quarantine attribute after upgrading. See [Codex configuration](codex/README.md) for details.
+
 ## Mackup
 
 Restore or back up macOS app settings:

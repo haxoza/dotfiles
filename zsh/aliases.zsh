@@ -19,7 +19,8 @@ station-off() {
 
 # Update dev tools: Homebrew packages and Zinit plugins
 dev-update() {
-  brew update && brew upgrade
+  brew update && brew upgrade || return
+  "$DOTFILES/codex/clear-homebrew-quarantine.sh" || return
 
   echo "==> Updating Zinit and plugins..."
   GIT_PAGER='' zinit self-update
