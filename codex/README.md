@@ -9,6 +9,10 @@ The Codex app may write new settings to `config.toml`. Before running
 `generate-config.sh` or `./install`, reconcile those changes into the source
 files. The generator creates a timestamped `config.toml.*.bak` first.
 
+Keep shared TUI preferences as root-level dotted keys such as `tui.status_line`.
+Local app state can then use other `tui.*` keys without defining `[tui]` twice
+when the generator combines the files.
+
 `dev-update` runs `clear-homebrew-quarantine.sh` after `brew upgrade`. Homebrew
 quarantines each new Codex CLI binary, which can make macOS ask for first-open
 approval again. The script checks that `/opt/homebrew/bin/codex` points into the

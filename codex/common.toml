@@ -3,8 +3,10 @@
 # This baseline is tracked in git. Machine-specific trust entries belong in
 # `trusted.local.toml`, which is intentionally left out of version control.
 
-model = "gpt-5.6-sol"
+model = "gpt-6-sol"
 model_reasoning_effort = "high"
+plan_mode_reasoning_effort = "high"
+service_tier = "default"
 
 # More autonomous than the default "untrusted", but still safe:
 # - routine work can proceed in the sandbox
@@ -14,10 +16,10 @@ approval_policy = "on-request"
 approvals_reviewer = "auto_review"
 sandbox_mode = "workspace-write"
 
-[tui]
+# Dotted syntax lets local app state share this table during generation.
 # Mirror the Claude Code status line with Codex-native, theme-aware fields.
 # Conditional items are omitted when unavailable or inactive.
-status_line = [
+tui.status_line = [
   "project-name",
   "git-branch",
   "model-with-reasoning",
@@ -48,6 +50,7 @@ followUpQueueMode = "queue"
 mac-menu-bar-enabled = false
 conversationDetailMode = "STEPS_PROSE"
 browser-show-full-url = true
+sansFontSize = 13
 
 [plugins."codex-app-tools@openai-bundled"]
 enabled = true
@@ -77,4 +80,7 @@ enabled = true
 enabled = true
 
 [plugins."template-creator@openai-primary-runtime"]
+enabled = true
+
+[plugins."code-review@openai-bundled"]
 enabled = true
