@@ -28,11 +28,12 @@ This repo installs shell and tool configuration by symlinking tracked files into
 
 ## Setup
 
-Clone the repo with submodules, then run the installer:
+Clone the repo with submodules, restore the [private settings](#private-settings-in-1password), then run the installer:
 
 ```bash
 git clone --recurse-submodules <repo-url> ~/dev/projects/dotfiles
 cd ~/dev/projects/dotfiles
+./1password/sync.py restore
 ./install
 ```
 
@@ -103,6 +104,15 @@ make backup
 - Use `create: true` when a target parent directory may not exist
 
 Examples already ignored from git include `git/gitconfig.local.symlink`, `hg/hgrc.local.symlink`, and `pypi/pypirc.symlink`.
+
+## Private settings in 1Password
+
+Gitignored settings and the shared GPG signing key are backed up in 1Password.
+Use [`1password/sync.py`](1password/sync.py) with `status`, `restore`, or `update`
+for machine-specific settings, and `restore-gpg` for the shared signing key.
+[`1password/machines.yaml`](1password/machines.yaml) maps machine aliases to vaults
+and items. See the [private settings instructions](1password/README.md) for setup
+and machine selection.
 
 ## Adding a new dotfile
 

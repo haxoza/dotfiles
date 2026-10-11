@@ -1,0 +1,26 @@
+# Public aliases and IDs only; keep personal names in 1Password.
+account_id: FTCNDRDBW5G5RBSQKIQD2R6Z6A
+default_machine: machine-1
+shared_gpg:
+  vault_id: wwhnquzch2b6k25e53vrip7mie
+  item_id: 7v3nih63myunemcskekwde5lgy
+  public_attachment_id: u5hmzripyqs2f6kxnu37m5426e
+  private_attachment_id: bg3fhf5eiak4uvwe45kt66u7oy
+  fingerprint_field: signing_fingerprint
+machines:
+  machine-1:
+    vault_id: vh6ch7mz3jfg7eyr7mqztu4jsi
+    files:
+    - path: git/gitconfig.local.symlink
+      item_id: nvjmb2i4r5yeek6qvfi7xnc6cu
+    - path: hg/hgrc.local.symlink
+      item_id: tsylo2b4vtz2psbizka6x6gjva
+    - path: pypi/pypirc.symlink
+      item_id: 5eeytbngncwycxu425smsm2rfy
+    - path: codex/trusted.local.toml
+      item_id: ah5mqp2tpwhr32rpo7izgxnzvy
+    recovery_files: []
+  machine-2:
+    vault_id: fkmc4b5xrxqoj4zgbtvl5ohrzy
+    files: []
+    recovery_files: []

@@ -2,6 +2,7 @@
 
 - Personal macOS dotfiles managed by Dotbot via `install.conf.yaml`
 - Most tracked config sources live in feature directories and end with `.symlink`
+- Private settings live in 1Password per machine, GPG is shared. Use IDs rather than personal names in public references.
 
 ## Do Not Touch
 
