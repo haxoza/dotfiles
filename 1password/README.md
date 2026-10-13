@@ -24,10 +24,11 @@ printf '%s\n' machine-2 > .machine
 ```
 
 This gitignored file is a repository-wide machine selector, available to other
-tools too. Selection order is `--machine <alias>` (before the command), `.machine`,
-then `default_machine` in `machines.yaml`. An invalid or unknown local alias
-stops the command. Every file command prints its selected alias. `status` compares bytes
-and reports `unchanged`, `modified`, or `missing` locally. If a vault read fails,
+tools too. Selection order is `--machine <alias>` (before the command), then
+`.machine`. Every command requires a machine selection, including `restore-gpg`;
+there is no default. A missing, invalid, or unknown machine selection stops the
+command before vault access. Every file command prints its selected alias.
+`status` compares bytes and reports `unchanged`, `modified`, or `missing` locally. If a vault read fails,
 it reports `unavailable` and exits unsuccessfully. No file contents appear unless
 you add `--diff` to `status` or `update`; that option can print secrets to your
 terminal. `update` previews the changed paths, asks once, uploads private

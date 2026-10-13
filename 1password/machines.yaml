@@ -1,6 +1,5 @@
 # Public aliases and IDs only; keep personal names in 1Password.
 account_id: FTCNDRDBW5G5RBSQKIQD2R6Z6A
-default_machine: machine-1
 shared_gpg:
   vault_id: wwhnquzch2b6k25e53vrip7mie
   item_id: 7v3nih63myunemcskekwde5lgy

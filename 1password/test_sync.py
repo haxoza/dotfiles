@@ -84,6 +84,7 @@ class SyncTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
+        (self.root / ".machine").write_text("machine-1\n")
         (self.root / "1password").mkdir()
         shutil.copy2(SOURCE, self.root / "1password/sync.py")
         bundled_yaml = self.root / "dotbot/lib/pyyaml/lib"
@@ -91,7 +92,6 @@ class SyncTests(unittest.TestCase):
         bundled_yaml.symlink_to(YAML_LIB.resolve(), target_is_directory=True)
         self.config = {
             "account_id": "A" * 26,
-            "default_machine": "machine-1",
             "shared_gpg": {
                 "vault_id": "S" * 26,
                 "item_id": GPG_ITEM,
@@ -142,6 +142,26 @@ class SyncTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("Machine: machine-2", result.stdout)
         self.assertFalse(self.log.exists())
+
+    def test_missing_machine_stops_before_vault_access(self):
+        (self.root / ".machine").unlink()
+        for command in ("status", "restore", "update", "restore-gpg"):
+            with self.subTest(command=command):
+                result = self.invoke(command, input="y\n")
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("Set repository .machine or pass --machine <alias>",
+                              result.stderr)
+                self.assertFalse(self.log.exists())
+                self.assertFalse((self.root / "gpg.log").exists())
+                for name in ITEMS:
+                    self.assertFalse((self.root / name).exists(), name)
+
+    def test_explicit_machine_without_local_selection(self):
+        (self.root / ".machine").unlink()
+        result = self.invoke("--machine", "machine-1", "status")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("Machine: machine-1", result.stdout)
+        self.assertIn("document get", self.log.read_text())
 
     def test_explicit_machine_overrides_local_selection(self):
         (self.root / ".machine").write_text("invalid local value\n")
