@@ -33,6 +33,8 @@ Clone the repo with submodules, restore the [private settings](#private-settings
 ```bash
 git clone --recurse-submodules <repo-url> ~/dev/projects/dotfiles
 cd ~/dev/projects/dotfiles
+# Set this checkout's machine alias (choose the matching entry in machines.yaml).
+printf '%s\n' machine-2 > .machine
 ./1password/sync.py restore
 ./install
 ```
@@ -113,6 +115,10 @@ for machine-specific settings, and `restore-gpg` for the shared signing key.
 [`1password/machines.yaml`](1password/machines.yaml) maps machine aliases to vaults
 and items. See the [private settings instructions](1password/README.md) for setup
 and machine selection.
+
+The gitignored root `.machine` file stores this checkout's machine alias as one
+line. It is shared local configuration for repository tools; `sync.py` uses it
+unless overridden with `--machine`.
 
 ## Adding a new dotfile
 

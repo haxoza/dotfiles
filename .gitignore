@@ -3,3 +3,4 @@ gpg/*.gpg
 hg/hgrc.local.symlink
 pypi/pypirc.symlink
 .claude/settings.local.json
+/.machine

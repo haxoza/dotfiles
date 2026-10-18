@@ -16,9 +16,17 @@ Run from the repository root:
 ./1password/sync.py --machine machine-1 status
 ```
 
-The script also works by full path from any directory. It selects the default
-machine alias in `machines.yaml` unless you pass `--machine <alias>` before the
-command. Every file command prints its selected alias. `status` compares bytes
+The script also works by full path from any directory. To remember the machine
+for this checkout, put its alias on a single line in the root `.machine` file:
+
+```bash
+printf '%s\n' machine-2 > .machine
+```
+
+This gitignored file is a repository-wide machine selector, available to other
+tools too. Selection order is `--machine <alias>` (before the command), `.machine`,
+then `default_machine` in `machines.yaml`. An invalid or unknown local alias
+stops the command. Every file command prints its selected alias. `status` compares bytes
 and reports `unchanged`, `modified`, or `missing` locally. If a vault read fails,
 it reports `unavailable` and exits unsuccessfully. No file contents appear unless
 you add `--diff` to `status` or `update`; that option can print secrets to your

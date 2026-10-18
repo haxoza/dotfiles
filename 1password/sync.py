@@ -20,6 +20,23 @@ class SyncError(Exception):
     pass
 
 
+def select_machine(explicit, default):
+    if explicit is not None:
+        return explicit
+    path = REPO / ".machine"
+    try:
+        machine = path.read_text(encoding="utf-8").strip()
+    except FileNotFoundError:
+        if path.is_symlink():
+            raise SyncError("Cannot read repository .machine file")
+        return default
+    except (OSError, UnicodeError) as error:
+        raise SyncError("Cannot read repository .machine file") from error
+    if not re.fullmatch(r"[A-Za-z0-9_-]+", machine):
+        raise SyncError("Repository .machine must contain one machine alias")
+    return machine
+
+
 def valid_id(value, label):
     if not isinstance(value, str) or not re.fullmatch(r"[A-Za-z0-9]{26}", value):
         raise SyncError(f"Invalid {label}; expected a 26-character ID")
@@ -290,7 +307,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG, metavar="PATH")
     parser.add_argument("--account", metavar="ID")
-    parser.add_argument("--machine", metavar="ALIAS")
+    parser.add_argument("--machine", metavar="ALIAS",
+                        help="override repository .machine and the map default")
     subparsers = parser.add_subparsers(dest="command", required=True)
     for command in ("status", "restore", "update", "restore-gpg"):
         sub = subparsers.add_parser(command)
@@ -301,7 +319,7 @@ def main():
     try:
         config = load_config(args.config)
         args.account = valid_id(args.account or config["account_id"], "account ID")
-        args.machine = args.machine or config["default_machine"]
+        args.machine = select_machine(args.machine, config["default_machine"])
         if args.machine not in config["machines"]:
             raise SyncError(f"Unknown machine alias: {args.machine}")
         args.vault = config["machines"][args.machine]["vault_id"]

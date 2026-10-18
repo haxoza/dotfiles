@@ -136,6 +136,28 @@ class SyncTests(unittest.TestCase):
                               input=input, text=True, capture_output=True,
                               env=env or self.env)
 
+    def test_local_machine_selection(self):
+        (self.root / ".machine").write_text("machine-2\n")
+        result = self.invoke("status")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("Machine: machine-2", result.stdout)
+        self.assertFalse(self.log.exists())
+
+    def test_explicit_machine_overrides_local_selection(self):
+        (self.root / ".machine").write_text("invalid local value\n")
+        result = self.invoke("--machine", "machine-2", "status")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("Machine: machine-2", result.stdout)
+        self.assertFalse(self.log.exists())
+
+    def test_invalid_local_machine_stops_before_vault_access(self):
+        for contents in ("", "machine-1\nmachine-2\n", "unknown-machine\n"):
+            with self.subTest(contents=contents):
+                (self.root / ".machine").write_text(contents)
+                result = self.invoke("status")
+                self.assertNotEqual(result.returncode, 0)
+                self.assertFalse(self.log.exists())
+
     def test_invalid_yaml_is_rejected_without_vault_access(self):
         for contents in ("machines: [", "!!python/object:builtins.object {}"):
             with self.subTest(contents=contents):

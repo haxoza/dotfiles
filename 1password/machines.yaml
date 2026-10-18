@@ -22,5 +22,11 @@ machines:
     recovery_files: []
   machine-2:
     vault_id: fkmc4b5xrxqoj4zgbtvl5ohrzy
-    files: []
+    files:
+    - path: hg/hgrc.local.symlink
+      item_id: h52gdhy3vbdfu3b4gqck6xufdq
+    - path: pypi/pypirc.symlink
+      item_id: sa25riy4ncnisb2bmny4vjloya
+    - path: git/gitconfig.local.symlink
+      item_id: ygho7fmnkb2rzqafqn5obzmfv4
     recovery_files: []
