@@ -1,154 +1,205 @@
+# Curated package inventory, grouped by purpose.
+# Keep taps first; preserve package options when moving entries between profiles.
+
+# Package sources
 tap "anomalyco/tap"
+tap "chamburr/tap", trusted: { casks: ["glance"] }
 tap "cloudflare/cloudflare"
 tap "docker/tap", trusted: { casks: ["sbx@nightly"] }
 tap "nikitabobko/tap", trusted: { casks: ["aerospace"] }
-brew "awscli"
+
+# Shells, prompt and terminal sessions
 brew "bash"
-brew "bat"
-brew "bats-core"
-brew "black"
-brew "cloudflared"
-brew "ruby"
-brew "cocoapods"
-brew "cookiecutter"
+brew "zsh"
+brew "zsh-completions"
+brew "zinit"
+brew "starship"
+brew "zoxide"
 brew "direnv"
-brew "docutils"
-brew "elixir"
-brew "exiftool"
-brew "fnm"
-brew "gh"
-brew "ghostscript"
+brew "tmux"
+brew "smug"
+
+# Everyday CLI tools and task automation
+brew "bat"
+brew "ripgrep"
+brew "jq"
+brew "gnu-getopt"
+brew "just"
+
+# Version control and repository checks
 brew "git"
 brew "git-filter-repo"
 brew "git-lfs"
-brew "gitleaks"
-brew "gnu-getopt"
-brew "go"
-brew "googleworkspace-cli"
-brew "gyb"
-brew "helm"
-brew "ipython"
-brew "jq"
-brew "just"
-brew "k9s"
-brew "kubernetes-cli"
-brew "kops"
-brew "libpq"
-brew "mackup"
-brew "mas"
 brew "mercurial"
-brew "mise"
-brew "mysql-client"
-brew "neovim"
-brew "nghttp2"
-brew "nmap"
-brew "node"
-brew "openjdk"
-brew "openskills"
-brew "pip-tools"
+brew "gh"
+brew "pre-commit"
+brew "gitleaks"
+brew "trufflehog"
+brew "bats-core"
+
+# Python runtime, environments and development
+brew "python@3.10"
+brew "uv"
 brew "pipx"
+brew "pip-tools"
+brew "poetry"
+brew "virtualenv"
+brew "cookiecutter"
+brew "ipython"
+brew "ruff"
+brew "pyright"
+
+# JavaScript and TypeScript
+brew "node"
+brew "fnm"
+brew "pnpm"
+brew "yarn"
+brew "typescript-language-server"
+
+# JavaScript package-manager bootstrap
+npm "corepack"
+
+# Other languages and build tools
+brew "elixir"
+brew "go"
+brew "rust"
+brew "ruby"
+brew "openjdk"
+brew "mise"
 brew "pkgconf"
+brew "tcl-tk"
+
+# Rust packages
+cargo "coldsnap"
+
+# Apple and Android development
+brew "cocoapods"
+
+# Apple and Android development apps
+cask "android-platform-tools"
+
+# Apple development tools
+mas "Xcode", id: 497799835
+
+# AI coding and browser automation
+brew "anomalyco/tap/opencode-v2", trusted: true
 brew "playwright-cli"
 brew "playwright-mcp"
-brew "pnpm"
-brew "poetry"
-brew "pre-commit"
-brew "pyright"
-brew "python@3.10"
-brew "railway"
-brew "ripgrep"
-brew "ruff"
-brew "rust"
-brew "smug"
-brew "sops"
-brew "starship"
-brew "tcl-tk"
-brew "tenv"
-brew "tmux"
-brew "tor"
-brew "trufflehog"
-brew "typescript-language-server"
-brew "uv"
-brew "virtualenv"
-brew "yarn"
-brew "yt-dlp"
-brew "zinit"
-brew "zoxide"
-brew "zsh"
-brew "zsh-completions"
-brew "anomalyco/tap/opencode-v2", trusted: true
-brew "cloudflare/cloudflare/cf-terraforming", trusted: true
-cask "1password"
-cask "1password-cli"
-cask "android-platform-tools"
-cask "nikitabobko/tap/aerospace"
-cask "arduino-ide"
-cask "betterzip"
-cask "caffeine"
+
+# AI assistants
 cask "chatgpt"
-cask "choosy"
 cask "claude"
 cask "claude-code@latest"
 cask "codex"
-cask "cursor"
+
+# Cloud, infrastructure and containers
+brew "awscli"
+brew "cloudflared"
+brew "cloudflare/cloudflare/cf-terraforming", trusted: true
+brew "helm"
+brew "k9s"
+brew "kubernetes-cli"
+brew "kops"
+brew "railway"
+brew "sops"
+brew "tenv"
+
+# Cloud and container apps
 cask "docker-desktop"
-cask "drivedx"
-cask "firefox"
-cask "fluor"
-cask "font-meslo-lg-nerd-font"
+cask "docker/tap/sbx", trusted: true
 cask "gcloud-cli"
+
+# Database clients
+brew "libpq"
+brew "mysql-client"
+
+# Networking and diagnostics
+brew "nghttp2"
+brew "nmap"
+brew "tor"
+
+# Networking apps
+cask "tailscale-app"
+
+# Google Workspace and backup
+brew "googleworkspace-cli"
+brew "gyb"
+
+# Configuration and app management
+brew "mackup"
+brew "mas"
+
+# Documents and media processing
+brew "docutils"
+brew "exiftool"
+brew "ghostscript"
+brew "yt-dlp"
+
+# Editors and terminals
+brew "neovim"
+
+# Editor and terminal apps
+cask "cursor"
 cask "ghostty"
-cask "gimp"
-cask "google-chrome"
-cask "google-drive"
-cask "gpg-suite-no-mail"
 cask "iterm2"
+cask "visual-studio-code"
+cask "zed"
+cask "font-meslo-lg-nerd-font"
+
+# Passwords and signing
+cask "1password"
+cask "1password-cli"
+cask "gpg-suite-no-mail"
+
+# Browsers and browser selection
+cask "choosy"
+cask "firefox"
+cask "google-chrome"
+
+# Window management and desktop utilities
+cask "nikitabobko/tap/aerospace"
+cask "rectangle"
+cask "stats"
+
+# Archives, inspection and Quick Look
+cask "chamburr/tap/glance", trusted: true
+cask "quicklook-video"
+cask "suspicious-package"
+cask "the-unarchiver"
+
+# Hardware and tinkering
 cask "logi-options+"
-cask "logitech-camera-settings"
-cask "macwhisper"
+
+# Productivity, office and file sync
+cask "google-drive"
 cask "microsoft-auto-update"
 cask "microsoft-excel"
 cask "microsoft-powerpoint"
 cask "microsoft-word"
 cask "obsidian"
-cask "qlmarkdown"
-cask "quicklook-video"
-cask "rectangle"
-cask "docker/tap/sbx", trusted: true
-cask "signal"
-cask "slack"
-cask "spotify"
-cask "stats"
 cask "sunsama"
-cask "suspicious-package"
-cask "syntax-highlight"
-cask "tailscale-app"
-cask "the-unarchiver"
-cask "visual-studio-code"
+
+# Communication
+cask "slack"
+cask "zoom"
+
+# Creative tools, media and dictation
+cask "macwhisper"
+cask "spotify"
 cask "vlc"
 cask "voiceink"
-cask "winbox"
-cask "zed"
-cask "zoom"
-mas "GarageBand", id: 682658836
-mas "Harvest", id: 506189836
-mas "iMazing Profile Editor", id: 1487860882
+
+# Office apps from the App Store
 mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
+
+# Time tracking and device administration
+mas "Harvest", id: 506189836
 mas "Windows App", id: 1295203466
-mas "Xcode", id: 497799835
-vscode "antfu.goto-alias"
+
+# VS Code: Python and notebooks
 vscode "charliermarsh.ruff"
-vscode "docker.docker"
-vscode "dracula-theme.theme-dracula"
-vscode "eamodio.gitlens"
-vscode "github.vscode-github-actions"
-vscode "hashicorp.terraform"
-vscode "mermaidchart.vscode-mermaid-chart"
-vscode "ms-azuretools.vscode-containers"
-vscode "ms-azuretools.vscode-docker"
-vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
 vscode "ms-python.debugpy"
 vscode "ms-python.isort"
 vscode "ms-python.mypy-type-checker"
@@ -160,16 +211,30 @@ vscode "ms-toolsai.jupyter-keymap"
 vscode "ms-toolsai.jupyter-renderers"
 vscode "ms-toolsai.vscode-jupyter-cell-tags"
 vscode "ms-toolsai.vscode-jupyter-slideshow"
-vscode "ms-vscode-remote.remote-containers"
-vscode "ms-vscode.makefile-tools"
-vscode "nefrob.vscode-just-syntax"
+
+# VS Code: web development
+vscode "antfu.goto-alias"
 vscode "nuxt.mdc"
 vscode "nuxtr.nuxt-vscode-extentions"
 vscode "nuxtr.nuxtr-vscode"
-vscode "redhat.vscode-yaml"
 vscode "samuelcolvin.jinjahtml"
 vscode "svelte.svelte-vscode"
-vscode "tamasfe.even-better-toml"
 vscode "vue.volar"
-cargo "coldsnap"
-npm "corepack"
+
+# VS Code: containers, cloud and infrastructure
+vscode "docker.docker"
+vscode "hashicorp.terraform"
+vscode "ms-azuretools.vscode-containers"
+vscode "ms-azuretools.vscode-docker"
+vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
+vscode "ms-vscode-remote.remote-containers"
+
+# VS Code: Git, build tools, formats and appearance
+vscode "dracula-theme.theme-dracula"
+vscode "eamodio.gitlens"
+vscode "github.vscode-github-actions"
+vscode "mermaidchart.vscode-mermaid-chart"
+vscode "ms-vscode.makefile-tools"
+vscode "nefrob.vscode-just-syntax"
+vscode "redhat.vscode-yaml"
+vscode "tamasfe.even-better-toml"

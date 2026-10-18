@@ -1,0 +1,3 @@
+# Shared packages for machine-1.
+shared = File.expand_path("Brewfile", __dir__)
+instance_eval(File.read(shared), shared)

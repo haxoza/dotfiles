@@ -1,0 +1,10 @@
+# Shared packages and machine-2 additions.
+shared = File.expand_path("Brewfile", __dir__)
+instance_eval(File.read(shared), shared)
+
+# Networking
+cask "winbox"
+
+# Hardware and tinkering
+cask "arduino-ide"
+cask "drivedx"
