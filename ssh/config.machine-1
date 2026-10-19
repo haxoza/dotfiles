@@ -1,0 +1,9 @@
+# Host rules restored from this machine's vault.
+Include config.local
+
+Host *
+    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+    IdentityFile none
+    IdentitiesOnly no
+    UseKeychain no
+    AddKeysToAgent no

@@ -312,6 +312,9 @@ def main():
         if command in ("status", "update"):
             sub.add_argument("--diff", action="store_true",
                              help="print file contents in a unified diff")
+        if command == "restore":
+            sub.add_argument("--only", action="append", metavar="PATH",
+                             help="restore only this mapped file (repeat for multiple files)")
     args = parser.parse_args()
     try:
         config = load_config(args.config)
@@ -322,6 +325,12 @@ def main():
         args.vault = config["machines"][args.machine]["vault_id"]
         args.files = config["machines"][args.machine]["files"]
         args.shared_gpg = config["shared_gpg"]
+        if args.command == "restore" and args.only:
+            requested = set(args.only)
+            unknown = requested - {name for name, _ in args.files}
+            if unknown:
+                raise SyncError("Files not configured for this machine: " + ", ".join(sorted(unknown)))
+            args.files = [(name, item) for name, item in args.files if name in requested]
     except SyncError as error:
         parser.error(str(error))
     required = ("op", "git", "gpg") if args.command == "restore-gpg" else ("op",)

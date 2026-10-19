@@ -18,6 +18,8 @@ machines:
       item_id: 5eeytbngncwycxu425smsm2rfy
     - path: codex/trusted.local.toml
       item_id: ah5mqp2tpwhr32rpo7izgxnzvy
+    - path: ssh/config.local
+      item_id: lpdojl6ahp2h7o3g5njkcnfi6y
     recovery_files: []
   machine-2:
     vault_id: fkmc4b5xrxqoj4zgbtvl5ohrzy
@@ -28,4 +30,6 @@ machines:
       item_id: sa25riy4ncnisb2bmny4vjloya
     - path: git/gitconfig.local.symlink
       item_id: ygho7fmnkb2rzqafqn5obzmfv4
+    - path: ssh/config.local
+      item_id: hztn5uhtigqppnly2cnempjyli
     recovery_files: []

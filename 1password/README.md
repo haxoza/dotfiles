@@ -41,6 +41,16 @@ uploaded. The commands do not run automatically.
 writing anything. It refuses to overwrite any existing local file, creates
 new files with mode `0600`, and removes files it created if a later local write
 fails. Review paths, trust, and permissions before running `./install`.
+To add a newly managed file to an existing installation, use
+`restore --only <repo-relative-path>`; repeat `--only` to restore several files.
+Only routine files mapped for the selected machine are accepted, and the same
+no-overwrite rule applies to selected files.
+
+SSH host rules are private per machine. machine-1's private keys are native SSH
+Key items used by the 1Password agent, outside this Document snapshot workflow.
+Public-key Documents retained in its vault are not part of routine sync.
+machine-2 keeps encrypted local private keys and macOS Keychain. See
+[SSH setup and recovery](../ssh/README.md).
 
 The versioned `machines.yaml` maps machine aliases to vaults and routine files.
 The aliases are intentionally neutral for public privacy; vault names in

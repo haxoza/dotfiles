@@ -1,0 +1,6 @@
+# Host rules and encrypted local-key identities restored from this machine's vault.
+Include config.local
+
+Host *
+    UseKeychain yes
+    AddKeysToAgent yes

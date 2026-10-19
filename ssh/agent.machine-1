@@ -1,0 +1,10 @@
+# Offer only the two active machine-1 keys. Keep names private; use IDs.
+[[ssh-keys]]
+item = "lpftdyor3rybyvt6yejiiwiloq"
+vault = "vh6ch7mz3jfg7eyr7mqztu4jsi"
+account = "FTCNDRDBW5G5RBSQKIQD2R6Z6A"
+
+[[ssh-keys]]
+item = "qi2r7y4k64m4e6cgv25q4gujve"
+vault = "vh6ch7mz3jfg7eyr7mqztu4jsi"
+account = "FTCNDRDBW5G5RBSQKIQD2R6Z6A"

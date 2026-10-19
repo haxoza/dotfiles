@@ -239,6 +239,28 @@ class SyncTests(unittest.TestCase):
         for name in ITEMS:
             self.assertFalse((self.root / name).exists(), name)
 
+    def test_selective_restore_leaves_existing_unselected_files_alone(self):
+        existing = self.root / "git/gitconfig.local.symlink"
+        existing.parent.mkdir()
+        existing.write_bytes(b"existing-private-settings\n")
+        selected = ["hg/hgrc.local.symlink", "pypi/pypirc.symlink"]
+        result = self.invoke("restore", "--only", selected[0], "--only", selected[1])
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(existing.read_bytes(), b"existing-private-settings\n")
+        for name in selected:
+            self.assertEqual((self.root / name).read_bytes(), b"vault-secret\n")
+            self.assertEqual((self.root / name).stat().st_mode & 0o777, 0o600)
+        self.assertNotIn(ITEMS["git/gitconfig.local.symlink"], self.log.read_text())
+        self.assertNotIn(ITEMS["codex/trusted.local.toml"], self.log.read_text())
+
+    def test_selective_restore_rejects_unknown_and_recovery_paths_before_vault_access(self):
+        for name in ("unknown", "../outside", "codex/config.toml"):
+            with self.subTest(name=name):
+                result = self.invoke("restore", "--only", name)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("Files not configured for this machine", result.stderr)
+                self.assertFalse(self.log.exists())
+
     def test_update_aborts_if_vault_changes_during_confirmation(self):
         name, item = next(iter(ITEMS.items()))
         local = self.root / name
