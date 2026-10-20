@@ -20,7 +20,7 @@ This repo installs shell and tool configuration by symlinking tracked files into
 - `~/.zshenv`, `~/.zshrc`, `~/.zprofile`
 - `~/.gitconfig`, `~/.gitconfig.local`, `~/.gitignore`
 - `~/.vimrc`
-- `~/.ssh/config`, `~/.ssh/config.local` (plus machine-1's 1Password agent config)
+- `~/.ssh/config`, `~/.ssh/config.local`, and the machine-selected 1Password agent config
 - `~/.gnupg/gpg.conf`, `~/.gnupg/gpg-agent.conf`
 - `~/.condarc`, `~/.hgrc`, `~/.hgrc.local`, `~/.pypirc`
 - `~/.config/starship.toml`
@@ -48,9 +48,9 @@ Useful variants:
 
 The installer syncs and initializes the bundled `dotbot/` submodule automatically before applying links.
 It requires a valid `.machine` and restored private SSH config before making
-changes. SSH uses the 1Password agent on machine-1 and encrypted local keys with
-macOS Keychain on machine-2. See [SSH setup](ssh/README.md) for migration and
-key recovery.
+changes. Both SSH wrappers select the 1Password agent and support encrypted
+local keys with macOS Keychain; machine-2's agent key list starts empty. See
+[SSH setup](ssh/README.md) for key selection and recovery.
 
 ## Shell stack
 

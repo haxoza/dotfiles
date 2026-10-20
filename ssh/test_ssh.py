@@ -75,23 +75,23 @@ class SSHConfigTests(unittest.TestCase):
     def effective_config(self, machine, host):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            public_suffix = ".pub" if machine == "machine-1" else ""
             private = root / "config.local"
             private.write_text(
                 "Host git-example\n"
                 "    HostName github.com\n"
                 "    User git\n"
-                f"    IdentityFile ~/.ssh/example{public_suffix}\n"
+                "    IdentityFile ~/.ssh/example.pub\n"
                 "    IdentitiesOnly yes\n"
+                "    UseKeychain no\n"
                 "Host tunnel-example\n"
                 "    HostName example.com\n"
                 "    ProxyCommand cloudflared access ssh --hostname %h\n"
                 "Host local-key-example\n"
                 "    IdentityFile ~/.ssh/id_local\n"
                 "    IdentitiesOnly yes\n"
-                "    IdentityAgent none\n"
+                "    IdentityAgent SSH_AUTH_SOCK\n"
                 "    UseKeychain yes\n"
-                "    AddKeysToAgent no\n"
+                "    AddKeysToAgent yes\n"
                 "Host password-key-example\n"
                 "    IdentityFile ~/.ssh/id_sensitive.pub\n"
                 "    IdentitiesOnly yes\n"
@@ -130,22 +130,27 @@ class SSHConfigTests(unittest.TestCase):
         self.assertEqual(values["identityfile"], ["none"])
         self.assertEqual(values["identitiesonly"], ["no"])
 
-    def test_machine_2_keeps_keychain_and_local_key_behavior(self):
+    def test_machine_2_can_select_a_specific_agent_key_for_a_host(self):
         values = self.effective_config("machine-2", "git-example")
-        self.assertNotIn("identityagent", values)
-        self.assertEqual(values["addkeystoagent"], ["true"])
-        self.assertEqual(values["identityfile"], ["~/.ssh/example"])
-        if "usekeychain" in values:
-            self.assertEqual(values["usekeychain"], ["yes"])
-
-    def test_machine_1_can_use_a_local_encrypted_key_for_one_host(self):
-        values = self.effective_config("machine-1", "local-key-example")
-        self.assertEqual(values["identityagent"], ["none"])
-        self.assertEqual(values["identityfile"], ["~/.ssh/id_local", "none"])
-        self.assertEqual(values["identitiesonly"], ["yes"])
+        self.assertIn("com.1password/t/agent.sock", values["identityagent"][0])
         self.assertEqual(values["addkeystoagent"], ["false"])
+        self.assertEqual(values["identityfile"], ["~/.ssh/example.pub"])
         if "usekeychain" in values:
-            self.assertEqual(values["usekeychain"], ["yes"])
+            self.assertEqual(values["usekeychain"], ["no"])
+
+    def test_both_machines_can_use_a_local_encrypted_key_for_one_host(self):
+        for machine in ("machine-1", "machine-2"):
+            with self.subTest(machine=machine):
+                values = self.effective_config(machine, "local-key-example")
+                self.assertEqual(values["identityagent"], ["SSH_AUTH_SOCK"])
+                expected_files = ["~/.ssh/id_local"]
+                if machine == "machine-1":
+                    expected_files.append("none")
+                self.assertEqual(values["identityfile"], expected_files)
+                self.assertEqual(values["identitiesonly"], ["yes"])
+                self.assertEqual(values["addkeystoagent"], ["true"])
+                if "usekeychain" in values:
+                    self.assertEqual(values["usekeychain"], ["yes"])
 
     def test_machine_2_can_use_1password_for_one_host(self):
         values = self.effective_config("machine-2", "password-key-example")

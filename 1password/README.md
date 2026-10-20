@@ -46,10 +46,11 @@ To add a newly managed file to an existing installation, use
 Only routine files mapped for the selected machine are accepted, and the same
 no-overwrite rule applies to selected files.
 
-SSH host rules are private per machine. machine-1's private keys are native SSH
-Key items used by the 1Password agent, outside this Document snapshot workflow.
-Public-key Documents retained in its vault are not part of routine sync.
-machine-2 keeps encrypted local private keys and macOS Keychain. See
+SSH host rules are private per machine. Agent-backed keys are native SSH Key
+items, outside this Document snapshot workflow. Encrypted local keys can be
+stored as Documents in `recovery_files` on either machine; routine sync never
+restores or updates them. Public-key Documents retained in the vault are also
+outside routine sync. See
 [SSH setup and recovery](../ssh/README.md).
 
 The versioned `machines.yaml` maps machine aliases to vaults and routine files.

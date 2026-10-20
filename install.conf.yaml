@@ -61,8 +61,7 @@
         path: ssh/config.local
     ~/.config/1Password/ssh/agent.toml:
         create: true
-        if: '[ "$DOTFILES_MACHINE" = machine-1 ]'
-        path: ssh/agent.machine-1
+        path: ssh/agent.${DOTFILES_MACHINE}
     ~/.vimrc: vim/vimrc.symlink
     ~/.zshenv: zsh/zshenv.symlink
     ~/.zshrc: zsh/zshrc.symlink

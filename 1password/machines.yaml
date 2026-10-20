@@ -20,7 +20,9 @@ machines:
       item_id: ah5mqp2tpwhr32rpo7izgxnzvy
     - path: ssh/config.local
       item_id: lpdojl6ahp2h7o3g5njkcnfi6y
-    recovery_files: []
+    recovery_files:
+    - path: ssh/keys.local/id_ed25519_github
+      item_id: uig6wnyzncklzhkyicsxvqrogm
   machine-2:
     vault_id: fkmc4b5xrxqoj4zgbtvl5ohrzy
     files:
