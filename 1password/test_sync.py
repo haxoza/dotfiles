@@ -38,6 +38,9 @@ if args[:2] == ["document", "get"]:
         sys.exit(1)
     Path(args[args.index("--out-file") + 1]).write_bytes((vault / args[2]).read_bytes())
 elif args[:2] == ["document", "edit"]:
+    if "--file-name" in args:
+        with Path(os.environ["FAKE_LOG"]).open("a") as log:
+            log.write("file-name " + args[args.index("--file-name") + 1] + "\\n")
     if args[2] == os.environ.get("FAKE_FAIL_EDIT"):
         print("SENSITIVE_EDIT_ERROR", file=sys.stderr)
         sys.exit(1)
@@ -318,7 +321,7 @@ class SyncTests(unittest.TestCase):
         self.assertIn("Unsafe path", result.stderr)
         self.assertFalse(self.log.exists())
 
-    def test_update_confirms_once_and_verifies_bytes(self):
+    def test_update_confirms_once_preserves_filename_and_verifies_bytes(self):
         local = self.root / "git/gitconfig.local.symlink"
         local.parent.mkdir()
         local.write_bytes(b"local-secret\n")
@@ -328,6 +331,7 @@ class SyncTests(unittest.TestCase):
         uploaded = self.invoke("update", input="y\n")
         self.assertEqual(uploaded.returncode, 0, uploaded.stderr)
         self.assertIn("Updated and verified", uploaded.stdout)
+        self.assertIn("file-name gitconfig.local.symlink\n", self.log.read_text())
         self.assertEqual((self.vault / next(iter(ITEMS.values()))).read_bytes(), b"local-secret\n")
         self.assertNotIn("secret", uploaded.stdout + uploaded.stderr)
 

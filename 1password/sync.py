@@ -248,7 +248,7 @@ def update(args, temporary):
         source.write_bytes(snapshot)
         source.chmod(0o600)
         run(["op", "document", "edit", item, str(source), "--account", args.account,
-             "--vault", args.vault])
+             "--vault", args.vault, "--file-name", PurePosixPath(name).name])
         verified = vault_document(item, temporary / f"verify-{index}", args)
         if verified != snapshot:
             raise SyncError(f"Verification failed for {name}; stop and inspect the vault item")
