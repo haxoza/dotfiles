@@ -38,7 +38,6 @@ brew "trufflehog"
 brew "bats-core"
 
 # Python runtime, environments and development
-brew "python@3.10"
 brew "uv"
 brew "pipx"
 brew "pip-tools"
@@ -139,7 +138,6 @@ brew "yt-dlp"
 brew "neovim"
 
 # Editor and terminal apps
-cask "cursor"
 cask "ghostty"
 cask "iterm2"
 cask "visual-studio-code"
