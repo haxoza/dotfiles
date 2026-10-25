@@ -1,1 +1,1 @@
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/libpq/bin:$PATH"

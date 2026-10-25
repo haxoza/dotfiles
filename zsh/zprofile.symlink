@@ -1,8 +1,6 @@
 #!/usr/bin/env zsh
 
 # Re-apply brew shellenv after macOS path_helper (/etc/zprofile) reorders PATH
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$("$HOMEBREW_PREFIX/bin/brew" shellenv)"
 
-# The following lines were added by Docker Desktop to add commands to your PATH.
-export PATH="$PATH:/Users/haxoza/.docker/bin"
-# End of Docker Desktop section.
+export PATH="$PATH:$HOME/.docker/bin"

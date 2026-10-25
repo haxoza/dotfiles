@@ -60,7 +60,14 @@ The shell setup is centered on `zsh`:
 - `zsh/zprofile.symlink` reapplies Homebrew after macOS `path_helper`
 - `zsh/zshrc.symlink` loads `zinit`, caches `starship init`, and sources all `zsh/*.zsh` helper files
 
-This repo currently expects a Homebrew-installed `zinit` at `/opt/homebrew/opt/zinit/zinit.zsh` and uses `starship` for the prompt.
+Both machines use Apple Silicon with Homebrew at `/opt/homebrew`.
+Homebrew and the tools in the Brewfile are required. Tool paths use
+`HOMEBREW_PREFIX`, set by `brew shellenv`. `zshrc` resolves its symlink to locate
+this checkout and uses `starship` for the prompt.
+
+Git loads `~/.gitconfig.local` after all shared defaults, so machine-specific
+values take precedence. GPG is resolved through `PATH`; set `gpg.program` in
+the local config if a machine needs a specific executable.
 
 ## Homebrew
 

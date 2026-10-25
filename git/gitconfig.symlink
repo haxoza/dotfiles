@@ -32,8 +32,6 @@
     cmd = code --wait --diff $LOCAL $REMOTE
 [commit]
     gpgsign = true
-[include]
-    path = ~/.gitconfig.local
 [pull]
     rebase = true
 [filter "lfs"]
@@ -42,6 +40,9 @@
     process = git-lfs filter-process
     required = true
 [gpg]
-    program = /usr/local/bin/gpg
+    program = gpg
 [rerere]
 	enabled = true
+# Keep machine-specific values last so they override shared defaults.
+[include]
+    path = ~/.gitconfig.local

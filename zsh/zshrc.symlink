@@ -1,12 +1,14 @@
 #!/usr/bin/env zsh
 
-export DOTFILES="$HOME/dev/projects/dotfiles"
+# Resolve the managed symlink so the checkout can live anywhere.
+export DOTFILES="${${(%):-%N}:A:h:h}"
 
 export ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit"
-source /opt/homebrew/opt/zinit/zinit.zsh
+source "$HOMEBREW_PREFIX/opt/zinit/zinit.zsh"
 
 _starship_cache="${XDG_CACHE_HOME:-$HOME/.cache}/starship_init.zsh"
 if [[ ! -f "$_starship_cache" || "$(command -v starship)" -nt "$_starship_cache" ]]; then
+  mkdir -p "${_starship_cache:h}"
   starship init zsh > "$_starship_cache"
 fi
 source "$_starship_cache"
@@ -18,6 +20,6 @@ zinit wait lucid for \
   atinit"zicompinit; zicdreplay" zsh-users/zsh-syntax-highlighting \
   umop3plsdn/colored-man-pages
 
-for zsh_file in $DOTFILES/zsh/*.zsh; do
+for zsh_file in "$DOTFILES"/zsh/*.zsh; do
   source "$zsh_file"
 done

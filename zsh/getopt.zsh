@@ -1,1 +1,1 @@
-export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/gnu-getopt/bin:$PATH"
