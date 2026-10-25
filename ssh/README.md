@@ -16,6 +16,8 @@ keeps macOS Keychain passphrase lookup for its local keys.
 ```
 
 Skip the restore if the file already exists; sync will not overwrite it.
+An existing regular `agent.toml` is preserved beside the new link as
+`agent.toml.dotbot-backup.<timestamp>`.
 
 ## Choosing a key for a host
 

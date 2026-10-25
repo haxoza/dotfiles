@@ -61,6 +61,7 @@
         path: ssh/config.local
     ~/.config/1Password/ssh/agent.toml:
         create: true
+        backup: true
         path: ssh/agent.${DOTFILES_MACHINE}
     ~/.vimrc: vim/vimrc.symlink
     ~/.zshenv: zsh/zshenv.symlink
