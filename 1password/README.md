@@ -24,10 +24,11 @@ printf '%s\n' machine-2 > .machine
 ```
 
 This gitignored file is a repository-wide machine selector, available to other
-tools too. Selection order is `--machine <alias>` (before the command), `.machine`,
-then `default_machine` in `machines.yaml`. An invalid or unknown local alias
-stops the command. Every file command prints its selected alias. `status` compares bytes
-and reports `unchanged`, `modified`, or `missing` locally. If a vault read fails,
+tools too. Selection order is `--machine <alias>` (before the command), then
+`.machine`. Every command requires a machine selection, including `restore-gpg`;
+there is no default. A missing, invalid, or unknown machine selection stops the
+command before vault access. Every file command prints its selected alias.
+`status` compares bytes and reports `unchanged`, `modified`, or `missing` locally. If a vault read fails,
 it reports `unavailable` and exits unsuccessfully. No file contents appear unless
 you add `--diff` to `status` or `update`; that option can print secrets to your
 terminal. `update` previews the changed paths, asks once, uploads private
@@ -40,6 +41,17 @@ uploaded. The commands do not run automatically.
 writing anything. It refuses to overwrite any existing local file, creates
 new files with mode `0600`, and removes files it created if a later local write
 fails. Review paths, trust, and permissions before running `./install`.
+To add a newly managed file to an existing installation, use
+`restore --only <repo-relative-path>`; repeat `--only` to restore several files.
+Only routine files mapped for the selected machine are accepted, and the same
+no-overwrite rule applies to selected files.
+
+SSH host rules are private per machine. Agent-backed keys are native SSH Key
+items, outside this Document snapshot workflow. Encrypted local keys can be
+stored as Documents in `recovery_files` on either machine; routine sync never
+restores or updates them. Public-key Documents retained in the vault are also
+outside routine sync. See
+[SSH setup and recovery](../ssh/README.md).
 
 The versioned `machines.yaml` maps machine aliases to vaults and routine files.
 The aliases are intentionally neutral for public privacy; vault names in

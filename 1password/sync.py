@@ -20,7 +20,7 @@ class SyncError(Exception):
     pass
 
 
-def select_machine(explicit, default):
+def select_machine(explicit):
     if explicit is not None:
         return explicit
     path = REPO / ".machine"
@@ -29,7 +29,7 @@ def select_machine(explicit, default):
     except FileNotFoundError:
         if path.is_symlink():
             raise SyncError("Cannot read repository .machine file")
-        return default
+        raise SyncError("Set repository .machine or pass --machine <alias>")
     except (OSError, UnicodeError) as error:
         raise SyncError("Cannot read repository .machine file") from error
     if not re.fullmatch(r"[A-Za-z0-9_-]+", machine):
@@ -73,7 +73,7 @@ def load_config(path):
     except (OSError, UnicodeError, yaml.YAMLError) as error:
         raise SyncError(f"Cannot read configuration: {path}") from error
     if not isinstance(config, dict) or set(config) != {
-            "account_id", "default_machine", "shared_gpg", "machines"}:
+            "account_id", "shared_gpg", "machines"}:
         raise SyncError("Invalid configuration fields")
     valid_id(config["account_id"], "account ID")
     shared = config["shared_gpg"]
@@ -89,9 +89,6 @@ def load_config(path):
     machines = config["machines"]
     if not isinstance(machines, dict) or not machines:
         raise SyncError("Invalid machines configuration")
-    if (not isinstance(config["default_machine"], str) or
-            config["default_machine"] not in machines):
-        raise SyncError("Default machine is not configured")
     for machine, details in machines.items():
         if not isinstance(machine, str) or not re.fullmatch(r"[A-Za-z0-9_-]+", machine):
             raise SyncError("Invalid machine selector")
@@ -308,23 +305,32 @@ def main():
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG, metavar="PATH")
     parser.add_argument("--account", metavar="ID")
     parser.add_argument("--machine", metavar="ALIAS",
-                        help="override repository .machine and the map default")
+                        help="select a machine instead of reading repository .machine")
     subparsers = parser.add_subparsers(dest="command", required=True)
     for command in ("status", "restore", "update", "restore-gpg"):
         sub = subparsers.add_parser(command)
         if command in ("status", "update"):
             sub.add_argument("--diff", action="store_true",
                              help="print file contents in a unified diff")
+        if command == "restore":
+            sub.add_argument("--only", action="append", metavar="PATH",
+                             help="restore only this mapped file (repeat for multiple files)")
     args = parser.parse_args()
     try:
         config = load_config(args.config)
         args.account = valid_id(args.account or config["account_id"], "account ID")
-        args.machine = select_machine(args.machine, config["default_machine"])
+        args.machine = select_machine(args.machine)
         if args.machine not in config["machines"]:
             raise SyncError(f"Unknown machine alias: {args.machine}")
         args.vault = config["machines"][args.machine]["vault_id"]
         args.files = config["machines"][args.machine]["files"]
         args.shared_gpg = config["shared_gpg"]
+        if args.command == "restore" and args.only:
+            requested = set(args.only)
+            unknown = requested - {name for name, _ in args.files}
+            if unknown:
+                raise SyncError("Files not configured for this machine: " + ", ".join(sorted(unknown)))
+            args.files = [(name, item) for name, item in args.files if name in requested]
     except SyncError as error:
         parser.error(str(error))
     required = ("op", "git", "gpg") if args.command == "restore-gpg" else ("op",)

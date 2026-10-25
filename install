@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 set -e
 
@@ -9,6 +9,23 @@ DOTBOT_BIN="bin/dotbot"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 cd "${BASEDIR}"
+
+if [ ! -f .machine ]; then
+    echo 'Set repository .machine to machine-1 or machine-2 before installing.' >&2
+    exit 1
+fi
+DOTFILES_MACHINE="$(cat .machine)"
+case "${DOTFILES_MACHINE}" in
+    machine-1|machine-2) ;;
+    *) echo 'Repository .machine must contain machine-1 or machine-2.' >&2; exit 1 ;;
+esac
+if [ ! -f ssh/config.local ]; then
+    echo 'Restore ssh/config.local from 1Password before installing.' >&2
+    exit 1
+fi
+export DOTFILES_MACHINE
+echo "Machine: ${DOTFILES_MACHINE}"
+
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
 

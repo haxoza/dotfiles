@@ -4,6 +4,10 @@
 
 - clean: ['~']
 
+- create:
+    ~/.ssh:
+        mode: 0700
+
 - shell:
     - [./codex/generate-config.sh, Generate Codex config]
     - command: ./claude/sync-settings.sh merge
@@ -51,7 +55,14 @@
     ~/.pypirc: pypi/pypirc.symlink
     ~/.ssh/config:
         create: true
-        path: ssh/config.symlink
+        path: ssh/config.${DOTFILES_MACHINE}
+    ~/.ssh/config.local:
+        create: true
+        path: ssh/config.local
+    ~/.config/1Password/ssh/agent.toml:
+        create: true
+        backup: true
+        path: ssh/agent.${DOTFILES_MACHINE}
     ~/.vimrc: vim/vimrc.symlink
     ~/.zshenv: zsh/zshenv.symlink
     ~/.zshrc: zsh/zshrc.symlink
