@@ -112,18 +112,6 @@
   "skillOverrides": {
     "code-review": "user-invocable-only"
   },
-  "enabledPlugins": {
-    "frontend-design@claude-plugins-official": true,
-    "feature-dev@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true,
-    "code-simplifier@claude-plugins-official": true,
-    "ai-repo-audit@sunscrapers": true,
-    "ai-team-toolkit@sunscrapers": true,
-    "typescript-lsp@claude-plugins-official": true,
-    "pyright-lsp@claude-plugins-official": true,
-    "codex@openai-codex": true,
-    "sdlc-toolkit@vecten": true
-  },
   "extraKnownMarketplaces": {
     "sunscrapers": {
       "source": {
