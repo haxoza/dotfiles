@@ -11,6 +11,7 @@ This repo installs shell and tool configuration by symlinking tracked files into
 - `git/`, `vim/`, `ssh/`, `gpg/`, `conda/`, `hg/`, `pypi/`, `cursor/`, `starship/` hold symlinked app configs
 - `claude/` holds Claude Code settings — permissions deny rules and sandbox config based on [trailofbits/claude-code-config](https://github.com/trailofbits/claude-code-config) and own research. `claude/settings.json` is merged into `~/.claude/settings.json` rather than symlinked, see [Claude Code settings](#claude-code-settings)
 - `homebrew/` contains Homebrew bootstrap and `Brewfile` helpers
+- `aerospace/` holds full machine-specific window manager configs; see [AeroSpace](aerospace/README.md)
 - `mackup/` stores macOS application preferences managed with Mackup
 
 ## Managed links
@@ -20,6 +21,7 @@ This repo installs shell and tool configuration by symlinking tracked files into
 - `~/.zshenv`, `~/.zshrc`, `~/.zprofile`
 - `~/.gitconfig`, `~/.gitconfig.local`, `~/.gitignore`
 - `~/.vimrc`
+- `~/.aerospace.toml`, selected using `.machine`
 - `~/.ssh/config`, `~/.ssh/config.local`, and the machine-selected 1Password agent config
 - `~/.gnupg/gpg.conf`, `~/.gnupg/gpg-agent.conf`
 - `~/.condarc`, `~/.hgrc`, `~/.hgrc.local`, `~/.pypirc`

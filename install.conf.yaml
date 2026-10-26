@@ -17,7 +17,7 @@
 - link:
     ~/.aerospace.toml:
         create: true
-        path: aerospace/aerospace.symlink.toml
+        path: aerospace/aerospace.${DOTFILES_MACHINE}.toml
     ~/.condarc: conda/condarc.symlink
     ~/.config/starship.toml:
         create: true

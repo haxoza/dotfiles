@@ -1,4 +1,5 @@
 # AeroSpace uses its own workspaces instead of macOS Spaces.
+# Keep both profiles in sync except monitor assignments and app placement.
 config-version = 2
 
 start-at-login = true
@@ -14,6 +15,7 @@ enable-normalization-opposite-orientation-for-nested-containers = true
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 persistent-workspaces = ['1', '2', '3', '4', '5', '6']
 
+# Machine-specific monitor assignments.
 [workspace-to-monitor-force-assignment]
 1 = ['dell', 'main']     # Development: Orca and Ghostty
 2 = ['dell', 'main']     # Chrome and Claude
@@ -76,6 +78,7 @@ j = ['join-with down', 'mode main']
 k = ['join-with up', 'mode main']
 l = ['join-with right', 'mode main']
 
+# Shared floating-window rules.
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
 if.window-title-regex-substring = 'Copy|Move|Delete|Info|Connecting'
@@ -91,6 +94,7 @@ run = 'layout floating'
 if.app-id = 'us.zoom.xos'
 run = 'layout floating'
 
+# Machine-specific app placement.
 # Placement runs when a window is detected. Moving it later by hand is allowed.
 # Monitor changes move the assigned workspaces with their windows.
 [[on-window-detected]]
