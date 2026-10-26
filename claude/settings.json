@@ -105,32 +105,6 @@
     "defaultMode": "auto"
   },
   "enableAllProjectMcpServers": false,
-  "hooks": {
-    "SessionStart": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash ~/.claude/caffeinate-manage.sh start",
-            "timeout": 5
-          }
-        ]
-      }
-    ],
-    "SessionEnd": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash ~/.claude/caffeinate-manage.sh stop",
-            "timeout": 5
-          }
-        ]
-      }
-    ]
-  },
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
@@ -235,8 +209,5 @@
   "effortLevel": "xhigh",
   "tui": "fullscreen",
   "skipWorkflowUsageWarning": true,
-  "preferredNotifChannel": "terminal_bell",
-  "remoteControlAtStartup": true,
-  "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true
 }

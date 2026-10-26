@@ -101,15 +101,20 @@ make backup
 
 ## Claude Code settings
 
-`~/.claude/settings.json` is a generated file, not a symlink, because Claude Code and Orca rewrite it in place. `./install` runs `claude/sync-settings.sh merge`, which overlays the keys tracked in `claude/settings.json` onto the live file and passes everything else through, including Orca's hook entries.
+`~/.claude/settings.json` is a generated regular file because Claude Code and Orca rewrite it in place. `./install` runs `claude/sync-settings.sh merge` using two sources:
 
-- Edit `claude/settings.json`, then run `./install` to apply it.
-- Run `claude/sync-settings.sh export` to pull changes made in the app (approved permissions, plugins) back into the tracked file, then review with `git diff`.
-- `model` is deliberately not tracked: Claude Code rewrites it between sessions, so it passes through as an app-owned key.
-- Run `claude/sync-settings.sh status` to see drifted keys, unowned live keys, and hook groups that are neither tracked nor vendor-marked.
-- A top-level key present in `claude/settings.json` is repo-owned and replaced wholesale on merge. To start tracking a key the app added, put it in the tracked file with any value and run export.
-- Inside `hooks`, groups whose command matches a marker in `VENDOR_HOOK_MARKERS` (in `claude/sync-settings.sh`) belong to a third party and pass through; all other groups are repo-owned.
-- `claude/test-sync-settings.sh` runs the fixture tests for the script.
+- `claude/settings.json` owns shared permissions, sandbox policy, status line, common UI preferences, plugins, and marketplaces.
+- `claude/settings.machine-1.json` or `claude/settings.machine-2.json` owns caffeinate hooks, notification preferences, and remote-control startup. Both initially preserve the previous tracked behavior; reconcile machine-2's live settings before applying them there.
+
+`DOTFILES_MACHINE` selects the machine, falling back to the repository's gitignored `.machine` file for direct script calls. A top-level key must belong to exactly one source file; duplicate ownership is rejected. Owned values replace live values wholesale, including plugin and marketplace maps. If either map needs to differ by machine, move the entire map from the shared file into both machine files and maintain two explicit copies.
+
+- Edit the appropriate source, then run `./install` to apply it.
+- Run `claude/sync-settings.sh status` to see drift by owning file, unowned live keys, and unrecognised hooks.
+- Run `claude/sync-settings.sh export` to pull app changes back into their owning source files, then review with `git diff`. The other machine's file is untouched. Changes to shared maps affect both machines.
+- Live-only top-level keys pass through and are never exported. `model`, `modelSettings`, and `autoMode` remain app-owned. To claim a new key, add it to the appropriate source with any value, then run export.
+- Inside `hooks`, groups matching `VENDOR_HOOK_MARKERS` in the sync script belong to third parties. Merge preserves Orca groups; export excludes them. Other groups belong to the source owning `hooks`: merge replaces them, and export pulls them back. Export unknown hooks before merging if you want to keep them.
+- Keep `"hooks": {}` in a machine file to disable caffeinate while preserving Orca hooks and retaining ownership.
+- `claude/test-sync-settings.sh` runs fixture tests without touching `~/.claude`.
 
 ## Customization patterns
 
