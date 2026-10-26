@@ -104,9 +104,9 @@ make backup
 `~/.claude/settings.json` is a generated regular file because Claude Code and Orca rewrite it in place. `./install` runs `claude/sync-settings.sh merge` using two sources:
 
 - `claude/settings.json` owns shared permissions, sandbox policy, status line, common UI preferences, and marketplaces.
-- `claude/settings.machine-1.json` or `claude/settings.machine-2.json` owns caffeinate hooks, notification preferences, remote-control startup, and the complete plugin map. Machine-2 disables Superpowers, the two Sunscrapers plugins, and SDLC Toolkit. Reconcile machine-2's live settings before applying them there.
+- `claude/settings.machine-1.json` or `claude/settings.machine-2.json` owns caffeinate hooks, notification preferences, remote-control startup, and the complete plugin map. Machine-2 omits Superpowers, the two Sunscrapers plugins, and SDLC Toolkit because they aren't installed there. Reconcile machine-2's live settings before applying them there.
 
-`DOTFILES_MACHINE` selects the machine, falling back to the repository's gitignored `.machine` file for direct script calls. A top-level key must belong to exactly one source file; duplicate ownership is rejected. Owned values replace live values wholesale, including plugin and marketplace maps. Keep complete plugin maps in both machine files, using `false` to disable individual plugins. If marketplaces need to differ by machine, move that entire map from the shared file into both machine files too.
+`DOTFILES_MACHINE` selects the machine, falling back to the repository's gitignored `.machine` file for direct script calls. A top-level key must belong to exactly one source file; duplicate ownership is rejected. Owned values replace live values wholesale, including plugin and marketplace maps. Keep each machine's complete plugin map in its machine file. If marketplaces need to differ by machine, move that entire map from the shared file into both machine files too.
 
 - Edit the appropriate source, then run `./install` to apply it.
 - Run `claude/sync-settings.sh status` to see drift by owning file, unowned live keys, and unrecognised hooks.
