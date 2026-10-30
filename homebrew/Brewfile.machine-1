@@ -1,3 +1,6 @@
-# Shared packages for machine-1.
+# Shared packages and machine-1 additions.
 shared = File.expand_path("Brewfile", __dir__)
 instance_eval(File.read(shared), shared)
+
+# Browser selection
+cask "choosy"

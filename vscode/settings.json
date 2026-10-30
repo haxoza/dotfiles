@@ -1,0 +1,14 @@
+{
+  "editor.fontFamily": "'MesloLGSDZ Nerd Font Propo', Menlo, Monaco, 'Courier New', monospace",
+  "python.analysis.autoImportCompletions": true,
+  "[python]": {
+    "editor.formatOnType": true,
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "editor.inlineSuggest.enabled": true,
+  "github.copilot.enable": {
+    "*": true,
+    "markdown": true,
+    "scminput": false
+  }
+}

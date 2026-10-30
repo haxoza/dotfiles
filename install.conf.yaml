@@ -15,6 +15,9 @@
       stderr: true
 
 - link:
+    ~/Library/Application Support/iTerm2/DynamicProfiles/Dotfiles.json:
+        create: true
+        path: iterm2/Profiles.symlink.json
     ~/.aerospace.toml:
         create: true
         path: aerospace/aerospace.${DOTFILES_MACHINE}.toml

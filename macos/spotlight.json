@@ -1,0 +1,12 @@
+{
+  "EnabledPreferenceRules": [
+    "Custom.relatedContents",
+    "System.files",
+    "System.folders",
+    "Domain.IMAGES",
+    "Domain.MOVIES",
+    "Domain.MUSIC",
+    "Domain.PDF",
+    "Domain.SPREADSHEETS"
+  ]
+}

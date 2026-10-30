@@ -5,3 +5,4 @@ pypi/pypirc.symlink
 .claude/settings.local.json
 /.machine
 *.bak
+preferences/backups.local/

@@ -2,7 +2,7 @@
 
 Personal macOS dotfiles managed with [Dotbot](https://github.com/anishathalye/dotbot).
 
-This repo installs shell and tool configuration by symlinking tracked files into `$HOME`. It also includes a few companion workflows for Homebrew package management and Mackup-based app settings restore.
+This repo installs shell and tool configuration by symlinking tracked files into `$HOME`. Companion workflows manage Homebrew packages and selected app and macOS preferences.
 
 ## What's here
 
@@ -12,7 +12,7 @@ This repo installs shell and tool configuration by symlinking tracked files into
 - `claude/` holds Claude Code settings — permissions deny rules and sandbox config based on [trailofbits/claude-code-config](https://github.com/trailofbits/claude-code-config) and own research. `claude/settings.json` is merged into `~/.claude/settings.json` rather than symlinked, see [Claude Code settings](#claude-code-settings)
 - `homebrew/` contains Homebrew bootstrap and `Brewfile` helpers
 - `aerospace/` holds full machine-specific window manager configs; see [AeroSpace](aerospace/README.md)
-- `mackup/` stores macOS application preferences managed with Mackup
+- `preferences/` manages selected macOS, Stats, VS Code and machine-1 Choosy settings
 
 ## Managed links
 
@@ -89,15 +89,12 @@ make dump
 
 `dev-update` also verifies the Homebrew Codex CLI signature and clears its quarantine attribute after upgrading. See [Codex configuration](codex/README.md) for details.
 
-## Mackup
+## Preferences
 
-Restore or back up macOS app settings:
-
-```bash
-cd mackup
-make restore
-make backup
-```
+Selected app settings use the explicit workflow in [preferences/README.md](preferences/README.md).
+Stats and selected macOS settings are shared; Choosy is machine-1 only. iTerm uses
+a curated dynamic profile installed by Dotbot. The preference helper applies
+settings only when explicitly requested. Old Mackup backups remain in Git history.
 
 ## Claude Code settings
 
