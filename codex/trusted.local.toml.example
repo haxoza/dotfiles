@@ -1,10 +1,12 @@
-# Copy this file to `trusted.local.toml` and add only machine-local trust
-# entries there. The generator will append them to `config.toml`.
+# Optional starting point for this machine's gitignored trusted.local.toml.
+# Alternatively, make -C codex export captures its live private settings.
+# Never copy another machine's trust entries here. See README.md for ownership.
 #
-# Example:
+# Private projects, paths, hooks, MCP servers and marketplaces belong here.
+# Shared tui.status_line can coexist with local TUI state:
 #
-# [projects."/Users/haxoza/dev/projects/dotfiles"]
-# trust_level = "trusted"
+# [tui]
+# screen_reader_detection_done = true
 #
-# [projects."/Users/haxoza/dev/projects/vecten.com"]
+# [projects."/path/to/your/project"]
 # trust_level = "trusted"

@@ -11,6 +11,8 @@ This repo installs shell and tool configuration by symlinking tracked files into
 - `git/`, `vim/`, `ssh/`, `gpg/`, `conda/`, `hg/`, `pypi/`, `cursor/`, `starship/` hold symlinked app configs
 - `claude/` holds shared and machine-specific Claude Code settings, merged into
   `~/.claude/settings.json` as a regular file; see [Claude Code settings](claude/README.md)
+- `codex/` merges shared, machine, and private local settings into the app-writable
+  `~/.codex/config.toml`; see [Codex configuration](codex/README.md)
 - `homebrew/` contains Homebrew bootstrap and `Brewfile` helpers
 - `aerospace/` holds full machine-specific window manager configs; see [AeroSpace](aerospace/README.md)
 - `preferences/` manages selected macOS, Stats, VS Code, Zed and machine-1 Choosy settings
@@ -40,6 +42,12 @@ cd ~/dev/projects/dotfiles
 # Set this checkout's machine alias (choose the matching entry in machines.yaml).
 printf '%s\n' machine-2 > .machine
 ./1password/sync.py restore
+# On an existing Codex installation, inspect/export app changes before merging.
+cd codex
+make status
+make export
+git diff -- .
+cd ..
 ./install
 ```
 
@@ -55,6 +63,11 @@ It requires a valid `.machine` and restored private SSH config before making
 changes. Both SSH wrappers select the 1Password agent and support encrypted
 local keys with macOS Keychain; machine-2's agent key list starts empty. See
 [SSH setup](ssh/README.md) for key selection and recovery.
+
+Codex merge/export requires Homebrew's `uv` from the Brewfile. On a fresh Codex
+installation with no live config, skip export. For a new worktree, use the
+[targeted Codex migration workflow](codex/README.md#migrating-an-existing-checkout-or-worktree)
+before running the installer, which also applies all other managed settings.
 
 ## Shell stack
 

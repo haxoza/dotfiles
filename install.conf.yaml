@@ -9,7 +9,9 @@
         mode: 0700
 
 - shell:
-    - [./codex/generate-config.sh, Generate Codex config]
+    - command: make -C codex merge
+      description: Merge Codex settings into ~/.codex/config.toml
+      stderr: true
     - command: ./claude/sync-settings.sh merge
       description: Merge Claude settings into ~/.claude/settings.json
       stderr: true
@@ -42,9 +44,6 @@
         create: true
         glob: true
         path: agents/skills/*
-    ~/.codex/config.toml:
-        create: true
-        path: codex/config.toml
     ~/.agents/skills:
         create: true
         glob: true

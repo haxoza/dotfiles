@@ -68,9 +68,11 @@ The account ID is in `machines.yaml`. Override it with `--account <account-id>`
 `op vault list --account <account-id> --format=json` (`id`). Document IDs
 are read from the selected machine entry.
 
-The generated `codex/config.toml` is not backed up in 1Password. Its sources are
-`codex/common.toml` and `codex/trusted.local.toml`. Reconcile app-written changes
-into those sources before regeneration; keep local generated backups.
+The app-writable `~/.codex/config.toml` is not backed up in 1Password. Its sources
+are `codex/common.toml`, `codex/config.machine-*.toml`, and the gitignored
+`codex/trusted.local.toml`; the routine private backup covers only the local
+source. Reconcile app-written changes with `make export` in `codex/` before
+merging; keep live and legacy generated backups. See the [Codex workflow](../codex/README.md).
 
 After restoring settings, run `./1password/sync.py restore-gpg` to import the
 shared signing key. It always reads the shared GPG vault in `machines.yaml`,

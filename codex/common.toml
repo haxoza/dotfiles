@@ -1,9 +1,8 @@
 # Secure-by-default Codex baseline.
 #
-# This baseline is tracked in git. Machine-specific trust entries belong in
-# `trusted.local.toml`, which is intentionally left out of version control.
+# Shared policy and portable preferences. Model selection stays app-owned.
+# Private trust, paths, hooks and integrations belong in trusted.local.toml.
 
-model = "gpt-6-sol"
 model_reasoning_effort = "high"
 plan_mode_reasoning_effort = "high"
 service_tier = "default"
@@ -16,7 +15,7 @@ approval_policy = "on-request"
 approvals_reviewer = "auto_review"
 sandbox_mode = "workspace-write"
 
-# Dotted syntax lets local app state share this table during generation.
+# tui fields are owned individually; local app state shares this table.
 # Mirror the Claude Code status line with Codex-native, theme-aware fields.
 # Conditional items are omitted when unavailable or inactive.
 tui.status_line = [
@@ -44,43 +43,3 @@ writable_roots = [
   "~/.npm/_cacache",
   "~/Library/Caches/uv",
 ]
-
-[desktop]
-followUpQueueMode = "queue"
-mac-menu-bar-enabled = false
-conversationDetailMode = "STEPS_PROSE"
-browser-show-full-url = true
-sansFontSize = 13
-
-[plugins."codex-app-tools@openai-bundled"]
-enabled = true
-
-[plugins."browser@openai-bundled"]
-enabled = true
-
-[plugins."unified-computer-use@openai-bundled"]
-enabled = true
-
-[plugins."visualize@openai-bundled"]
-enabled = true
-
-[plugins."computer-use@openai-bundled"]
-enabled = true
-
-[plugins."documents@openai-primary-runtime"]
-enabled = true
-
-[plugins."pdf@openai-primary-runtime"]
-enabled = true
-
-[plugins."spreadsheets@openai-primary-runtime"]
-enabled = true
-
-[plugins."presentations@openai-primary-runtime"]
-enabled = true
-
-[plugins."template-creator@openai-primary-runtime"]
-enabled = true
-
-[plugins."code-review@openai-bundled"]
-enabled = true
