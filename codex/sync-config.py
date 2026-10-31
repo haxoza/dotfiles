@@ -76,6 +76,18 @@ def get(doc, path):
 
 
 def put(doc, path, value):
+    if isinstance(value, Mapping):
+        # Rebuild the containing root table from plain values. Reusing dotted
+        # key metadata can duplicate prefixes or put a header before root keys,
+        # changing their scope. Preserve siblings when replacing a split field.
+        replacement = value.unwrap()
+        if len(path) == 2:
+            siblings = doc[path[0]].unwrap() if path[0] in doc else {}
+            replacement = {**siblings, path[1]: replacement}
+        if path[0] in doc:
+            del doc[path[0]]
+        doc[path[0]] = tomlkit.item(replacement)
+        return
     if len(path) == 2:
         if path[0] not in doc:
             doc[path[0]] = tomlkit.table()
@@ -123,11 +135,14 @@ def ownership(sources):
 
 def serialized(doc):
     text = tomlkit.dumps(doc)
-    # Validate the complete document before any mutation, including exports.
+    # Valid TOML can still encode the wrong nesting. Check both syntax and the
+    # intended mapping before any mutation, including exports.
     try:
-        tomlkit.parse(text)
+        reparsed = tomlkit.parse(text)
     except ParseError:
         raise ConfigError("cannot serialize valid TOML; no files written") from None
+    if reparsed.unwrap() != doc.unwrap():
+        raise ConfigError("serialization changed the TOML mapping; no files written")
     return text.encode("utf-8")
 
 

@@ -130,6 +130,83 @@ class SyncConfigTests(unittest.TestCase):
     def backups(self):
         return list(self.live.parent.glob("config.toml.*.bak"))
 
+    @staticmethod
+    def dotted_sandbox(text):
+        return text.replace(
+            "[sandbox_workspace_write]\nnetwork_access =",
+            "sandbox_workspace_write.network_access =",
+        ).replace("\nwritable_roots =", "\nsandbox_workspace_write.writable_roots =")
+
+    def test_merge_table_syntax_preserves_mapping_and_idempotence(self):
+        self.run_sync("merge")
+        expected = self.load(self.live)
+        for source_dotted in (False, True):
+            for live_dotted in (False, True):
+                with self.subTest(source=source_dotted, live=live_dotted):
+                    self.shared.write_text(
+                        self.dotted_sandbox(SHARED) if source_dotted else SHARED
+                    )
+                    self.live.write_text(
+                        self.dotted_sandbox(LIVE) if live_dotted else LIVE
+                    )
+                    self.run_sync("merge")
+                    self.assertEqual(self.load(self.live), expected)
+                    before = self.snapshot()
+                    self.run_sync("merge")
+                    self.assertEqual(self.snapshot(), before)
+
+    def test_export_table_syntax_preserves_mapping_and_idempotence(self):
+        self.run_sync("export")
+        expected = [self.load(p) for p in (self.shared, self.machine, self.local)]
+        for source_dotted in (False, True):
+            for live_dotted in (False, True):
+                with self.subTest(source=source_dotted, live=live_dotted):
+                    self.shared.write_text(
+                        self.dotted_sandbox(SHARED) if source_dotted else SHARED
+                    )
+                    self.machine.write_text(MACHINE)
+                    self.local.write_text(LOCAL)
+                    self.live.write_text(
+                        self.dotted_sandbox(LIVE) if live_dotted else LIVE
+                    )
+                    self.run_sync("export")
+                    self.assertEqual(
+                        [self.load(p) for p in (self.shared, self.machine, self.local)],
+                        expected,
+                    )
+                    before = self.snapshot()
+                    self.run_sync("export")
+                    self.assertEqual(self.snapshot(), before)
+
+    def test_dotted_tui_table_replacement_preserves_siblings_and_quoted_keys(self):
+        self.local.write_text(
+            LOCAL + '\n[tui.model_availability_nux]\n"some.model" = 8\n'
+        )
+        self.run_sync("merge")
+        expected = self.load(self.live)
+        start, end = LIVE.index("[tui]\n"), LIVE.index('[plugins."')
+        self.live.write_text(
+            'tui.status_line = ["git-branch"]\n'
+            "tui.screen_reader_detection_done = false\n"
+            "tui.unknown_state = { seen = 3 }\n"
+            'tui.model_availability_nux."some.model" = 4\n' + LIVE[:start] + LIVE[end:]
+        )
+        self.run_sync("merge")
+        self.assertEqual(self.load(self.live), expected)
+
+    def test_serialization_mapping_change_is_rejected_before_writing(self):
+        before = self.snapshot()
+        with (
+            patch.dict(os.environ, self.env),
+            patch.object(
+                sync_config.tomlkit, "dumps", return_value='wrong = "fixture-secret"\n'
+            ),
+            self.assertRaises(sync_config.ConfigError) as error,
+        ):
+            sync_config.sync("merge")
+        self.assertNotIn("fixture-secret", str(error.exception))
+        self.assertEqual(self.snapshot(), before)
+
     def test_merge_ownership_and_tui_coexistence(self):
         self.run_sync("merge")
         live = self.load(self.live)
