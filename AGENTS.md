@@ -10,8 +10,12 @@
 - Do not commit secrets, private keys, tokens, or machine-specific credentials
 - Edit `claude/settings.json` or `claude/settings.machine-*.json` and run `./install`; never edit `~/.claude/settings.json` directly.
   It is a merged file, not a symlink. Pull app-side changes back with `claude/sync-settings.sh export`
-- `codex/config.toml` is generated. Before regenerating, reconcile app-written changes into
-  `codex/common.toml` or the gitignored `codex/trusted.local.toml`; keep the generated backup.
+- Codex sources are `codex/common.toml`, `codex/config.machine-*.toml`, and the gitignored
+  `codex/trusted.local.toml`. `~/.codex/config.toml` is a merged app-writable regular file;
+  model selection stays app-owned. Reconcile app changes with `make -C codex export`
+  before merging. Use `status` to inspect ownership/drift; keep live and legacy generated backups.
+  For Codex-only changes use `make -C codex merge`, not the full installer. A new worktree
+  needs an explicit `DOTFILES_MACHINE` or its own `.machine`; never borrow another machine's trust.
 
 ## Repo Conventions
 
