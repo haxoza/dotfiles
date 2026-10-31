@@ -1,0 +1,15 @@
+[
+  {
+    "context": "Workspace",
+    "bindings": {}
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {}
+  },
+  {
+    "bindings": {
+      "ctrl-alt-`": "terminal_panel::ToggleFocus"
+    }
+  }
+]

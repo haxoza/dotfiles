@@ -3,5 +3,9 @@
   "FXPreferredViewStyle": "clmv",
   "ShowPathbar": true,
   "ShowStatusBar": true,
-  "NewWindowTarget": "PfHm"
+  "NewWindowTarget": "PfHm",
+  "ShowExternalHardDrivesOnDesktop": true,
+  "ShowRemovableMediaOnDesktop": true,
+  "ShowHardDrivesOnDesktop": false,
+  "AppleShowAllFiles": false
 }

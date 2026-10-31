@@ -46,7 +46,8 @@
         "ApplePressAndHoldEnabled",
         "AppleLanguages",
         "AppleLocale",
-        "AppleShowAllExtensions"
+        "AppleShowAllExtensions",
+        "AppleKeyboardUIMode"
       ]
     }
   },
@@ -75,7 +76,11 @@
         "FXPreferredViewStyle",
         "ShowPathbar",
         "ShowStatusBar",
-        "NewWindowTarget"
+        "NewWindowTarget",
+        "ShowExternalHardDrivesOnDesktop",
+        "ShowRemovableMediaOnDesktop",
+        "ShowHardDrivesOnDesktop",
+        "AppleShowAllFiles"
       ]
     }
   },
@@ -116,6 +121,70 @@
         "Domain.MUSIC",
         "Domain.PDF",
         "Domain.SPREADSHEETS"
+      ]
+    }
+  },
+  "zed": {
+    "source": "zed/settings.json",
+    "backend": "json",
+    "target": ".config/zed/settings.json"
+  },
+  "zed-agents": {
+    "source": "zed/agents.json",
+    "backend": "json",
+    "target": ".config/zed/settings.json"
+  },
+  "shortcuts": {
+    "source": "macos/shortcuts.json",
+    "backend": "defaults",
+    "domain": "com.apple.symbolichotkeys",
+    "macos_versions": [
+      26
+    ],
+    "key_filter": {
+      "include": [
+        "AppleSymbolicHotKeys"
+      ]
+    }
+  },
+  "trackpad-built-in": {
+    "source": "macos/trackpad-built-in.json",
+    "backend": "defaults",
+    "domain": "com.apple.AppleMultitouchTrackpad",
+    "key_filter": {
+      "include": [
+        "Clicking",
+        "TrackpadRightClick",
+        "TrackpadCornerSecondaryClick",
+        "Dragging",
+        "DragLock",
+        "TrackpadThreeFingerDrag"
+      ]
+    }
+  },
+  "trackpad-bluetooth": {
+    "source": "macos/trackpad-bluetooth.json",
+    "backend": "defaults",
+    "domain": "com.apple.driver.AppleBluetoothMultitouch.trackpad",
+    "key_filter": {
+      "include": [
+        "Clicking",
+        "TrackpadRightClick",
+        "TrackpadCornerSecondaryClick",
+        "Dragging",
+        "DragLock",
+        "TrackpadThreeFingerDrag"
+      ]
+    }
+  },
+  "trackpad-host": {
+    "source": "macos/trackpad-host.json",
+    "backend": "defaults",
+    "domain": "NSGlobalDomain",
+    "current_host": true,
+    "key_filter": {
+      "include": [
+        "com.apple.mouse.tapBehavior"
       ]
     }
   }

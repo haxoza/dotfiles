@@ -12,7 +12,7 @@ This repo installs shell and tool configuration by symlinking tracked files into
 - `claude/` holds Claude Code settings — permissions deny rules and sandbox config based on [trailofbits/claude-code-config](https://github.com/trailofbits/claude-code-config) and own research. `claude/settings.json` is merged into `~/.claude/settings.json` rather than symlinked, see [Claude Code settings](#claude-code-settings)
 - `homebrew/` contains Homebrew bootstrap and `Brewfile` helpers
 - `aerospace/` holds full machine-specific window manager configs; see [AeroSpace](aerospace/README.md)
-- `preferences/` manages selected macOS, Stats, VS Code and machine-1 Choosy settings
+- `preferences/` manages selected macOS, Stats, VS Code, Zed and machine-1 Choosy settings
 
 ## Managed links
 
@@ -27,6 +27,7 @@ This repo installs shell and tool configuration by symlinking tracked files into
 - `~/.condarc`, `~/.hgrc`, `~/.hgrc.local`, `~/.pypirc`
 - `~/.config/starship.toml`
 - `~/.cursor/sandbox.json`
+- `~/.config/zed/keymap.json` (complete array; existing files are backed up)
 
 ## Setup
 

@@ -78,7 +78,10 @@ def defaults_args(value):
         return ["-string", value]
     if isinstance(value, list) and all(isinstance(item, str) for item in value):
         return ["-array", *value]
-    raise ValueError("Defaults values must be scalars or lists of strings")
+    if isinstance(value, (dict, list)):
+        # A single XML plist value preserves nested types without importing a domain.
+        return [plistlib.dumps(value).decode()]
+    raise ValueError("Defaults values must be scalars, lists or dictionaries")
 
 
 def validate_defaults(source, definition):
@@ -115,11 +118,18 @@ def owned_view(live, definition):
 
 
 def value_to_apply(key, value, live, definition):
+    if isinstance(value, dict):
+        return merged(live.get(key, {}), value)
     if key not in definition.get("list_items", {}):
         return value
     allowed = definition["list_items"][key]
     local = [item for item in live.get(key, []) if item not in allowed]
     return [*local, *value]
+
+
+def defaults_command(definition, action, *arguments):
+    host = ["-currentHost"] if definition.get("current_host", False) else []
+    return ["/usr/bin/defaults", *host, action, definition["domain"], *arguments]
 
 
 def relative_path(directory, name):
@@ -189,7 +199,7 @@ def main():
     if backend == "defaults":
         validate_defaults(source, definition)
         result = subprocess.run(
-            ["/usr/bin/defaults", "export", definition["domain"], "-"],
+            defaults_command(definition, "export", "-"),
             capture_output=True,
             check=False,
         )
@@ -197,15 +207,17 @@ def main():
             raise ValueError(f"Preferences unavailable for {args.app}")
         raw = result.stdout
         live = plistlib.loads(raw)
+        if not isinstance(live, dict):
+            raise TypeError(f"Expected a preference dictionary for {args.app}")
         # Keep the complete domain for backups and for preserving local list members.
         original_live = live
         live = owned_view(live, definition)
     else:
         target = relative_path(Path.home(), definition["target"])
         raw = target.read_bytes() if target.exists() else b""
-        if backend == "plist" and args.action == "export" and not raw:
+        if args.action == "export" and not raw:
             raise ValueError(
-                f"Cannot export {args.app}: live plist is missing or empty: {target}"
+                f"Cannot export {args.app}: live {backend} file is missing or empty: {target}"
             )
         live = (
             plistlib.loads(raw)
@@ -216,16 +228,11 @@ def main():
         )
 
     different = (
-        [k for k, v in source.items() if k not in live or live[k] != v]
+        [k for k in source if selected(live, {k: source[k]}) != {k: source[k]}]
         if backend != "plist"
         else ([] if live == source else ["contents"])
     )
     if args.action == "status":
-        if backend == "json":
-            # Nested settings are owned per key; unowned nested keys aren't drift.
-            different = [
-                k for k in source if selected(live, {k: source[k]}) != {k: source[k]}
-            ]
         print(f"{args.app}: " + (", ".join(different) if different else "in sync"))
         return
     if args.action == "export":
@@ -245,22 +252,20 @@ def main():
         return
 
     if backend == "defaults":
-        different = [k for k in source if k not in live or live[k] != source[k]]
         if not different:
             print(f"{args.app}: in sync")
             return
         backup(args.app, raw)
         for key in different:
             subprocess.run(
-                [
-                    "/usr/bin/defaults",
+                defaults_command(
+                    definition,
                     "write",
-                    definition["domain"],
                     key,
                     *defaults_args(
                         value_to_apply(key, source[key], original_live, definition)
                     ),
-                ],
+                ),
                 check=True,
             )
     else:
