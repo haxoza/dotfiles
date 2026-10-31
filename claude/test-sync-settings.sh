@@ -71,6 +71,9 @@ setup() {
   mkdir -p "${tmp}/home/.claude" "${tmp}/repo"
   tracked_fixture > "$tracked"
   live_fixture > "$live"
+  printf '{}\n' > "${tmp}/repo/settings.machine-1.json"
+  printf '{}\n' > "${tmp}/repo/settings.machine-2.json"
+  export DOTFILES_MACHINE=machine-1
   export CLAUDE_SETTINGS_LIVE_FILE="$live" CLAUDE_SETTINGS_TRACKED_FILE="$tracked"
 }
 teardown() { rm -rf "$tmp"; }
@@ -229,6 +232,53 @@ test_status_reports_without_writing() {
   assert_contains "status: lists unrecognised hook group command" "$out" "say hi"
   assert_true "status: live untouched" '[ "$(cat "$live")" = "$before_live" ]'
   assert_true "status: tracked untouched" '[ "$(cat "$tracked")" = "$before_tracked" ]'
+  teardown
+}
+
+# --- machine ownership -------------------------------------------------------
+
+test_machine_selection_and_export_ownership() {
+  setup
+  local machine1="${tmp}/repo/settings.machine-1.json" machine2="${tmp}/repo/settings.machine-2.json"
+  jq '{hooks, tui: "inline", enabledPlugins: {"machine-plugin@test": true}}' "$tracked" > "$machine1"
+  jq 'del(.hooks, .tui)' "$tracked" > "${tracked}.new" && mv "${tracked}.new" "$tracked"
+  jq '.hooks = {} | .tui = "fullscreen" | .enabledPlugins = {"other-plugin@test": true}' "$machine1" > "$machine2"
+  cp "$machine2" "${tmp}/machine2.orig"
+
+  run merge
+  assert_json "machine: selected settings merged" "$live" '{tui, enabledPlugins}' \
+    '{"tui":"inline","enabledPlugins":{"machine-plugin@test":true}}'
+  jq '.permissions.allow += ["Bash(make *)"] | .tui = "fullscreen"
+      | .enabledPlugins = {"app-plugin@test": true}
+      | .hooks.SessionStart[0].hooks[0].timeout = 9' "$live" > "${live}.new" && mv "${live}.new" "$live"
+  assert_contains "status: drift identifies machine owner" "$("$sut" status)" \
+    'settings.machine-1.json; merge resets, export pulls): tui'
+  run export
+  assert_json "export: shared changes stay shared" "$tracked" '{allow: .permissions.allow, machineKeys: (has("hooks") or has("tui") or has("enabledPlugins"))}' \
+    '{"allow":["Bash(git status*)","WebSearch","Bash(make *)"],"machineKeys":false}'
+  assert_json "export: machine values and whole plugin map return to owner" "$machine1" '{tui, enabledPlugins, timeout: .hooks.SessionStart[0].hooks[0].timeout}' \
+    '{"tui":"fullscreen","enabledPlugins":{"app-plugin@test":true},"timeout":9}'
+  assert_json "export: machine hooks exclude vendor groups" "$machine1" '[.hooks[][] | select(.hooks[].command | test("orca/agent-hooks"))] | length' '0'
+  assert_true "export: other machine untouched" 'cmp -s "$machine2" "${tmp}/machine2.orig"'
+
+  DOTFILES_MACHINE=machine-2 run merge
+  assert_json "machine: selection switches whole plugin map" "$live" '.enabledPlugins' '{"other-plugin@test":true}'
+  assert_json "machine: empty hooks remove repo groups and keep vendors" "$live" \
+    '[.hooks[][] | .hooks[].command | test("orca/agent-hooks")] | {count: length, allVendor: all}' '{"count":12,"allVendor":true}'
+  DOTFILES_MACHINE=machine-2 run export
+  assert_json "export: empty hooks retain ownership" "$machine2" '.hooks' '{}'
+  teardown
+}
+
+test_duplicate_ownership_is_rejected() {
+  setup
+  printf '{"tui":"inline"}\n' > "${tmp}/repo/settings.machine-1.json"
+  local before rc=0 err
+  before="$(cat "$live")"
+  err="$("$sut" merge 2>&1 >/dev/null)" || rc=$?
+  assert_true "ownership: duplicate key exits non-zero" '[ "$rc" -ne 0 ]'
+  assert_contains "ownership: duplicate key explained" "$err" 'keys owned by both source files: tui'
+  assert_true "ownership: duplicate key leaves live untouched" '[ "$(cat "$live")" = "$before" ]'
   teardown
 }
 

@@ -105,50 +105,12 @@
     "defaultMode": "auto"
   },
   "enableAllProjectMcpServers": false,
-  "hooks": {
-    "SessionStart": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash ~/.claude/caffeinate-manage.sh start",
-            "timeout": 5
-          }
-        ]
-      }
-    ],
-    "SessionEnd": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash ~/.claude/caffeinate-manage.sh stop",
-            "timeout": 5
-          }
-        ]
-      }
-    ]
-  },
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
   },
   "skillOverrides": {
     "code-review": "user-invocable-only"
-  },
-  "enabledPlugins": {
-    "frontend-design@claude-plugins-official": true,
-    "feature-dev@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true,
-    "code-simplifier@claude-plugins-official": true,
-    "ai-repo-audit@sunscrapers": true,
-    "ai-team-toolkit@sunscrapers": true,
-    "typescript-lsp@claude-plugins-official": true,
-    "pyright-lsp@claude-plugins-official": true,
-    "codex@openai-codex": true,
-    "sdlc-toolkit@vecten": true
   },
   "extraKnownMarketplaces": {
     "sunscrapers": {
@@ -235,8 +197,5 @@
   "effortLevel": "xhigh",
   "tui": "fullscreen",
   "skipWorkflowUsageWarning": true,
-  "preferredNotifChannel": "terminal_bell",
-  "remoteControlAtStartup": true,
-  "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true
 }

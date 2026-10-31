@@ -9,7 +9,8 @@ This repo installs shell and tool configuration by symlinking tracked files into
 - `install` bootstraps the Dotbot submodule and applies `install.conf.yaml`
 - `zsh/` contains the main shell setup, sourced helper files, and prompt/tooling config
 - `git/`, `vim/`, `ssh/`, `gpg/`, `conda/`, `hg/`, `pypi/`, `cursor/`, `starship/` hold symlinked app configs
-- `claude/` holds Claude Code settings — permissions deny rules and sandbox config based on [trailofbits/claude-code-config](https://github.com/trailofbits/claude-code-config) and own research. `claude/settings.json` is merged into `~/.claude/settings.json` rather than symlinked, see [Claude Code settings](#claude-code-settings)
+- `claude/` holds shared and machine-specific Claude Code settings, merged into
+  `~/.claude/settings.json` as a regular file; see [Claude Code settings](claude/README.md)
 - `homebrew/` contains Homebrew bootstrap and `Brewfile` helpers
 - `aerospace/` holds full machine-specific window manager configs; see [AeroSpace](aerospace/README.md)
 - `preferences/` manages selected macOS, Stats, VS Code, Zed and machine-1 Choosy settings
@@ -96,18 +97,6 @@ Selected app settings use the explicit workflow in [preferences/README.md](prefe
 Stats and selected macOS settings are shared; Choosy is machine-1 only. iTerm uses
 a curated dynamic profile installed by Dotbot. The preference helper applies
 settings only when explicitly requested. Old Mackup backups remain in Git history.
-
-## Claude Code settings
-
-`~/.claude/settings.json` is a generated file, not a symlink, because Claude Code and Orca rewrite it in place. `./install` runs `claude/sync-settings.sh merge`, which overlays the keys tracked in `claude/settings.json` onto the live file and passes everything else through, including Orca's hook entries.
-
-- Edit `claude/settings.json`, then run `./install` to apply it.
-- Run `claude/sync-settings.sh export` to pull changes made in the app (approved permissions, plugins) back into the tracked file, then review with `git diff`.
-- `model` is deliberately not tracked: Claude Code rewrites it between sessions, so it passes through as an app-owned key.
-- Run `claude/sync-settings.sh status` to see drifted keys, unowned live keys, and hook groups that are neither tracked nor vendor-marked.
-- A top-level key present in `claude/settings.json` is repo-owned and replaced wholesale on merge. To start tracking a key the app added, put it in the tracked file with any value and run export.
-- Inside `hooks`, groups whose command matches a marker in `VENDOR_HOOK_MARKERS` (in `claude/sync-settings.sh`) belong to a third party and pass through; all other groups are repo-owned.
-- `claude/test-sync-settings.sh` runs the fixture tests for the script.
 
 ## Customization patterns
 

@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
-# Keep ~/.claude/settings.json in sync with the tracked claude/settings.json
+# Keep ~/.claude/settings.json in sync with shared and machine settings
 # without owning the whole file.
 #
 #   sync-settings.sh merge    overlay tracked keys onto the live file (run by ./install)
 #   sync-settings.sh export   pull live values of tracked keys back into the repo
 #   sync-settings.sh status   report drift, unowned keys and unrecognised hooks; writes nothing
 #
-# Ownership rule: a top-level key present in the tracked file is repo-owned and
-# its tracked value replaces the live value wholesale. Keys only in the live
-# file pass through untouched. Inside "hooks", a matcher group whose command
+# Ownership rule: each tracked top-level key belongs to either settings.json
+# or settings.machine-N.json, never both. Its value replaces the live value
+# wholesale, including plugin maps. Keys only in the live file pass through.
+# DOTFILES_MACHINE selects the machine, falling back to the repository .machine.
+# Inside "hooks", a matcher group whose command
 # matches one of VENDOR_HOOK_MARKERS is vendor-owned and passes through; every
 # other group is repo-owned. To start tracking a key the app added, put it in
-# the tracked file with any value and run export.
+# the appropriate source file with any value and run export.
 #
 # Env overrides (used by the tests): CLAUDE_SETTINGS_LIVE_FILE, CLAUDE_SETTINGS_TRACKED_FILE
 set -e
@@ -54,10 +56,8 @@ JQ_EXPORT='
 . as $live
 | reduce ($tracked | to_entries[]) as $e ({};
     if $e.key == "hooks" then
-      if ($live | has("hooks")) then
-        ($live | repo_hooks($re)) as $repo
-        | .hooks = (($tracked.hooks | with_entries(select(.key as $k | $repo | has($k)))) + $repo)
-      else . end
+      ($live | repo_hooks($re)) as $repo
+      | .hooks = (($tracked.hooks | with_entries(select(.key as $k | $repo | has($k)))) + $repo)
     elif ($live | has($e.key)) then .[$e.key] = $live[$e.key]
     else . end)
 '
@@ -77,14 +77,25 @@ JQ_REPORT='
   }
 '
 
-command -v jq >/dev/null 2>&1 || die "jq is required; install it from homebrew/Brewfile and rerun"
-
 check_tracked() {
-  [ -f "$tracked" ] || die "tracked file missing: $tracked"
-  jq empty "$tracked" 2>/dev/null || die "tracked file is not valid JSON: $tracked"
-  if jq -e --arg re "$vendor_re" "${JQ_LIB} vendor_hooks(\$re) | length > 0" "$tracked" >/dev/null; then
-    die "tracked file contains vendor hook groups matching /${vendor_re}/; remove them (export never writes them): $tracked"
-  fi
+  local machine file duplicates
+  machine="${DOTFILES_MACHINE:-$(cat "${script_dir}/../.machine")}"
+  case "$machine" in
+    machine-1|machine-2) ;;
+    *) die "DOTFILES_MACHINE or repository .machine must select machine-1 or machine-2" ;;
+  esac
+  machine_tracked="$(dirname "$tracked")/settings.${machine}.json"
+  for file in "$tracked" "$machine_tracked"; do
+    [ -f "$file" ] || die "tracked file missing: $file"
+    jq -e 'type == "object"' "$file" >/dev/null 2>&1 || die "tracked file is not valid JSON (expected an object): $file"
+    if jq -e --arg re "$vendor_re" "${JQ_LIB} vendor_hooks(\$re) | length > 0" "$file" >/dev/null; then
+      die "tracked file contains vendor hook groups matching /${vendor_re}/; remove them (export never writes them): $file"
+    fi
+  done
+  duplicates="$(jq -nr --slurpfile shared "$tracked" --slurpfile machine "$machine_tracked" '
+    [$shared[0] | keys_unsorted[] | select(. as $key | $machine[0] | has($key))] | join(", ")')"
+  [ -z "$duplicates" ] || die "keys owned by both source files: $duplicates"
+  tracked_json="$(jq -s 'add' "$tracked" "$machine_tracked")"
 }
 
 # Prints the live JSON, or {} when the file does not exist. Dies on invalid JSON.
@@ -97,8 +108,8 @@ read_live() {
   fi
 }
 
-# with_tracked FILTER: run FILTER over stdin with $tracked and $re bound.
-with_tracked() { jq --indent 2 --slurpfile t "$tracked" --arg re "$vendor_re" "${JQ_LIB} \$t[0] as \$tracked | $1"; }
+# with_tracked FILTER [JSON]: default to both sources; export uses one owner.
+with_tracked() { jq --indent 2 --argjson tracked "${2:-$tracked_json}" --arg re "$vendor_re" "${JQ_LIB} $1"; }
 
 # write_if_changed DEST: stdin is the new content. Atomic; replaces a symlink
 # with a regular file. Returns 1 (without writing) when DEST already matches.
@@ -143,26 +154,31 @@ cmd_merge() {
 cmd_export() {
   check_tracked
   [ -e "$live" ] || die "live file missing, nothing to export: $live"
-  local live_json report
+  local live_json report file
   live_json="$(read_live)"
   report="$(with_tracked "$JQ_REPORT" <<<"$live_json")"
   if [ "$(jq '.unowned | length' <<<"$report")" -gt 0 ]; then
-    note "not exported (unowned; add the key to $(basename "$tracked") to claim it): $(jq .unowned <<<"$report" | join_or_none)"
+    note "not exported (unowned; add the key to a source file to claim it): $(jq .unowned <<<"$report" | join_or_none)"
   fi
-  if with_tracked "$JQ_EXPORT" <<<"$live_json" | write_if_changed "$tracked"; then
-    printf 'sync-settings: updated %s; review with git diff\n' "$tracked"
-  else
-    printf 'sync-settings: %s already matches the live file\n' "$tracked"
-  fi
+  for file in "$tracked" "$machine_tracked"; do
+    if with_tracked "$JQ_EXPORT" "$(cat "$file")" <<<"$live_json" | write_if_changed "$file"; then
+      printf 'sync-settings: updated %s; review with git diff\n' "$file"
+    else
+      printf 'sync-settings: %s already matches the live file\n' "$file"
+    fi
+  done
 }
 
 cmd_status() {
   check_tracked
-  local live_json report marker
+  local live_json report marker file
   live_json="$(read_live)"
   report="$(with_tracked "$JQ_REPORT" <<<"$live_json")"
-  printf 'tracked: %s\nlive:    %s\n' "$tracked" "$live"
-  printf 'drifted owned keys (merge resets, export pulls): %s\n' "$(jq .drifted <<<"$report" | join_or_none)"
+  printf 'shared:  %s\nmachine: %s\nlive:    %s\n' "$tracked" "$machine_tracked" "$live"
+  for file in "$tracked" "$machine_tracked"; do
+    printf 'drifted owned keys (%s; merge resets, export pulls): %s\n' "$(basename "$file")" \
+      "$(jq --slurpfile source "$file" '.drifted | map(select(. as $key | $source[0] | has($key)))' <<<"$report" | join_or_none)"
+  done
   printf 'unowned live keys (pass through, never exported): %s\n' "$(jq .unowned <<<"$report" | join_or_none)"
   printf 'vendor hook groups (pass through):\n'
   for marker in "${VENDOR_HOOK_MARKERS[@]}"; do
