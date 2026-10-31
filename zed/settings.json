@@ -1,0 +1,47 @@
+{
+  "vim_mode": true,
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "One Dark"
+  },
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)"
+  },
+  "base_keymap": "Zed",
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+    "anthropic_retention": false
+  },
+  "ui_font_size": 15.0,
+  "buffer_font_size": 13.0,
+  "buffer_font_weight": 400.0,
+  "agent_ui_font_size": 14.0,
+  "diff_view_style": "unified",
+  "terminal": {
+    "font_family": "MesloLGMDZ Nerd Font Mono"
+  },
+  "outline_panel": {
+    "dock": "right"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
+  "project_panel": {
+    "dock": "left"
+  },
+  "tabs": {
+    "file_icons": true
+  },
+  "title_bar": {
+    "show_branch_status_icon": true
+  },
+  "cli_default_open_behavior": "new_window",
+  "disable_ai": true
+}

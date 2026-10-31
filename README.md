@@ -2,7 +2,7 @@
 
 Personal macOS dotfiles managed with [Dotbot](https://github.com/anishathalye/dotbot).
 
-This repo installs shell and tool configuration by symlinking tracked files into `$HOME`. It also includes a few companion workflows for Homebrew package management and Mackup-based app settings restore.
+This repo installs shell and tool configuration by symlinking tracked files into `$HOME`. Companion workflows manage Homebrew packages and selected app and macOS preferences.
 
 ## What's here
 
@@ -13,7 +13,7 @@ This repo installs shell and tool configuration by symlinking tracked files into
   `~/.claude/settings.json` as a regular file; see [Claude Code settings](claude/README.md)
 - `homebrew/` contains Homebrew bootstrap and `Brewfile` helpers
 - `aerospace/` holds full machine-specific window manager configs; see [AeroSpace](aerospace/README.md)
-- `mackup/` stores macOS application preferences managed with Mackup
+- `preferences/` manages selected macOS, Stats, VS Code, Zed and machine-1 Choosy settings
 
 ## Managed links
 
@@ -28,6 +28,7 @@ This repo installs shell and tool configuration by symlinking tracked files into
 - `~/.condarc`, `~/.hgrc`, `~/.hgrc.local`, `~/.pypirc`
 - `~/.config/starship.toml`
 - `~/.cursor/sandbox.json`
+- `~/.config/zed/keymap.json` (complete array; existing files are backed up)
 
 ## Setup
 
@@ -90,15 +91,12 @@ make dump
 
 `dev-update` also verifies the Homebrew Codex CLI signature and clears its quarantine attribute after upgrading. See [Codex configuration](codex/README.md) for details.
 
-## Mackup
+## Preferences
 
-Restore or back up macOS app settings:
-
-```bash
-cd mackup
-make restore
-make backup
-```
+Selected app settings use the explicit workflow in [preferences/README.md](preferences/README.md).
+Stats and selected macOS settings are shared; Choosy is machine-1 only. iTerm uses
+a curated dynamic profile installed by Dotbot. The preference helper applies
+settings only when explicitly requested. Old Mackup backups remain in Git history.
 
 ## Customization patterns
 

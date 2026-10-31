@@ -1,0 +1,191 @@
+{
+  "stats": {
+    "source": "stats/settings.json",
+    "backend": "defaults",
+    "domain": "eu.exelban.Stats",
+    "key_filter": {
+      "include": [
+        "telemetry"
+      ],
+      "prefixes": [
+        "CPU_",
+        "RAM_",
+        "Network_",
+        "Battery_",
+        "Disk_",
+        "Bluetooth_",
+        "Sensors_",
+        "Sensor_"
+      ],
+      "exclude": [
+        "Sensors_hid"
+      ]
+    }
+  },
+  "vscode": {
+    "source": "vscode/settings.json",
+    "backend": "json",
+    "target": "Library/Application Support/Code/User/settings.json"
+  },
+  "choosy": {
+    "source": "choosy/behaviours.machine-1.symlink.plist",
+    "backend": "plist",
+    "target": "Library/Application Support/Choosy/behaviours.plist",
+    "machines": [
+      "machine-1"
+    ]
+  },
+  "macos": {
+    "source": "macos/settings.json",
+    "backend": "defaults",
+    "domain": "NSGlobalDomain",
+    "key_filter": {
+      "include": [
+        "KeyRepeat",
+        "InitialKeyRepeat",
+        "ApplePressAndHoldEnabled",
+        "AppleLanguages",
+        "AppleLocale",
+        "AppleShowAllExtensions",
+        "AppleKeyboardUIMode"
+      ]
+    }
+  },
+  "text-input": {
+    "source": "macos/text-input.json",
+    "backend": "defaults",
+    "domain": "NSGlobalDomain",
+    "key_filter": {
+      "include": [
+        "NSAutomaticCapitalizationEnabled",
+        "NSAutomaticDashSubstitutionEnabled",
+        "NSAutomaticPeriodSubstitutionEnabled",
+        "NSAutomaticQuoteSubstitutionEnabled",
+        "NSAutomaticSpellingCorrectionEnabled",
+        "NSAutomaticInlinePredictionEnabled"
+      ]
+    }
+  },
+  "finder": {
+    "source": "macos/finder.json",
+    "backend": "defaults",
+    "domain": "com.apple.finder",
+    "key_filter": {
+      "include": [
+        "FXDefaultSearchScope",
+        "FXPreferredViewStyle",
+        "ShowPathbar",
+        "ShowStatusBar",
+        "NewWindowTarget",
+        "ShowExternalHardDrivesOnDesktop",
+        "ShowRemovableMediaOnDesktop",
+        "ShowHardDrivesOnDesktop",
+        "AppleShowAllFiles"
+      ]
+    }
+  },
+  "desktop": {
+    "source": "macos/desktop.json",
+    "backend": "defaults",
+    "domain": "com.apple.dock",
+    "key_filter": {
+      "include": [
+        "autohide",
+        "show-recents",
+        "expose-group-apps",
+        "tilesize",
+        "magnification",
+        "largesize"
+      ]
+    }
+  },
+  "spotlight": {
+    "source": "macos/spotlight.json",
+    "backend": "defaults",
+    "domain": "com.apple.Spotlight",
+    "macos_versions": [
+      26
+    ],
+    "key_filter": {
+      "include": [
+        "EnabledPreferenceRules"
+      ]
+    },
+    "list_items": {
+      "EnabledPreferenceRules": [
+        "Custom.relatedContents",
+        "System.files",
+        "System.folders",
+        "Domain.IMAGES",
+        "Domain.MOVIES",
+        "Domain.MUSIC",
+        "Domain.PDF",
+        "Domain.SPREADSHEETS"
+      ]
+    }
+  },
+  "zed": {
+    "source": "zed/settings.json",
+    "backend": "json",
+    "target": ".config/zed/settings.json"
+  },
+  "zed-agents": {
+    "source": "zed/agents.json",
+    "backend": "json",
+    "target": ".config/zed/settings.json"
+  },
+  "shortcuts": {
+    "source": "macos/shortcuts.json",
+    "backend": "defaults",
+    "domain": "com.apple.symbolichotkeys",
+    "macos_versions": [
+      26
+    ],
+    "key_filter": {
+      "include": [
+        "AppleSymbolicHotKeys"
+      ]
+    }
+  },
+  "trackpad-built-in": {
+    "source": "macos/trackpad-built-in.json",
+    "backend": "defaults",
+    "domain": "com.apple.AppleMultitouchTrackpad",
+    "key_filter": {
+      "include": [
+        "Clicking",
+        "TrackpadRightClick",
+        "TrackpadCornerSecondaryClick",
+        "Dragging",
+        "DragLock",
+        "TrackpadThreeFingerDrag"
+      ]
+    }
+  },
+  "trackpad-bluetooth": {
+    "source": "macos/trackpad-bluetooth.json",
+    "backend": "defaults",
+    "domain": "com.apple.driver.AppleBluetoothMultitouch.trackpad",
+    "key_filter": {
+      "include": [
+        "Clicking",
+        "TrackpadRightClick",
+        "TrackpadCornerSecondaryClick",
+        "Dragging",
+        "DragLock",
+        "TrackpadThreeFingerDrag"
+      ]
+    }
+  },
+  "trackpad-host": {
+    "source": "macos/trackpad-host.json",
+    "backend": "defaults",
+    "domain": "NSGlobalDomain",
+    "current_host": true,
+    "key_filter": {
+      "include": [
+        "com.apple.mouse.tapBehavior"
+      ]
+    }
+  }
+}

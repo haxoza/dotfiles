@@ -125,7 +125,6 @@ brew "googleworkspace-cli"
 brew "gyb"
 
 # Configuration and app management
-brew "mackup"
 brew "mas"
 
 # Documents and media processing
@@ -150,13 +149,11 @@ cask "1password-cli"
 cask "gpg-suite-no-mail"
 
 # Browsers and browser selection
-cask "choosy"
 cask "firefox"
 cask "google-chrome"
 
 # Window management and desktop utilities
 cask "nikitabobko/tap/aerospace"
-cask "rectangle"
 cask "stats"
 
 # Archives, inspection and Quick Look

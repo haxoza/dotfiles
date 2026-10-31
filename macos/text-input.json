@@ -1,0 +1,8 @@
+{
+  "NSAutomaticCapitalizationEnabled": true,
+  "NSAutomaticDashSubstitutionEnabled": false,
+  "NSAutomaticPeriodSubstitutionEnabled": true,
+  "NSAutomaticQuoteSubstitutionEnabled": false,
+  "NSAutomaticSpellingCorrectionEnabled": true,
+  "NSAutomaticInlinePredictionEnabled": true
+}
