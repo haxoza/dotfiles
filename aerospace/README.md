@@ -9,17 +9,16 @@ Each machine has a complete config:
 to `~/.aerospace.toml`. Edit that profile directly; AeroSpace reloads it
 automatically. There is no generation step.
 
-Both profiles start with the existing layout. Customize each machine's monitor
-assignments and app placement as needed.
-
 Only these sections may differ:
 
 - `[workspace-to-monitor-force-assignment]`: workspace-to-monitor mapping.
+- `[gaps]`: spacing for each display setup.
+- `persistent-workspaces` and the corresponding numbered workspace/move bindings.
 - The `[[on-window-detected]]` callbacks below `# Machine-specific app placement.`:
   app matching and placement when a window is detected. Callback order matters.
 
-Keep everything else identical, including workspace definitions, keybindings,
-gaps, layout defaults, and the shared floating-window rules for Finder dialogs,
+Keep everything else identical, including directional and service keybindings,
+layout defaults, and the shared floating-window rules for Finder dialogs,
 Slack huddles, and Zoom. Apply shared changes to both files.
 
 Review differences with:

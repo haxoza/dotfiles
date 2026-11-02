@@ -1,5 +1,5 @@
 # AeroSpace uses its own workspaces instead of macOS Spaces.
-# Keep both profiles in sync except monitor assignments and app placement.
+# Keep shared controls and layout behavior in sync; workspace plans are machine-specific.
 config-version = 2
 
 start-at-login = true
@@ -17,20 +17,20 @@ persistent-workspaces = ['1', '2', '3', '4', '5', '6']
 
 # Machine-specific monitor assignments.
 [workspace-to-monitor-force-assignment]
-1 = ['dell', 'main']     # Development: Orca and Ghostty
-2 = ['dell', 'main']     # Chrome and Claude
-3 = ['dell', 'main']     # Firefox and ChatGPT (formerly workspace 5)
-4 = ['built-in', 'main'] # Sunsama and Obsidian (formerly workspace 3)
-5 = ['built-in', 'main'] # Slack (formerly workspace 4)
-6 = ['built-in', 'main'] # Spotify
+1 = 'main' # Development: Orca and Ghostty
+2 = 'main' # Code editors: Zed and VS Code
+3 = 'main' # Personal: Firefox, ChatGPT and Claude
+4 = 'main' # Planning: Sunsama and Obsidian
+5 = 'main' # Media: Spotify
+6 = 'main' # Work: Chrome and Slack
 
 [gaps]
-inner.horizontal = 8
-inner.vertical = 8
-outer.left = 8
-outer.bottom = 8
+inner.horizontal = 4
+inner.vertical = 4
+outer.left = 0
+outer.bottom = 0
 outer.top = 0
-outer.right = 8
+outer.right = 0
 
 [mode.main.binding]
 ctrl-alt-h = 'focus left'
@@ -106,12 +106,20 @@ if.app-id = 'com.mitchellh.ghostty'
 run = 'move-node-to-workspace 1; layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.google.Chrome'
+if.app-id = 'dev.zed.Zed'
 run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
-if.app-id = 'com.anthropic.claudefordesktop'
+if.app-id = 'com.microsoft.VSCode'
 run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+run = 'move-node-to-workspace 6'
+
+[[on-window-detected]]
+if.app-id = 'com.anthropic.claudefordesktop'
+run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
 if.app-id = 'org.mozilla.firefox'
@@ -131,8 +139,8 @@ run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
-run = 'move-node-to-workspace 5'
+run = 'move-node-to-workspace 6'
 
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
-run = 'move-node-to-workspace 6'
+run = 'move-node-to-workspace 5'
