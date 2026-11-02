@@ -7,6 +7,7 @@ tap "chamburr/tap", trusted: { casks: ["glance"] }
 tap "cloudflare/cloudflare"
 tap "docker/tap", trusted: { casks: ["sbx@nightly"] }
 tap "nikitabobko/tap", trusted: { casks: ["aerospace"] }
+tap "stablyai/orca"
 
 # Shells, prompt and terminal sessions
 brew "bash"
@@ -90,6 +91,7 @@ cask "chatgpt"
 cask "claude"
 cask "claude-code@latest"
 cask "codex"
+cask "stablyai/orca/orca"
 
 # Cloud, infrastructure and containers
 brew "awscli"
