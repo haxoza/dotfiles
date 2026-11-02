@@ -34,4 +34,6 @@ machines:
       item_id: ygho7fmnkb2rzqafqn5obzmfv4
     - path: ssh/config.local
       item_id: hztn5uhtigqppnly2cnempjyli
-    recovery_files: []
+    recovery_files:
+    - path: ssh/keys.local/id_ed25519_github
+      item_id: xuji5nzoj2xky6kti7ji7vv3yu
