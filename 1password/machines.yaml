@@ -32,6 +32,8 @@ machines:
       item_id: sa25riy4ncnisb2bmny4vjloya
     - path: git/gitconfig.local.symlink
       item_id: ygho7fmnkb2rzqafqn5obzmfv4
+    - path: codex/trusted.local.toml
+      item_id: xxfdxvxzbb2xhndl7rui2yog2e
     - path: ssh/config.local
       item_id: hztn5uhtigqppnly2cnempjyli
     recovery_files:
