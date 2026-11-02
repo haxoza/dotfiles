@@ -2,6 +2,11 @@
 shared = File.expand_path("Brewfile", __dir__)
 instance_eval(File.read(shared), shared)
 
+# Current universal App Store listings; require macOS 26 or later.
+mas "Keynote", id: 361285480
+mas "Numbers", id: 361304891
+mas "Pages", id: 361309726
+
 # Networking
 cask "winbox"
 

@@ -4,3 +4,8 @@ instance_eval(File.read(shared), shared)
 
 # Browser selection
 cask "choosy"
+
+# Preserve this machine's existing App Store selections until its OS review.
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541

@@ -186,11 +186,6 @@ cask "spotify"
 cask "vlc"
 cask "voiceink"
 
-# Office apps from the App Store
-mas "Keynote", id: 409183694
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
-
 # Time tracking and device administration
 mas "Harvest", id: 506189836
 mas "Windows App", id: 1295203466
