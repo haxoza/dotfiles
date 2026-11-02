@@ -1,12 +1,11 @@
 # Machine-specific desktop preferences and complete plugin selections.
-# Initial baseline from the former common.toml; export on machine-2 before first merge.
+# Reviewed against machine-2 live config after desktop sign-in.
 
 [desktop]
-followUpQueueMode = "queue"
-mac-menu-bar-enabled = false
+followUpQueueMode = "steer"
 conversationDetailMode = "STEPS_PROSE"
-browser-show-full-url = true
-sansFontSize = 13
+ambient-suggestions-enabled = true
+mac-menu-bar-enabled = false
 
 [plugins."codex-app-tools@openai-bundled"]
 enabled = true
@@ -17,10 +16,10 @@ enabled = true
 [plugins."unified-computer-use@openai-bundled"]
 enabled = true
 
-[plugins."visualize@openai-bundled"]
+[plugins."computer-use@openai-bundled"]
 enabled = true
 
-[plugins."computer-use@openai-bundled"]
+[plugins."visualize@openai-bundled"]
 enabled = true
 
 [plugins."documents@openai-primary-runtime"]
@@ -36,7 +35,4 @@ enabled = true
 enabled = true
 
 [plugins."template-creator@openai-primary-runtime"]
-enabled = true
-
-[plugins."code-review@openai-bundled"]
 enabled = true

@@ -82,9 +82,9 @@ make merge
 On a fresh installation with no live config yet, skip export and use `make merge`
 to create it. Never copy one Mac's private trust settings to the other.
 
-**Machine-2 still needs its first review.** Its tracked file starts with the old
-shared desktop and plugin settings. Export and review its actual settings on
-that Mac before merging.
+Machine-2's desktop preferences and complete plugin selection were reviewed
+after desktop sign-in. Private editor-target preferences stay in
+`trusted.local.toml`. Export and review new app selections before merging.
 
 Use this targeted workflow when setting up a worktree. The full repository
 installer also changes other apps' settings and requires the repository's
