@@ -14,7 +14,7 @@
 | `finder` | Both Macs | Search/view behavior, path/status bars, desktop drives and hidden-file visibility |
 | `desktop` | Both Macs | Dock size, magnification, auto-hide, recent apps and Mission Control grouping by app |
 | `spotlight` | macOS 26 | Selected system-result rules and related-content choice; app rules and local state stay local |
-| `shortcuts` | macOS 26 | Seven verified, explicit disabled shortcuts; only selected `enabled` leaves are owned |
+| `shortcuts` | macOS 26–27 | Seven disabled shortcuts with verified resource mappings; only selected `enabled` leaves are owned |
 | `trackpad-built-in`, `trackpad-bluetooth` | Matching hardware only | Separate tap/secondary-click and dragging profiles; apply only the relevant one |
 | `trackpad-host` | Opt-in, current host | Host-scoped tap behavior; no host/device identifiers are tracked |
 
@@ -95,8 +95,8 @@ clipboard toggle and keyboard shortcut aren't managed in this pass. Verify the
 Spotlight UI after applying; another OS major needs its rule format checked first.
 Lock Screen, monitor/Spaces layout and screenshot defaults remain unmanaged.
 
-See [macOS capture notes](../macos/README.md) for shortcut identities, preserved
-keyboard-navigation value `3`, trackpad hardware scopes and second-Mac checks.
+See [macOS notes](../macos/README.md) for keyboard navigation, shortcut compatibility
+and trackpad hardware scopes.
 See [Zed notes](../zed/README.md) for keymap ownership and agent-server boundaries.
 
 The helper uses [`defaults`](https://developer.apple.com/documentation/foundation/userdefaults),

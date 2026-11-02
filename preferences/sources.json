@@ -139,7 +139,8 @@
     "backend": "defaults",
     "domain": "com.apple.symbolichotkeys",
     "macos_versions": [
-      26
+      26,
+      27
     ],
     "key_filter": {
       "include": [
