@@ -32,3 +32,13 @@ They do not configure Logitech devices.
 
 After applying, check tap-to-click, secondary click and dragging in System
 Settings. Missing keys or different hardware need review before applying.
+
+## Pointer speed
+
+`pointer.json` captures mouse and trackpad tracking speeds separately in
+`NSGlobalDomain`. Inspect with `python3 preferences/sync.py status pointer`,
+export deliberate local changes with `export pointer`, and opt in on another Mac
+with `apply pointer`. These are native preference values, not percentages.
+Check the feel on each Mac after applying; mouse hardware and vendor software
+may affect the result. Natural scrolling, acceleration and double-click speed
+remain unmanaged.

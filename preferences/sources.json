@@ -188,5 +188,16 @@
         "com.apple.mouse.tapBehavior"
       ]
     }
+  },
+  "pointer": {
+    "source": "macos/pointer.json",
+    "backend": "defaults",
+    "domain": "NSGlobalDomain",
+    "key_filter": {
+      "include": [
+        "com.apple.mouse.scaling",
+        "com.apple.trackpad.scaling"
+      ]
+    }
   }
 }

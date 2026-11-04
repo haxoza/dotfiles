@@ -10,6 +10,7 @@
 | `zed-agents` | Both Macs | Registry declarations only; commands, environment and authentication stay local |
 | `choosy` | machine-1 | Complete browser-selection rules |
 | `macos` | Both Macs | Key repeat, keyboard navigation, preferred languages, locale and filename extensions |
+| `pointer` | Both Macs, opt-in | Mouse and trackpad tracking speeds |
 | `text-input` | Both Macs | Smart punctuation, autocorrect, capitalization, predictions and double-space period |
 | `finder` | Both Macs | Search/view behavior, path/status bars, desktop drives and hidden-file visibility |
 | `desktop` | Both Macs | Dock size, magnification, auto-hide, recent apps and Mission Control grouping by app |
