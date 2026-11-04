@@ -25,12 +25,12 @@ persistent-workspaces = ['1', '2', '3', '4', '5', '6']
 6 = ['built-in', 'main'] # Spotify
 
 [gaps]
-inner.horizontal = 8
-inner.vertical = 8
-outer.left = 8
-outer.bottom = 8
+inner.horizontal = 4
+inner.vertical = 4
+outer.left = 0
+outer.bottom = 0
 outer.top = 0
-outer.right = 8
+outer.right = 0
 
 [mode.main.binding]
 ctrl-alt-h = 'focus left'
