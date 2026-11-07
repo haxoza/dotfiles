@@ -104,7 +104,8 @@
     "backend": "defaults",
     "domain": "com.apple.Spotlight",
     "macos_versions": [
-      26
+      26,
+      27
     ],
     "key_filter": {
       "include": [

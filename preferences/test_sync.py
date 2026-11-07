@@ -394,7 +394,7 @@ class PreferenceSyncTests(unittest.TestCase):
     def test_spotlight_rejects_unverified_macos_before_read_or_write(self):
         with (
             patch.object(
-                sync.platform, "mac_ver", return_value=("27.0", ("", "", ""), "arm64")
+                sync.platform, "mac_ver", return_value=("28.0", ("", "", ""), "arm64")
             ),
             patch.object(sync.subprocess, "run") as defaults,
             patch("sys.argv", ["sync.py", "apply", "spotlight"]),

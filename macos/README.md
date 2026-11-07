@@ -20,8 +20,12 @@ shortcuts, including Spotlight, remain untouched.
 
 Shortcut mappings were checked against Apple's installed KeyboardSettings
 resource tables on macOS 26 and 27. After applying, verify input switching and
-AeroSpace navigation in your session. The separate Spotlight profile supports
-macOS 26 only.
+AeroSpace navigation in your session. The Spotlight profile supports macOS 26 and 27.
+
+Spotlight's `EnabledPreferenceRules` stores active exclusion rules: the entries
+in `spotlight.json` turn off Related Content, Files, Folders and the selected
+file categories. This was verified against the macOS 27 settings UI; absent
+entries can use enabled system defaults.
 
 ## Trackpads
 

@@ -14,7 +14,7 @@
 | `text-input` | Both Macs | Smart punctuation, autocorrect, capitalization, predictions and double-space period |
 | `finder` | Both Macs | Search/view behavior, path/status bars, desktop drives and hidden-file visibility |
 | `desktop` | Both Macs | Dock size, magnification, auto-hide, recent apps and Mission Control grouping by app |
-| `spotlight` | macOS 26 | Selected system-result rules and related-content choice; app rules and local state stay local |
+| `spotlight` | macOS 26–27 | Selected system-result rules and related-content choice; app rules and local state stay local |
 | `shortcuts` | macOS 26–27 | Seven disabled shortcuts with verified resource mappings; only selected `enabled` leaves are owned |
 | `trackpad-built-in`, `trackpad-bluetooth` | Matching hardware only | Separate tap/secondary-click and dragging profiles; apply only the relevant one |
 | `trackpad-host` | Opt-in, current host | Host-scoped tap behavior; no host/device identifiers are tracked |
@@ -89,7 +89,7 @@ language remain outside this baseline. Key names can change between macOS versio
 
 The new sources preserve current choices, except `desktop` explicitly enables
 grouping windows by app, as recommended by [AeroSpace](https://nikitabobko.github.io/AeroSpace/guide#42-a-note-on-mission-control).
-Spotlight uses macOS 26's `EnabledPreferenceRules`; legacy `orderedItems` and
+Spotlight uses `EnabledPreferenceRules` on macOS 26–27 (active exclusion rules); legacy `orderedItems` and
 `DisabledUTTypes` are left alone. Only configured system rules are managed.
 App rules, iPhone integration, exclusions, indexes and history stay local; the
 clipboard toggle and keyboard shortcut aren't managed in this pass. Verify the
