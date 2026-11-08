@@ -1,4 +1,9 @@
 {
+  "orca": {
+    "source": "orca/settings.json",
+    "backend": "orca",
+    "target": "Library/Application Support/orca/profiles/local-default/profile-state.db"
+  },
   "stats": {
     "source": "stats/settings.json",
     "backend": "defaults",

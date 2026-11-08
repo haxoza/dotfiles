@@ -2,14 +2,20 @@
 """Explicit export/apply of selected settings, preserving app-owned values."""
 
 import argparse
+import hashlib
 import json
 import os
 import platform
 import plistlib
 import re
+import socket
+import sqlite3
 import subprocess
+import sys
 import tempfile
 import time
+import uuid
+from contextlib import closing, contextmanager
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -164,6 +170,108 @@ def backup(app, raw):
     print(f"Previous settings: {name}")
 
 
+def validate_orca(source):
+    """Keep this adapter limited to the portable settings we deliberately own."""
+    for key, value in source.items():
+        valid = (
+            key == "theme" and value in ("system", "light", "dark")
+            or key == "terminalFontFamily" and isinstance(value, str) and value.strip()
+            or key == "terminalFontSize" and type(value) is int and 10 <= value <= 24
+        )
+        if not valid:
+            raise ValueError(f"Unsupported Orca setting or value: {key}")
+
+
+def orca_settings(connection):
+    # Verified against Orca's SQLite schema v3; do not guess after a migration.
+    if connection.execute("PRAGMA user_version").fetchone()[0] != 3:
+        raise ValueError("Unsupported Orca profile database version (expected 3)")
+    row = connection.execute(
+        "SELECT payload, content_hash, domain_version FROM profile_state_documents "
+        "WHERE domain = 'settings'"
+    ).fetchone()
+    if not row or row[2] != 1:
+        raise ValueError("Missing or unsupported Orca settings document")
+    raw = row[0].encode("utf-8")
+    if hashlib.sha256(raw).hexdigest() != row[1]:
+        raise ValueError("Orca settings checksum mismatch")
+    live = json.loads(raw)
+    if not isinstance(live, dict):
+        raise ValueError("Expected an Orca settings object")
+    return raw, live
+
+
+def read_orca(target):
+    with closing(sqlite3.connect(target.resolve().as_uri() + "?mode=ro", uri=True)) as db:
+        return orca_settings(db)
+
+
+@contextmanager
+def orca_maintenance(target):
+    """Use Orca's own admission gate; never remove another owner's lock."""
+    access = target.parents[2] / ".profile-state-access"
+    token = str(uuid.uuid4())
+    candidate = access / "candidates" / token
+    maintenance = access / "maintenance"
+    candidate.mkdir(mode=0o700, parents=True)
+    owner = candidate / f"{token}.owner"
+    acquired = False
+    try:
+        owner.write_text(json.dumps({
+            "token": token, "pid": os.getpid(), "host": socket.gethostname(),
+            "platform": sys.platform, "pidNamespace": None,
+        }))
+        owner.chmod(0o600)
+        if maintenance.exists():
+            raise ValueError("Orca maintenance is already active; retry after it finishes")
+        candidate.rename(maintenance)
+        owner = maintenance / owner.name
+        acquired = True
+        if any((access / "participants").iterdir()):
+            raise ValueError("Quit Orca and orcad before applying settings")
+        yield
+    finally:
+        owner.unlink(missing_ok=True)
+        (maintenance if acquired else candidate).rmdir()
+
+
+def apply_orca(target, source):
+    if target.is_symlink():
+        raise ValueError("Orca profile database must not be a symlink")
+    with orca_maintenance(target):
+        if target.with_name("orca-data.json").exists():
+            raise ValueError("Mixed Orca JSON/SQLite storage; reconcile it in Orca first")
+        with closing(sqlite3.connect(target.resolve().as_uri() + "?mode=rw", uri=True)) as db:
+            with db:
+                db.execute("BEGIN IMMEDIATE")
+                raw, live = orca_settings(db)
+                result = merged(live, source)
+                if result == live:
+                    return
+                revision = db.execute(
+                    "SELECT value FROM profile_state_meta WHERE key = 'revision'"
+                ).fetchone()
+                if not revision or not revision[0].isdigit() or int(revision[0]) < 1:
+                    raise ValueError("Invalid Orca profile revision")
+                profile = db.execute(
+                    "SELECT value FROM profile_state_meta WHERE key = 'profile_id'"
+                ).fetchone()
+                if not profile or profile[0] != target.parent.name:
+                    raise ValueError("Orca profile identity does not match its directory")
+                backup("orca", raw)
+                payload = json.dumps(result, ensure_ascii=False, separators=(",", ":"))
+                db.execute(
+                    "UPDATE profile_state_documents SET payload = ?, revision = ?, "
+                    "updated_at = ?, content_hash = ? WHERE domain = 'settings'",
+                    (payload, int(revision[0]) + 1, time.time_ns() // 1_000_000,
+                     hashlib.sha256(payload.encode("utf-8")).hexdigest()),
+                )
+                db.execute(
+                    "UPDATE profile_state_meta SET value = ? WHERE key = 'revision'",
+                    (str(int(revision[0]) + 1),),
+                )
+
+
 def main():
     sources = load_sources()
     parser = argparse.ArgumentParser(description=__doc__)
@@ -188,7 +296,7 @@ def main():
             parser.error(f"{args.app} requires {allowed} (.machine or --machine)")
 
     backend = definition["backend"]
-    if backend not in {"defaults", "json", "plist"}:
+    if backend not in {"defaults", "json", "plist", "orca"}:
         raise ValueError(f"Unsupported settings backend: {backend}")
     source_path = relative_path(ROOT, definition["source"])
     source = (
@@ -196,7 +304,11 @@ def main():
         if backend == "plist"
         else json.loads(source_path.read_text())
     )
-    if backend == "defaults":
+    if backend == "orca":
+        validate_orca(source)
+        target = relative_path(Path.home(), definition["target"])
+        raw, live = read_orca(target)
+    elif backend == "defaults":
         validate_defaults(source, definition)
         result = subprocess.run(
             defaults_command(definition, "export", "-"),
@@ -251,7 +363,12 @@ def main():
         print(f"Exported {args.app}; review git diff")
         return
 
-    if backend == "defaults":
+    if backend == "orca":
+        if not different:
+            print(f"{args.app}: in sync")
+            return
+        apply_orca(target, source)
+    elif backend == "defaults":
         if not different:
             print(f"{args.app}: in sync")
             return
@@ -286,5 +403,5 @@ def main():
 if __name__ == "__main__":
     try:
         main()
-    except (OSError, ValueError, TypeError, subprocess.CalledProcessError) as error:
+    except (OSError, ValueError, TypeError, sqlite3.Error, subprocess.CalledProcessError) as error:
         raise SystemExit(str(error)) from error

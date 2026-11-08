@@ -4,6 +4,7 @@
 
 | Source | Scope | Tracked settings |
 | --- | --- | --- |
+| `orca` | Both Macs, default local profile | Dark theme, terminal font and explicit terminal font size; editor size stays unmanaged |
 | `stats` | Both Macs | Widgets, appearance, intervals and telemetry; hardware sensors, identities and screen positions stay local |
 | `vscode` | Both Macs | Selected editor/Python settings; unowned values are preserved |
 | `zed` | Both Macs | Vim, theme/fonts, telemetry and deliberate editor/panel/tab behavior |
@@ -79,6 +80,35 @@ uses `defaults -currentHost` for both reads and writes without recording a UUID.
 The JSON backend requires objects; use a separate managed file for an entire array.
 Adding an app with an existing backend needs no Python changes. Seed its source
 with only the keys you want to own, then export the current values and review.
+
+## Orca
+
+`orca/settings.json` owns only `theme`, `terminalFontFamily` and
+`terminalFontSize`. The size is deliberately pinned even though 14 matches the
+current terminal default. Export updates these keys; it does not discover new
+overrides or remove settings that happen to match defaults.
+
+```bash
+python3 preferences/sync.py status orca
+python3 preferences/sync.py export orca
+# Quit Orca and any headless orcad runtime before applying:
+python3 preferences/sync.py apply orca
+```
+
+This is a source for our helper, not a native Orca config file or a Dotbot link.
+The adapter targets `profiles/local-default/profile-state.db` under Orca's macOS
+Application Support directory; other profiles are unmanaged. `status` and
+`export` can run while Orca is open. An apply that would change settings uses
+Orca's maintenance admission gate and refuses existing runtime participants.
+It backs up the previous settings document as private JSON, merges owned keys
+in one SQLite transaction, and updates the document checksum and profile revision.
+Relaunch Orca afterward. Nothing is applied by `./install`.
+
+The adapter is verified against SQLite schema version 3 and settings document
+version 1. It refuses other versions, checksum failures, and mixed legacy
+`orca-data.json`/SQLite storage rather than attempting migration. A leftover
+runtime or maintenance owner also blocks writes; resolve that through Orca's
+recovery workflow instead of deleting ownership files blindly.
 
 ## macOS notes
 

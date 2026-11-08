@@ -15,7 +15,7 @@ This repo installs shell and tool configuration by symlinking tracked files into
   `~/.codex/config.toml`; see [Codex configuration](codex/README.md)
 - `homebrew/` contains Homebrew bootstrap and `Brewfile` helpers
 - `aerospace/` holds full machine-specific window manager configs; see [AeroSpace](aerospace/README.md)
-- `preferences/` manages selected macOS, Stats, VS Code, Zed and machine-1 Choosy settings
+- `preferences/` manages selected macOS, Orca, Stats, VS Code, Zed and machine-1 Choosy settings
 
 ## Managed links
 
