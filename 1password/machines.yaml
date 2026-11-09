@@ -23,6 +23,8 @@ machines:
     recovery_files:
     - path: ssh/keys.local/id_ed25519_github
       item_id: uig6wnyzncklzhkyicsxvqrogm
+    - path: ssh/keys.local/git-signing-machine-1
+      item_id: hmfy7goc4cjeonyglc3yomqo2i
   machine-2:
     vault_id: fkmc4b5xrxqoj4zgbtvl5ohrzy
     files:

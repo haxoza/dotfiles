@@ -1,4 +1,5 @@
 git/gitconfig.local.symlink
+git/allowed_signers.local
 gpg/*.gpg
 hg/hgrc.local.symlink
 pypi/pypirc.symlink
