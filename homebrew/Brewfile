@@ -181,7 +181,6 @@ cask "slack"
 cask "zoom"
 
 # Creative tools, media and dictation
-cask "macwhisper"
 cask "spotify"
 cask "vlc"
 cask "voiceink"
